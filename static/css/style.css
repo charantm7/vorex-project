@@ -20,6 +20,10 @@ body {
   --white: #fff;
   --black: black;
   --bodylight: #ececec;
+  --desktop: 1200px;
+  --laptop: 992px;
+  --tablet: 768px;
+  --mobile: 576px;
 }
 
 .silkscreen-regular {
@@ -76,6 +80,7 @@ nav {
   transition: all 0.3s ease;
   overflow: hidden;
   align-items: center;
+  z-index: 10;
 }
 
 .sidebar.active {
@@ -163,7 +168,21 @@ nav {
   margin-left: 240px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: --desktop) {
+  .sidebar {
+    width: 0;
+  }
+  .sidebar.active {
+    width: 200px;
+  }
+  .main_content {
+    margin-left: 0;
+  }
+  .sidebar.active ~ .main_content {
+    margin-left: 200px;
+  }
+}
+@media (max-width: --mobile) {
   .sidebar {
     width: 0;
   }
@@ -182,14 +201,14 @@ nav {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  position: absolute;
   align-items: center;
   border: 1px solid var(--bodylight);
   border-radius: 5px;
-  width: 18%;
+  width: 100%;
   height: 32px;
   max-width: 250px;
   justify-content: center;
+  transform: translateX(50%);
 }
 
 .search-input-container i {
@@ -205,6 +224,7 @@ nav {
   border: none;
   outline: none;
   height: auto;
+  width: 20%;
   margin-left: 2px;
   margin-right: 5px;
   color: var(--white);
@@ -242,6 +262,28 @@ nav {
   border-radius: 5px;
   font-size: 1.05rem;
 }
+@media (max-width: 900px) {
+  .login-btn,
+  .signup-btn {
+    display: none;
+  }
+  .search-input-container {
+    width: 65%;
+  }
+}
+@media (max-width: 576px) {
+  .login-btn,
+  .signup-btn {
+    display: none;
+  }
+  input::placeholder {
+    color: transparent;
+  }
+  .search-input-container {
+    width: 50%;
+  }
+}
+
 .login-btn button:hover {
   background-color: var(--white);
   color: var(--black);

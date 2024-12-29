@@ -18,13 +18,13 @@
             width="33"
             height="33"
           />
+          <div><span class="username">@{{ room.created_by }}</span><br /></div>
           <div>
-            <span class="username">@{{ room.created_by }}</span><br />
             <p class="text-muted">{{ room.created_at }}</p>
           </div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{ room.name }}</h5>
+          <a href="#"><h5 class="card-title">{{ room.name }}</h5></a>
           <p class="card-text">{{ room.description }}</p>
         </div>
         <div class="card-footer d-flex justify-content-between">
