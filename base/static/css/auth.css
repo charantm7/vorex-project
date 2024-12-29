@@ -361,3 +361,8 @@ form .forget-pass {
   transform: rotate(-11deg) skewY(-40deg);
   transition-delay: 1.2s;
 }
+@media (max-width: 767px) {
+  .wrapper {
+    width: 50%;
+  }
+}

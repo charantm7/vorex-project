@@ -18,9 +18,9 @@
             width="33"
             height="33"
           />
-          <div><span class="username">@{{ room.created_by }}</span><br /></div>
-          <div>
-            <p class="text-muted">{{ room.created_at }}</p>
+          <a href="#" class="username"><span>@{{ room.created_by }}</span></a>
+          <div class="text-muted">
+            <p>created: {{ room.created_at }}</p>
           </div>
         </div>
         <div class="card-body">

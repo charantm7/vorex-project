@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from .models import CustomUser, Room, RoomMembership, ChatBox, StudyMaterials
 
-
-
 def home(request):
     room = Room.objects.all()
     return render(request, 'base/home.html', {'rooms': room})

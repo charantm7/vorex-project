@@ -25,6 +25,7 @@
 .card-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid var(--borderbottom);
 }
 
@@ -33,17 +34,32 @@
 }
 
 .card-header .username {
-  position: absolute;
   flex: 1;
   font-weight: bold;
   color: var(--roomtext);
   overflow: hidden;
-  text-align: left;
+  left: 0;
+  text-decoration: none;
 }
 
 .text-muted {
-  color: white;
+  color: var(--roomtext);
   margin-right: 0;
+}
+.text-muted p {
+  color: var(--roomtext);
+  font-size: 0.7rem;
+  margin-top: 10px;
+}
+@media (max-width: 992px) {
+  .card-header {
+    padding: 10px 0 35px 10px;
+  }
+  .text-muted {
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 80px;
+  }
 }
 
 .card-body {
@@ -141,6 +157,6 @@
     display: none;
   }
   .container {
-    width: 65%;
+    width: 95%;
   }
 }
