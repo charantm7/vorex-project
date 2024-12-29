@@ -2,75 +2,93 @@
   --roomborder: #ececec;
   --roomtext: white;
   --roomdark: #0d1117;
+  --roomlight: #151b23;
+  --borderbottom: #2e2e3f;
 }
 
-.rooms {
-  display: flex;
-  height: 100%;
+.container {
   background-color: #161b22;
+  padding: 20px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
 }
 
-.pre-dif-rooms {
-  margin: 10px 10px 10px 10px;
-}
-.room1 {
-  display: flex;
-  border: 1px solid var(--roomborder);
-  height: 150px;
-  width: 350px;
-  text-align: center;
-  margin: 50px 0 0 50px;
+.card {
+  border: 1px solid #2e2e3f;
   border-radius: 8px;
   background-color: var(--roomdark);
-  flex-direction: row;
-}
-.room1 a {
-  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
   color: var(--white);
-  margin-top: 40px;
-  text-align: center;
-  margin-left: 140px;
 }
-.room1 p {
-  margin-top: 80px;
-  font-size: 1rem;
-  margin-left: 65px;
-  position: absolute;
-}
-.room2 {
+
+.card-header {
   display: flex;
+  align-items: center;
+  background-color: var();
+  padding: 10px;
+  border-bottom: 1px solid var(--borderbottom);
+}
+
+.card-header .rounded-circle {
   border: 1px solid var(--roomborder);
-  height: 150px;
-  width: 350px;
-  text-align: center;
-  margin-left: 33%;
-  contain-intrinsic-block-size: AUTO 100px;
-  background-color: var(--roomdark);
-  flex-direction: row;
-  position: absolute;
-  top: 125px;
-  border-radius: 8px;
 }
-.room2 a {
-  text-decoration: none;
+
+.card-header .username {
+  font-weight: bold;
+  color: var(--roomtext);
+  margin-bottom: 2px;
+  margin-left: 3px;
+}
+
+.card-header p {
+  color: var(--roomtext);
+}
+
+.card-body {
+  padding: 15px;
+}
+
+.card-body .card-title {
+  font-size: 1.25rem;
   color: var(--white);
-  margin-top: 40px;
-  text-align: center;
-  margin-left: 140px;
 }
-.room2 p {
-  margin-top: 80px;
-  font-size: 1rem;
-  margin-left: 65px;
-  position: absolute;
+
+.card-body .card-text {
+  font-size: 0.9rem;
+  color: #cccccc;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2a2e38;
+  padding: 10px;
+  border-top: 1px solid #2e2e3f;
+}
+
+.card-footer .members {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #ffffff;
+}
+
+.card-footer .badge {
+  font-size: 0.8rem;
+  padding: 6px 10px;
+  border-radius: 12px;
 }
 
 .your-rooms-container {
+  position: absolute;
   background: #0d1117;
   border: none;
   width: 250px;
   height: 100vh;
-  margin-left: auto;
+  right: 0;
+  top: 65px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }

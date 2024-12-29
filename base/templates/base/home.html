@@ -1,21 +1,40 @@
 {% extends 'base.html' %} {% load static %} {% block title %}
 <title>Home</title>
 {% endblock %} {% block link %}
-<link rel="stylesheet" href="{% static 'css/body.css'%}" />
-{% endblock %} {%block nav %}
+<link rel="stylesheet" href="{% static 'css/body.css' %}" />
+{% endblock %} {% block nav %}
 <a href="/">HOME</a>
 {% endblock %} {% block content %}
-<div class="rooms">
-  <div class="pre-dif-rooms">
-    <div class="room1">
-      <a href="#"><h3>PYTHON</h3></a>
-      <p>Learn & Practice Python with vorex</p>
+<div class="container mt-6">
+  <div class="row g-5">
+    {% for room in rooms %}
+    <div class="col-md-5 col-sm-7">
+      <div class="card h-100">
+        <div class="card-header d-flex align-items-center">
+          <img
+            src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
+            alt="User"
+            class="rounded-circle me-2"
+            width="33"
+            height="33"
+          />
+          <div>
+            <span class="username">@{{ room.created_by }}</span><br />
+            <p class="text-muted">{{ room.created_at }}</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ room.name }}</h5>
+          <p class="card-text">{{ room.description }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <span class="members"><i class="icon-people"></i> 5 Joined</span>
+          <span class="badge bg-primary">{{ room.name }}</span>
+        </div>
+      </div>
     </div>
-    <div class="room2">
-      <a href="#"><h3>JAVA</h3></a>
-      <p>Learn & Practice problem java with vorexx</p>
-    </div>
+    {% endfor %}
   </div>
-  <div class="your-rooms-container"></div>
 </div>
+<div class="your-rooms-container"></div>
 {% endblock %}
