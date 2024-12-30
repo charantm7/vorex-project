@@ -5,36 +5,15 @@
 {% endblock %} {% block nav %}
 <a href="/">HOME</a>
 {% endblock %} {% block content %}
-<div class="container mt-6">
-  <div class="row g-5">
+<div class="main-body">
+  <div class="activity_container"></div>
+  <div class="topic_container">
     {% for room in rooms %}
-    <div class="col-md-5 col-sm-7">
-      <div class="card h-100">
-        <div class="card-header d-flex align-items-center">
-          <img
-            src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
-            alt="User"
-            class="rounded-circle me-2"
-            width="33"
-            height="33"
-          />
-          <a href="#" class="username"><span>@{{ room.created_by }}</span></a>
-          <div class="text-muted">
-            <p>created: {{ room.created_at }}</p>
-          </div>
-        </div>
-        <div class="card-body">
-          <a href="#"><h5 class="card-title">{{ room.name }}</h5></a>
-          <p class="card-text">{{ room.description }}</p>
-        </div>
-        <div class="card-footer d-flex justify-content-between">
-          <span class="members"><i class="icon-people"></i> 5 Joined</span>
-          <span class="badge bg-primary">{{ room.name }}</span>
-        </div>
-      </div>
-    </div>
+    <div>{{room.name}}</div>
     {% endfor %}
   </div>
+  <div class="room_container">
+    <div class="#"></div>
+  </div>
 </div>
-<div class="your-rooms-container"></div>
 {% endblock %}

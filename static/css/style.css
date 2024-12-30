@@ -280,7 +280,10 @@ nav {
     color: transparent;
   }
   .search-input-container {
-    width: 50%;
+    width: 90%;
+  }
+  .search-input-container input {
+    display: none;
   }
 }
 

@@ -5,158 +5,31 @@
   --roomlight: #151b23;
   --borderbottom: #2e2e3f;
 }
-
-.container {
-  background-color: #161b22;
-  padding: 20px;
-  border-radius: 8px;
-  font-family: "Poppins", sans-serif;
-}
-
-.card {
-  border: 1px solid #2e2e3f;
-  border-radius: 8px;
-  background-color: var(--roomdark);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  color: var(--white);
-}
-
-.card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--borderbottom);
-}
-
-.card-header .rounded-circle {
-  border: 1px solid var(--roomborder);
-}
-
-.card-header .username {
-  flex: 1;
-  font-weight: bold;
-  color: var(--roomtext);
-  overflow: hidden;
-  left: 0;
-  text-decoration: none;
-}
-
-.text-muted {
-  color: var(--roomtext);
-  margin-right: 0;
-}
-.text-muted p {
-  color: var(--roomtext);
-  font-size: 0.7rem;
-  margin-top: 10px;
-}
-@media (max-width: 992px) {
-  .card-header {
-    padding: 10px 0 35px 10px;
-  }
-  .text-muted {
-    position: absolute;
-    margin-left: 5px;
-    margin-top: 80px;
-  }
-}
-
-.card-body {
-  padding: 15px;
-}
-
-.card-body .card-title {
-  font-size: 1.25rem;
-  color: var(--white);
-}
-
-.card-body a {
-  text-decoration: none;
-}
-.card-body .card-text {
-  font-size: 0.7rem;
-  color: #cccccc;
-  margin-top: 20px;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2a2e38;
-  padding: 10px;
-  border-top: 1px solid #2e2e3f;
-}
-
-.card-footer .members {
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  color: #ffffff;
-}
-
-.card-footer .badge {
-  font-size: 0.8rem;
-  padding: 6px 10px;
-  border-radius: 12px;
-}
-
-.your-rooms-container {
-  position: absolute;
-  background: var(--roomdark);
-  border: none;
-  width: 250px;
+.main-body {
+  border: 2px solid red;
   height: 100vh;
-  right: 0;
-  top: 65px;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.your-rooms-container p {
-  color: white;
-  background-color: var(--roomdark);
-  padding: 10px 5px;
-  font-size: 17px;
   font-family: "Poppins", sans-serif;
-  font-weight: 450;
 }
-@media (max-width: 1120px) {
-  .your-rooms-container {
-    width: 20%;
-  }
-}
-@media (max-width: 992px) {
-  .your-rooms-container {
-    width: 20%;
-  }
-}
-@media (max-width: 930px) {
-  .your-rooms-container {
-    width: 20%;
-  }
-}
-@media (max-width: 920px) {
-  .your-rooms-container {
-    width: 20%;
-  }
+.activity_container {
+  position: absolute;
+  right: 0;
+  height: 100vh;
+  width: 20%;
+  border: 2px solid green;
 }
 
-@media (max-width: 900px) {
-  .your-rooms-container {
-    display: none;
-  }
-  .container {
-    width: 100%;
-  }
+.topic_container {
+  display: flex;
+  border: 2px solid red;
+  flex-direction: row;
+  height: 8%;
+  width: 80%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
 }
-
-@media (max-width: 576px) {
-  .your-rooms-container {
-    display: none;
-  }
-  .container {
-    width: 95%;
-  }
+.room_container {
+  height: 92%;
+  width: 80%;
+  border: 2px solid blue;
 }
