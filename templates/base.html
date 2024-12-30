@@ -39,115 +39,118 @@
     </div> -->
     <header>
       <nav>
-        <div class="nav-left">
-          <div class="sidebar" id="sidebar">
-            <div class="logo_content">
-              <div class="logo">
-                <i class="fas fa-bars" id="menuBtn"
-                  ><span class="logo_name">VOREX</span></i
-                >
-              </div>
+        <div class="nav-container">
+          <div class="nav-left">
+            <div class="hamburger" onclick="myFunction(this)" id="menuBtn">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
             </div>
-            <ul class="nav_list">
-              <li>
-                <a href="/">
-                  <i class="fas fa-home"></i>
-                  <span class="link_name">Home</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fa fa-info-circle"></i>
-                  <span class="link_name">About</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fas fa-wrench"></i>
-                  <span class="link_name">Services</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fas fa-chart-line"></i>
-                  <span class="link_name">Analytics</span>
-                </a>
-              </li>
+            <div class="nav-main-links">
+              <ul>
+                <li>
+                  {% block nav %}
+                  <a href="#Home">HOME</a>
+                  {% endblock %}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="nav-center">
+            <div class="search-input-container">
+              <a href="#"><i class="fas fa-search"></i></a>
+              <input type="text" placeholder="Search..." />
+            </div>
+          </div>
+          <div class="nav-right">
+            <div class="login-btn">
+              <a href="{% url 'auth_page' %}?action=login"
+                ><button>Login</button></a
+              >
+            </div>
+            <div class="signup-btn">
+              <a href="{% url 'auth_page' %}?action=signup"
+                ><button>Sign Up</button></a
+              >
+            </div>
+            <div class="create-logo">
+              <a href="#">
+                <img
+                  src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733592006/add_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_sktijw.png"
+                  alt="create img"
+                />
+              </a>
+            </div>
 
-              <li>
-                <a href="#">
-                  <i class="fas fa-lightbulb"></i>
-                  <span class="link_name">Ideas</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fas fa-clock"></i>
-                  <span class="link_name">History</span>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i class="fas fa-cog"></i>
-                  <span class="link_name">Settings</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <ul class="nav-main-links">
-            <li>
-              {% block nav %}
-              <a href="#Home">HOME</a>
-              {% endblock %}
-            </li>
-          </ul>
-        </div>
-        <div class="nav-center">
-          <div class="search-input-container">
-            <a href="#"><i class="fas fa-search"></i></a>
-            <input type="text" placeholder="Search..." />
-          </div>
-        </div>
-        <div class="nav-right">
-          <div class="login-btn">
-            <a href="{% url 'auth_page' %}?action=login"
-              ><button>Login</button></a
-            >
-          </div>
-          <div class="signup-btn">
-            <a href="{% url 'auth_page' %}?action=signup"
-              ><button>Sign Up</button></a
-            >
-          </div>
-          <div class="create-logo">
-            <a href="#">
-              <img
-                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733592006/add_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_sktijw.png"
-                alt="create img"
-              />
-            </a>
-          </div>
-
-          <div class="notification-logo">
-            <a href="#"
-              ><img
-                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733590708/notifications_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_bnn7xt.png"
-                alt="notification img"
-            /></a>
-          </div>
-          <div class="account-logo">
-            <a href="#"
-              ><img
-                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733589526/main_logo-removebg_1_c35fah.png"
-                alt="account img"
-            /></a>
+            <div class="notification-logo">
+              <a href="#"
+                ><img
+                  src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733590708/notifications_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_bnn7xt.png"
+                  alt="notification img"
+              /></a>
+            </div>
+            <div class="account-logo">
+              <a href="#"
+                ><img
+                  src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733589526/main_logo-removebg_1_c35fah.png"
+                  alt="account img"
+              /></a>
+            </div>
           </div>
         </div>
       </nav>
-      <hr />
     </header>
-    {% block content %}{% endblock %}
+    <main>
+      <div class="sidebar" id="sidebar">
+        <ul class="nav_list">
+          <li>
+            <a href="/">
+              <i class="fas fa-home"></i>
+              <span class="link_name">Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-info-circle"></i>
+              <span class="link_name">About</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-wrench"></i>
+              <span class="link_name">Services</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-chart-line"></i>
+              <span class="link_name">Analytics</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <i class="fas fa-lightbulb"></i>
+              <span class="link_name">Ideas</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-clock"></i>
+              <span class="link_name">History</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="link_name">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      {% block content %}{% endblock %}
+    </main>
+    <footer></footer>
     <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>

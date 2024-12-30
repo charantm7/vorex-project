@@ -4,6 +4,9 @@ const menuBtn = document.getElementById("menuBtn");
 menuBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
 });
+function myFunction(x) {
+  x.classList.toggle("change");
+}
 
 // window.addEventListener("load", () => {
 //   setTimeout(() => {
