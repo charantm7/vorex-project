@@ -12,11 +12,12 @@
   font-family: "Poppins", sans-serif;
 }
 .activity_container {
-  position: absolute;
+  position: fixed;
   right: 0;
   height: 100vh;
   width: 20%;
   border: 2px solid green;
+  background-color: var(--borderbottom);
 }
 
 .topic_container {
@@ -24,14 +25,14 @@
   border: 2px solid red;
   flex-direction: row;
   height: 8%;
-  width: 80%;
+  width: 79.25%;
   align-items: center;
   justify-content: space-between;
   padding: 0 25px;
 }
 .room_container {
   height: 92%;
-  width: 80%;
+  width: 79.25%;
   border: 2px solid blue;
 }
 /* @media (max-width: 1400px) {

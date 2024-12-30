@@ -8,13 +8,17 @@
   --lightBulue: rgb(34, 237, 255);
   --links: rgb(34, 237, 255);
 }
-
+.main-body {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
 .wrapper {
   position: relative;
   width: 750px;
   height: 450px;
-  margin: auto auto;
-  margin-top: 120px;
+
   background: var(--bodydark);
   border-radius: 10px;
   box-shadow: 0 0 20px var(--black);

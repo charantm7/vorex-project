@@ -9,117 +9,125 @@
   rel="stylesheet"
 />
 {% endblock %} {% block content %}
-<div class="wrapper">
-  <span class="rotate-bg"></span>
-  <span class="rotate-bg2"></span>
-  <div class="third-party-auth login">
-    <a href="https://www.google.com/" class="animation" style="--i: 3; --j: 24">
-      <i class="fa-brands fa-google"></i>
-    </a>
-    <a
-      href="https://github.com/charantm7/"
-      class="animation"
-      style="--i: 3; --j: 24"
-      ><i class="fa-brands fa-github"></i
-    ></a>
-    <a href="https://facebook.com/" class="animation" style="--i: 3; --j: 24"
-      ><i class="fa-brands fa-facebook"></i
-    ></a>
-  </div>
-  <div class="third-party-auth register">
-    <a href="#" class="animation" style="--i: 17; --j: 0">
-      <i class="fa-brands fa-google"></i>
-    </a>
-    <a href="#" class="animation" style="--i: 17; --j: 0"
-      ><i class="fa-brands fa-github"></i
-    ></a>
-    <a href="#" class="animation" style="--i: 17; --j: 0"
-      ><i class="fa-brands fa-facebook"></i
-    ></a>
-  </div>
+<div class="main-body">
+  <div class="wrapper">
+    <span class="rotate-bg"></span>
+    <span class="rotate-bg2"></span>
+    <div class="third-party-auth login">
+      <a
+        href="https://www.google.com/"
+        class="animation"
+        style="--i: 3; --j: 24"
+      >
+        <i class="fa-brands fa-google"></i>
+      </a>
+      <a
+        href="https://github.com/charantm7/"
+        class="animation"
+        style="--i: 3; --j: 24"
+        ><i class="fa-brands fa-github"></i
+      ></a>
+      <a href="https://facebook.com/" class="animation" style="--i: 3; --j: 24"
+        ><i class="fa-brands fa-facebook"></i
+      ></a>
+    </div>
+    <div class="third-party-auth register">
+      <a href="#" class="animation" style="--i: 17; --j: 0">
+        <i class="fa-brands fa-google"></i>
+      </a>
+      <a href="#" class="animation" style="--i: 17; --j: 0"
+        ><i class="fa-brands fa-github"></i
+      ></a>
+      <a href="#" class="animation" style="--i: 17; --j: 0"
+        ><i class="fa-brands fa-facebook"></i
+      ></a>
+    </div>
 
-  <div class="form-box login">
-    <h2 class="title animation" style="--i: 0; --j: 21">Login</h2>
-    <form action="{% url 'User_login' %}" method="POST">
-      <div class="input-box animation" style="--i: 1; --j: 22">
-        <input type="text" required />
-        <label for="">Username</label>
-        <i class="bx bxs-user"></i>
-      </div>
+    <div class="form-box login">
+      <h2 class="title animation" style="--i: 0; --j: 21">Login</h2>
+      <form action="{% url 'User_login' %}" method="POST">
+        <div class="input-box animation" style="--i: 1; --j: 22">
+          <input type="text" required />
+          <label for="">Username</label>
+          <i class="bx bxs-user"></i>
+        </div>
 
-      <div class="input-box animation" style="--i: 2; --j: 23">
-        <input type="password" required />
-        <label for="">Password</label>
-        <i class="bx bxs-lock-alt"></i>
-      </div>
-      <div class="body-btn">
-        <button type="submit" class="animation" style="--i: 3; --j: 24">
-          Login
-        </button>
-      </div>
+        <div class="input-box animation" style="--i: 2; --j: 23">
+          <input type="password" required />
+          <label for="">Password</label>
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+        <div class="body-btn">
+          <button type="submit" class="animation" style="--i: 3; --j: 24">
+            Login
+          </button>
+        </div>
 
-      <div class="forget-pass animation" style="--i: 4; --j: 25">
-        <p>
-          <a href="">Forget Password?</a>
-        </p>
-      </div>
-      <div class="linkTxt animation" style="--i: 5; --j: 26">
-        <p>
-          New to vorex?
-          <a href="#" class="register-link">Sign Up</a>
-        </p>
-      </div>
-    </form>
-  </div>
+        <div class="forget-pass animation" style="--i: 4; --j: 25">
+          <p>
+            <a href="">Forget Password?</a>
+          </p>
+        </div>
+        <div class="linkTxt animation" style="--i: 5; --j: 26">
+          <p>
+            New to vorex?
+            <a href="#" class="register-link">Sign Up</a>
+          </p>
+        </div>
+      </form>
+    </div>
 
-  <div class="info-text login">
-    <h2 class="animation" style="--i: 1; --j: 20">
-      Welcome Back, {{username}}
-    </h2>
+    <div class="info-text login">
+      <h2 class="animation" style="--i: 1; --j: 20">
+        Welcome Back, {{username}}
+      </h2>
 
-    <p class="animation" style="--i: 2; --j: 21">
-      Let's Pick Up Where You Left Off!
-    </p>
-  </div>
+      <p class="animation" style="--i: 2; --j: 21">
+        Let's Pick Up Where You Left Off!
+      </p>
+    </div>
 
-  <div class="form-box register">
-    <h2 class="title animation" style="--i: 17; --j: 0">Sign Up</h2>
+    <div class="form-box register">
+      <h2 class="title animation" style="--i: 17; --j: 0">Sign Up</h2>
 
-    <form action="{% url 'User_signup' %}" method="POST">
-      <div class="input-box animation" style="--i: 18; --j: 1">
-        <input type="text" required />
-        <label for="">Username</label>
-        <i class="bx bxs-user"></i>
-      </div>
+      <form action="{% url 'User_signup' %}" method="POST">
+        <div class="input-box animation" style="--i: 18; --j: 1">
+          <input type="text" required />
+          <label for="">Username</label>
+          <i class="bx bxs-user"></i>
+        </div>
 
-      <div class="input-box animation" style="--i: 19; --j: 2">
-        <input type="email" required />
-        <label for="">Email</label>
-        <i class="bx bxs-envelope"></i>
-      </div>
+        <div class="input-box animation" style="--i: 19; --j: 2">
+          <input type="email" required />
+          <label for="">Email</label>
+          <i class="bx bxs-envelope"></i>
+        </div>
 
-      <div class="input-box animation" style="--i: 20; --j: 3">
-        <input type="password" required />
-        <label for="">Password</label>
-        <i class="bx bxs-lock-alt"></i>
-      </div>
-      <div class="body-btn">
-        <button type="submit" class="animation" style="--i: 21; --j: 4">
-          Sign Up
-        </button>
-      </div>
+        <div class="input-box animation" style="--i: 20; --j: 3">
+          <input type="password" required />
+          <label for="">Password</label>
+          <i class="bx bxs-lock-alt"></i>
+        </div>
+        <div class="body-btn">
+          <button type="submit" class="animation" style="--i: 21; --j: 4">
+            Sign Up
+          </button>
+        </div>
 
-      <div class="linkTxt animation" style="--i: 22; --j: 5">
-        <p>Already have an account? <a href="#" class="login-link">Login</a></p>
-      </div>
-    </form>
-  </div>
+        <div class="linkTxt animation" style="--i: 22; --j: 5">
+          <p>
+            Already have an account? <a href="#" class="login-link">Login</a>
+          </p>
+        </div>
+      </form>
+    </div>
 
-  <div class="info-text register">
-    <h2 class="animation" style="--i: 17; --j: 0">Welcome Abroad!</h2>
-    <p class="animation" style="--i: 18; --j: 1">
-      Let's get you signed up and ready to go!
-    </p>
+    <div class="info-text register">
+      <h2 class="animation" style="--i: 17; --j: 0">Welcome Abroad!</h2>
+      <p class="animation" style="--i: 18; --j: 1">
+        Let's get you signed up and ready to go!
+      </p>
+    </div>
   </div>
 </div>
 <script src="{% static 'js/auth.js'%}"></script>
