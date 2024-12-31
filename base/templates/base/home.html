@@ -24,7 +24,7 @@
               />
               <a href="#">@{{room.created_by}}</a>
             </div>
-            <small>{{room.created_at}}</small>
+            <small>{{room.created_at|date:"Y F j"}}</small>
           </div>
           <div class="card-mid">
             <a href="#">{{room.name}}</a>
@@ -32,7 +32,7 @@
           </div>
           <div class="card-bottom">
             <p>5k Joined</p>
-            <button>JOIN</button>
+            <button><b>JOIN</b></button>
           </div>
         </div>
       </div>

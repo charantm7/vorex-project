@@ -3,7 +3,7 @@
   --roomtext: #d1d1d1;
   --roomdark: #0d1117;
   --roomlight: #151b23;
-  --borderbottom: #9f9c9c;
+  --borderbottom: #4e4e4eb9;
   --white: white;
 }
 p {
@@ -15,8 +15,8 @@ p {
   font-family: sans-serif;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr 270px;
+  grid-template-rows: 3vw 1fr;
+  grid-template-columns: 1fr 20%;
   grid-template-areas:
     "topic activity"
     "contents activity";
@@ -29,7 +29,7 @@ p {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-
+  font-size: 1.2vw;
   a {
     text-decoration: none;
     color: var(--roomtext);
@@ -56,7 +56,7 @@ p {
       justify-content: space-between;
       padding: 30px;
       height: 20%;
-      border-bottom: 1px solid var(--borderbottom);
+      border-bottom: 0.1px solid var(--borderbottom);
       img {
         height: 35px;
         width: 35px;
@@ -121,11 +121,19 @@ p {
   }
 }
 .activity {
-  top: 56.8;
-  right: 0;
-  position: fixed;
-  height: 100vh;
-  width: 270px;
-  align-self: start;
+  grid-area: activity;
+
+  position: sticky;
+  height: 100%;
   background-color: var(--roomdark);
+}
+
+@media (max-width: 576px) {
+  .activity {
+    display: none;
+  }
+
+  .main-body {
+    display: block;
+  }
 }

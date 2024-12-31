@@ -1,9 +1,15 @@
-const sidebar = document.getElementById("sidebar");
-const menuBtn = document.getElementById("menuBtn");
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const sidebar = document.getElementById("sidebar");
+  menuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("active");
+  });
 
-menuBtn.addEventListener("click", () => {
-  sidebar.classList.toggle("active");
+  menuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("visible");
+  });
 });
+
 function myFunction(x) {
   x.classList.toggle("change");
 }
