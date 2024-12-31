@@ -6,14 +6,34 @@
 <a href="/">HOME</a>
 {% endblock %} {% block content %}
 <div class="main-body">
-  <div class="activity_container"></div>
-  <div class="topic_container">
+  <div class="topic">
     {% for room in rooms %}
-    <div>{{room.name}}</div>
+    <a href="#">{{room.name}}</a>
     {% endfor %}
   </div>
-  <div class="room_container">
-    <div class="#"></div>
+  <div class="content">
+    <div class="row g-5">
+      {% for room in rooms %}
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-top">
+            <img src="#" alt="" />
+            <a href="#">{{room.created_by}}</a>
+            <small>{{room.created_at}}</small>
+          </div>
+          <div class="card-mid">
+            <a href="#">{{room.name}}</a>
+            <p>{{room.description}}</p>
+          </div>
+          <div class="card-bottom">
+            <p>5k Joined</p>
+            <button>JOIN</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
+  <div class="activity">activity</div>
 </div>
 {% endblock %}

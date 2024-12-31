@@ -34,73 +34,64 @@
     {% endblock %} {% block link %} {% endblock %}
   </head>
   <body>
-    <!-- <div id="preloader">
-      <div class="spinner"></div>
-    </div> -->
-    <header>
-      <nav>
-        <div class="nav-container">
-          <div class="nav-left">
-            <div class="hamburger" onclick="myFunction(this)" id="menuBtn">
-              <div class="bar1"></div>
-              <div class="bar2"></div>
-              <div class="bar3"></div>
-            </div>
-            <div class="nav-main-links">
-              <ul>
-                <li>
-                  {% block nav %}
-                  <a href="#Home">HOME</a>
-                  {% endblock %}
-                </li>
-              </ul>
-            </div>
+    <nav>
+      <div class="nav-container">
+        <div class="nav-container-left">
+          <div class="hamburger" onclick="myFunction(this)" id="menuBtn">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
           </div>
-          <div class="nav-center">
-            <div class="search-input-container">
-              <a href="#"><i class="fas fa-search"></i></a>
-              <input type="text" placeholder="Search..." />
-            </div>
-          </div>
-          <div class="nav-right">
-            <div class="login-btn">
-              <a href="{% url 'auth_page' %}?action=login"
-                ><button>Login</button></a
-              >
-            </div>
-            <div class="signup-btn">
-              <a href="{% url 'auth_page' %}?action=signup"
-                ><button>Sign Up</button></a
-              >
-            </div>
-            <div class="create-logo">
-              <a href="#">
-                <img
-                  src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733592006/add_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_sktijw.png"
-                  alt="create img"
-                />
-              </a>
-            </div>
-
-            <div class="notification-logo">
-              <a href="#"
-                ><img
-                  src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733590708/notifications_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_bnn7xt.png"
-                  alt="notification img"
-              /></a>
-            </div>
-            <div class="account-logo">
-              <a href="#"
-                ><img
-                  src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733589526/main_logo-removebg_1_c35fah.png"
-                  alt="account img"
-              /></a>
-            </div>
+          <div class="nav-links">
+            {% block nav %}
+            <a href="#Home">HOME</a>
+            {% endblock %}
           </div>
         </div>
-      </nav>
-    </header>
-    <main>
+        <div class="nav-container-center">
+          <div class="search-container">
+            <a href="#"><i class="fas fa-search"></i></a>
+            <input type="text" placeholder="Search..." />
+          </div>
+        </div>
+        <div class="nav-container-right">
+          <div class="nav-container-right-login-btn">
+            <a href="{% url 'auth_page' %}?action=login"
+              ><button>Login</button></a
+            >
+          </div>
+          <div class="nav-container-right-signup-btn">
+            <a href="{% url 'auth_page' %}?action=signup"
+              ><button>Sign Up</button></a
+            >
+          </div>
+          <div class="nav-container-right-create-logo">
+            <a href="#">
+              <img
+                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733592006/add_circle_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_sktijw.png"
+                alt="create img"
+              />
+            </a>
+          </div>
+
+          <div class="nav-container-right-notification-logo">
+            <a href="#"
+              ><img
+                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733590708/notifications_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24_bnn7xt.png"
+                alt="notification img"
+            /></a>
+          </div>
+          <div class="nav-container-right-account-logo">
+            <a href="#"
+              ><img
+                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733589526/main_logo-removebg_1_c35fah.png"
+                alt="account img"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <aside>
       <div class="sidebar" id="sidebar">
         <ul class="nav_list">
           <li>
@@ -148,9 +139,40 @@
           </li>
         </ul>
       </div>
-      {% block content %}{% endblock %}
-    </main>
-    <footer></footer>
+      {% block aside %}{% endblock %}
+    </aside>
+    <main>{% block content %}{% endblock %}</main>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column-1">
+          <h3>About Us</h3>
+          <p>
+            We provide quality tutorials, resources, and support to help
+            learners and professionals grow in their careers.
+          </p>
+        </div>
+        <div class="footer-column-2">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column-3">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2024 VOREX. All rights reserved.</div>
+    </footer>
+
     <script src="{% static 'js/script.js' %}"></script>
   </body>
 </html>
