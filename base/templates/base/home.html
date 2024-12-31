@@ -14,11 +14,16 @@
   <div class="content">
     <div class="row g-5">
       {% for room in rooms %}
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="card">
           <div class="card-top">
-            <img src="#" alt="" />
-            <a href="#">{{room.created_by}}</a>
+            <div class="card-top-left">
+              <img
+                src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
+                alt=""
+              />
+              <a href="#">@{{room.created_by}}</a>
+            </div>
             <small>{{room.created_at}}</small>
           </div>
           <div class="card-mid">
@@ -34,6 +39,6 @@
       {% endfor %}
     </div>
   </div>
-  <div class="activity">activity</div>
+  <div class="activity"></div>
 </div>
 {% endblock %}

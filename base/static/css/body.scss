@@ -1,14 +1,19 @@
 :root {
   --roomborder: #ececec;
-  --roomtext: white;
+  --roomtext: #d1d1d1;
   --roomdark: #0d1117;
   --roomlight: #151b23;
-  --borderbottom: #2e2e3f;
+  --borderbottom: #9f9c9c;
+  --white: white;
+}
+p {
+  margin: 0;
+  padding: 0;
 }
 
 .main-body {
   font-family: sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
   grid-template-columns: 1fr 270px;
@@ -19,7 +24,7 @@
 
 .topic {
   grid-area: topic;
-  border: 1px solid red;
+  background-color: #2a2e38;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -29,37 +34,89 @@
     text-decoration: none;
     color: var(--roomtext);
   }
+  a:hover {
+    color: var(--white);
+  }
 }
 
 .content {
   grid-area: contents;
-  border: 1px solid blue;
   padding: 40px;
 
   .card {
     background-color: var(--roomdark);
     color: var(--roomtext);
     height: 100%;
+    border-radius: 8px;
 
     &-top {
       display: flex;
       flex-direction: row;
       align-items: center;
+      justify-content: space-between;
+      padding: 30px;
       height: 20%;
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid var(--borderbottom);
+      img {
+        height: 35px;
+        width: 35px;
+        border-radius: 20px;
+      }
+      a {
+        margin-left: 5px;
+        text-decoration: none;
+        color: var(--roomtext);
+        transition: 0.4s ease;
+      }
+      a:hover {
+        color: var(--white);
+        text-decoration: underline;
+      }
     }
     &-mid {
       display: flex;
-      flex-direction: row;
-      align-items: center;
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
       height: 80%;
-      border-bottom: 1px solid white;
+      border-bottom: 1px solid var(--borderbottom);
+      a {
+        margin: 0 0 0 20px;
+        text-decoration: none;
+        color: var(--roomtext);
+      }
+      a:hover {
+        color: var(--white);
+        text-decoration: underline;
+      }
+      p {
+        margin: 15px 0 0 20px;
+      }
     }
     &-bottom {
       display: flex;
       flex-direction: row;
       align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      padding: 30px;
       height: 20%;
+      background-color: #2a2e38;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+    button {
+      padding: 5px 20px;
+      background-color: var(--roomdark);
+      border: 1px solid var(--roomdark);
+      color: var(--white);
+      border-radius: 20px;
+      transition: 0.6s ease;
+    }
+    button:hover {
+      background-color: var(--white);
+      border: 1px solid var(--white);
+      color: var(--roomdark);
     }
   }
 }
