@@ -14,7 +14,7 @@
   <div class="content">
     <div class="row g-5">
       {% for room in rooms %}
-      <div class="col-md-6">
+      <div class="col-md-6 col-lg-12 col-md-12">
         <div class="card">
           <div class="card-top">
             <div class="card-top-left">
@@ -28,7 +28,7 @@
           </div>
           <div class="card-mid">
             <a href="#">{{room.name}}</a>
-            <p>{{room.description}}</p>
+            <small>{{room.description}}</small>
           </div>
           <div class="card-bottom">
             <p>5k Joined</p>

@@ -16,6 +16,7 @@ p {
   font-family: sans-serif;
   min-height: 100vh;
   display: grid;
+  top: 56.8;
   grid-template-rows: 3vw 1fr;
   grid-template-columns: 1fr 20%;
   grid-template-areas: "topic activity" "contents activity";
@@ -53,7 +54,7 @@ p {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 30px;
+  padding: 25px 20px 25px 20px;
   height: 20%;
   border-bottom: 0.1px solid var(--borderbottom);
 }
@@ -89,8 +90,9 @@ p {
   color: var(--white);
   text-decoration: underline;
 }
-.content .card-mid p {
+.content .card-mid small {
   margin: 15px 0 0 20px;
+  font-size: 12px;
 }
 .content .card-bottom {
   display: flex;
@@ -131,5 +133,11 @@ p {
   }
   .main-body {
     display: block;
+  }
+  .content {
+    padding: 20px;
+  }
+  .content .card-top {
+    padding: 15px 10px 15px 10px;
   }
 }/*# sourceMappingURL=body.css.map */

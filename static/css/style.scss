@@ -16,6 +16,7 @@ li {
   margin: 0;
   padding: 0;
 }
+
 body {
   min-height: 100vh;
   font-family: "VT323", monospace;
@@ -24,7 +25,7 @@ body {
   background: var(--bodydark);
   color: var(--white);
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 58.6px 1fr auto;
   grid-template-columns: 58px 1fr;
   grid-template-areas:
     "nav nav"
@@ -34,9 +35,9 @@ body {
 nav {
   grid-area: nav;
   top: 0;
-  position: fixed;
-  z-index: 100;
+  position: sticky;
   display: flex;
+  z-index: 100;
   width: 100%;
   .nav-container {
     display: flex;
@@ -158,37 +159,6 @@ nav {
         width: 35px;
       }
     }
-  }
-}
-@media (max-width: 576px) {
-  .nav-container-right-login-btn a button,
-  .nav-container-right-signup-btn a button {
-    display: none;
-  }
-  body {
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "nav"
-      "main "
-      "footer ";
-  }
-  .sidebar {
-    display: none;
-    position: fixed;
-    top: 56.8px;
-    left: 0;
-    height: calc(100% - 56.8px);
-    height: 100%;
-    width: 200px;
-    z-index: 1000;
-    transform: translateX(-100%);
-    transition: transform 1s ease-in-out;
-  }
-
-  .sidebar.visible {
-    display: block;
-    transform: translateX(0); /* Slide sidebar into view */
   }
 }
 
@@ -329,7 +299,7 @@ main {
 footer {
   grid-area: footer;
   font-family: sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.95vw;
   background-color: var(--navdark);
   z-index: 100;
   .footer-container {
@@ -341,6 +311,9 @@ footer {
 
     [class^="footer-column-"] {
       width: (100%)/3;
+      p {
+        font-size: 1.3vw;
+      }
     }
     .footer-column-2,
     .footer-column-3 {
@@ -361,6 +334,51 @@ footer {
     align-items: center;
     justify-content: center;
     padding: 10px 0;
-    font-size: 0.9rem;
+    font-size: 1vw;
+  }
+}
+@media (max-width: 576px) {
+  .nav-container-right-login-btn a button,
+  .nav-container-right-signup-btn a button {
+    display: none;
+  }
+  body {
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "nav"
+      "main "
+      "footer ";
+  }
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 56.8px;
+    left: 0;
+    height: calc(100% - 56.8px);
+    height: 100%;
+    width: 200px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 1s ease-in-out;
+  }
+
+  .sidebar.visible {
+    display: block;
+    transform: translateX(0);
+  }
+  footer {
+    .footer-container [class^="footer-column-"] {
+      p {
+        font-size: 2.5vw;
+      }
+      small,
+      a {
+        font-size: 2vw;
+      }
+    }
+    .footer-bottom {
+      font-size: 2.5vw;
+    }
   }
 }
