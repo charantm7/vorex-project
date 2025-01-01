@@ -30,7 +30,7 @@ p {
   align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
-  font-size: 1.2vw;
+  font-size: 1vw;
   a {
     text-decoration: none;
     color: var(--roomtext);
@@ -144,5 +144,8 @@ p {
     .card-top {
       padding: 15px 10px 15px 10px;
     }
+  }
+  .topic {
+    font-size: 2.5vw;
   }
 }

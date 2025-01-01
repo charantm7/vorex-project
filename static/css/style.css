@@ -25,6 +25,7 @@ body {
   font-style: normal;
   background: var(--bodydark);
   color: var(--white);
+  width: 100%;
   display: grid;
   grid-template-rows: 58.6px 1fr auto;
   grid-template-columns: 58px 1fr;
@@ -84,6 +85,7 @@ nav .nav-container-left .nav-links a {
 nav .nav-container-center {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 }
 nav .nav-container-center .search-container {
   display: flex;
@@ -91,7 +93,7 @@ nav .nav-container-center .search-container {
   align-items: center;
   gap: 10px;
   border: 1px solid var(--text);
-  padding: 0.104vw 0 0.104vw 0.521vw;
+  padding: 2px 0 2px 10px;
   border-radius: 4px;
   transform: translateX(15px);
 }
@@ -102,7 +104,12 @@ nav .nav-container-center .search-container input {
   color: var(--text);
   background-color: transparent;
   border: none;
-  padding: 1px 0 1px 0;
+  padding: 4px 15px 4px 0;
+  outline: none;
+}
+nav .nav-container-center .search-container input:focus {
+  outline: none;
+  border: none;
 }
 nav .nav-container-right {
   display: flex;
@@ -342,5 +349,21 @@ footer .footer-bottom {
   }
   footer .footer-bottom {
     font-size: 2.5vw;
+  }
+  .nav-container .nav-container-center {
+    margin-left: 120px;
+  }
+  .nav-container .nav-container-center .search-container {
+    border: none;
+  }
+  .nav-container .nav-container-center .search-container input {
+    display: none;
+  }
+  .nav-container .nav-container-center .search-container a i {
+    font-size: 21px;
+    padding-top: 5px;
+  }
+  .nav-container-right {
+    gap: 20px;
   }
 }/*# sourceMappingURL=style.css.map */
