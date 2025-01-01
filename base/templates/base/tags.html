@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% load static %}{% block title %}
+<title>Room</title>
+{% endblock %} {% block nav %}
+<a href="#">ROOM</a>
+{% endblock %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/tags.css' %}" />
+{% endblock %} {% block content %}
+<div class="tag-rooms">
+  <div class="row g-5">
+    {% for room in rooms %}
+    <div class="col-md-6 col-lg-12 col-md-12">
+      <div class="card">
+        <div class="card-top">
+          <div class="card-top-left">
+            <img
+              src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
+              alt=""
+            />
+            <a href="#">@{{room.created_by.username}}</a>
+          </div>
+          <small>{{room.created_at|date:"Y F j"}}</small>
+        </div>
+        <div class="card-mid">
+          <a href="{% url 'Rooms' room.pk %}">{{room.name}}</a>
+          <small>{{room.description}}</small>
+        </div>
+        <div class="card-bottom">
+          <p>
+            5k Joined / {% for tag in room.tags.all %}
+            <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
+            {% endfor %}
+          </p>
+
+          <button><b>JOIN</b></button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

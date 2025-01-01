@@ -1,5 +1,10 @@
-{% extends 'base.html' %} {% block title %}
+{% extends 'base.html' %} {% load static %}{% block title %}
 <title>Room</title>
 {% endblock %} {% block nav %}
-<a href="/rooms">ROOM</a>
+<a href="#">ROOM</a>
+{% endblock %} {% block content %}
+<div class="rooms">
+  <p>{{rooms.pk}}--{{rooms.name}}</p>
+</div>
+
 {% endblock %}

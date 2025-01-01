@@ -7,8 +7,8 @@
 {% endblock %} {% block content %}
 <div class="main-body">
   <div class="topic">
-    {% for room in rooms %}
-    <a href="#">{{room.name}}</a>
+    {% for tag in tags %}
+    <a href="{% url 'Tag' tag.name %}">{{tag.name}}</a>
     {% endfor %}
   </div>
   <div class="content">
@@ -22,16 +22,20 @@
                 src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
                 alt=""
               />
-              <a href="#">@{{room.created_by}}</a>
+              <a href="#">@{{room.created_by.username}}</a>
             </div>
             <small>{{room.created_at|date:"Y F j"}}</small>
           </div>
           <div class="card-mid">
-            <a href="#">{{room.name}}</a>
+            <a href="{% url 'Rooms' room.pk %}">{{room.name}}</a>
             <small>{{room.description}}</small>
           </div>
           <div class="card-bottom">
-            <p>5k Joined</p>
+            <p>
+              5k Joined / {% for tag in room.tags.all %}
+              <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
+              {% endfor %}
+            </p>
             <button><b>JOIN</b></button>
           </div>
         </div>

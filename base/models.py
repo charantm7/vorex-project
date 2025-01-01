@@ -8,18 +8,29 @@ class CustomUser(AbstractUser):
     groups = models.ManyToManyField('auth.Group', related_name='customuser_groups', blank=True)
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='customuser_permissions',  # Custom reverse accessor name
+        related_name='customuser_permissions',  
         blank=True
     )
     profile_picture = models.ImageField(upload_to='profile_picture/', blank=True, null=True)
 
+    
+    
+class Tag(models.Model):
+    name = models.CharField(max_length=500, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class Room(models.Model):
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE,related_name="rooms")
     name = models.CharField(max_length=50)
+    tags = models.ManyToManyField(Tag, related_name="rooms", blank=False)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_private = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name
 
 class RoomMembership(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

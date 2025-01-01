@@ -1,54 +1,24 @@
 :root {
+  --white: #fff;
   --roomborder: #ececec;
   --roomtext: #d1d1d1;
   --roomdark: #0d1117;
   --roomlight: #151b23;
   --borderbottom: #4e4e4eb9;
-  --white: white;
 }
 
-p {
-  margin: 0;
-  padding: 0;
-}
-
-.main-body {
-  font-family: sans-serif;
+.tag-rooms {
   min-height: 100vh;
-  display: grid;
-  grid-template-rows: 3vw 1fr;
-  grid-template-columns: 1fr 20%;
-  grid-template-areas: "topic activity" "contents activity";
-}
-
-.topic {
-  grid-area: topic;
-  background-color: #2a2e38;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  font-size: 1vw;
-}
-.topic a {
-  text-decoration: none;
-  color: var(--roomtext);
-}
-.topic a:hover {
-  color: var(--white);
-}
-
-.content {
-  grid-area: contents;
   padding: 40px;
+  font-family: sans-serif;
 }
-.content .card {
+.tag-rooms .card {
   background-color: var(--roomdark);
   color: var(--roomtext);
   height: 100%;
   border-radius: 8px;
 }
-.content .card-top {
+.tag-rooms .card-top {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -57,22 +27,22 @@ p {
   height: 20%;
   border-bottom: 0.1px solid var(--borderbottom);
 }
-.content .card-top img {
+.tag-rooms .card-top img {
   height: 35px;
   width: 35px;
   border-radius: 20px;
 }
-.content .card-top a {
+.tag-rooms .card-top a {
   margin-left: 5px;
   text-decoration: none;
   color: var(--roomtext);
   transition: 0.4s ease;
 }
-.content .card-top a:hover {
+.tag-rooms .card-top a:hover {
   color: var(--white);
   text-decoration: underline;
 }
-.content .card-mid {
+.tag-rooms .card-mid {
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -80,20 +50,20 @@ p {
   height: 80%;
   border-bottom: 1px solid var(--borderbottom);
 }
-.content .card-mid a {
+.tag-rooms .card-mid a {
   margin: 0 0 0 20px;
   text-decoration: none;
   color: var(--roomtext);
 }
-.content .card-mid a:hover {
+.tag-rooms .card-mid a:hover {
   color: var(--white);
   text-decoration: underline;
 }
-.content .card-mid small {
+.tag-rooms .card-mid small {
   margin: 15px 0 0 20px;
   font-size: 12px;
 }
-.content .card-bottom {
+.tag-rooms .card-bottom {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -105,15 +75,15 @@ p {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.content .card-bottom a {
+.tag-rooms .card-bottom a {
   text-decoration: none;
   color: var(--roomtext);
 }
-.content .card-bottom a:hover {
+.tag-rooms .card-bottom a:hover {
   text-decoration: underline;
   color: rgb(55, 88, 253);
 }
-.content .card button {
+.tag-rooms .card button {
   padding: 5px 20px;
   background-color: var(--roomdark);
   border: 1px solid var(--roomdark);
@@ -121,33 +91,8 @@ p {
   border-radius: 20px;
   transition: 0.6s ease;
 }
-.content .card button:hover {
+.tag-rooms .card button:hover {
   background-color: var(--white);
   border: 1px solid var(--white);
   color: var(--roomdark);
-}
-
-.activity {
-  grid-area: activity;
-  position: sticky;
-  height: 100%;
-  background-color: var(--roomdark);
-}
-
-@media (max-width: 576px) {
-  .activity {
-    display: none;
-  }
-  .main-body {
-    display: block;
-  }
-  .content {
-    padding: 20px;
-  }
-  .content .card-top {
-    padding: 15px 10px 15px 10px;
-  }
-  .topic {
-    font-size: 2.5vw;
-  }
-}/*# sourceMappingURL=body.css.map */
+}/*# sourceMappingURL=tags.css.map */
