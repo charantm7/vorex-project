@@ -13,8 +13,6 @@ class CustomUser(AbstractUser):
     )
     profile_picture = models.ImageField(upload_to='profile_picture/', blank=True, null=True)
 
-    
-    
 class Tag(models.Model):
     name = models.CharField(max_length=500, unique=True)
 

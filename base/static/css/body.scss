@@ -72,6 +72,9 @@ p {
         color: var(--white);
         text-decoration: underline;
       }
+      p {
+        font-size: 0.9rem;
+      }
     }
     &-mid {
       display: flex;
@@ -150,6 +153,9 @@ p {
 
     .card-top {
       padding: 15px 10px 15px 10px;
+      p {
+        font-size: 0.7rem;
+      }
     }
   }
   .topic {

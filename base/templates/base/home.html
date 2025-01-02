@@ -24,7 +24,7 @@
               />
               <a href="#">@{{room.created_by.username}}</a>
             </div>
-            <small>{{room.created_at|date:"Y F j"}}</small>
+            <p>created: {{room.created_at|date:"Y F j"}}</p>
           </div>
           <div class="card-mid">
             <a href="{% url 'Rooms' room.pk %}">{{room.name}}</a>
