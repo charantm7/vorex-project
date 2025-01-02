@@ -44,16 +44,12 @@
           </div>
           <div class="nav-links">
             {% block nav %}
-            <a href="#Home">HOME</a>
+            <a href="/">Home</a>
             {% endblock %}
+            <div class="nav1">{% block nav1 %} {% endblock %}</div>
           </div>
         </div>
-        <div class="nav-container-center">
-          <div class="search-container">
-            <a href="#"><i class="fas fa-search"></i></a>
-            <input type="text" placeholder="Search..." />
-          </div>
-        </div>
+        <div class="nav-container-center"></div>
         <div class="nav-container-right">
           <div class="nav-container-right-login-btn">
             <a href="{% url 'auth_page' %}?action=login"
@@ -64,6 +60,9 @@
             <a href="{% url 'auth_page' %}?action=signup"
               ><button>Sign Up</button></a
             >
+          </div>
+          <div class="search-container">
+            <a href="#"><i class="fas fa-search"></i></a>
           </div>
           <div class="nav-container-right-create-logo">
             <a href="#">

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %}{% block title %}
 <title>Room</title>
-{% endblock %} {% block nav %}
-<a href="#">ROOM</a>
+{% endblock %} {% block nav1 %}
+<a href="{% url 'Rooms' rooms.pk %}">/ {{rooms.name}}</a>
 {% endblock %} {% block content %}
 <div class="rooms">
   <p>{{rooms.pk}}--{{rooms.name}}</p>

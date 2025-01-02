@@ -82,74 +82,75 @@ nav {
         transform: translate(0, -8.5px) rotate(45deg);
       }
 
-      .nav-links a {
-        text-decoration: none;
-        color: var(--text);
-        font-size: 1.5rem;
+      .nav-links {
+        display: flex;
+        align-items: center;
+        a {
+          text-decoration: none;
+          color: var(--text);
+          font-size: 1.5rem;
+        }
       }
     }
     &-center {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-
-      .search-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 10px;
-        border: 1px solid var(--text);
-        padding: 2px 0 2px 10px;
-        border-radius: 4px;
-        transform: translateX(15px);
-
-        i {
-          color: var(--text);
-        }
-        input {
-          color: var(--text);
-          background-color: transparent;
-          border: none;
-          padding: 4px 15px 4px 0;
-          outline: none;
-        }
-        input:focus {
-          outline: none;
-          border: none;
-        }
-      }
     }
     &-right {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 15px;
+      gap: 20px;
+
+      .search-container {
+        border: 1px solid var(--text);
+        padding: 5px 8px 5px 8px;
+        border-radius: 4px;
+        transition: 0.5s ease;
+
+        i {
+          color: var(--text);
+        }
+      }
+      .search-container:hover {
+        background-color: white;
+        i {
+          color: black;
+        }
+      }
 
       [class^="nav-container-right-"] {
         display: flex;
         flex-direction: row;
       }
-      &-login-btn a button {
-        color: var(--white);
-        background-color: transparent;
-        border: 1px solid var(--text);
-        border-radius: 4px;
-        transition: 0.7s ease;
+      &-login-btn {
+        a button {
+          color: var(--white);
+          background-color: transparent;
+          border: 1px solid var(--text);
+          border-radius: 4px;
+          transition: 0.7s ease;
+          padding: 5px 8px;
+        }
+        a button:hover {
+          background-color: var(--text);
+          color: var(--black);
+        }
       }
-      &-login-btn a button:hover {
-        background-color: var(--text);
-        color: var(--black);
-        border: none;
-      }
-      &-signup-btn a button {
-        color: var(--white);
-        background-color: transparent;
-        border: 1px solid var(--text);
-        border-radius: 4px;
-      }
-      &-signup-btn a button:hover {
-        background-color: var(--text);
-        color: var(--black);
+
+      &-signup-btn {
+        a button {
+          color: var(--white);
+          background-color: transparent;
+          border: 1px solid var(--text);
+          border-radius: 4px;
+          padding: 5px 8px;
+        }
+        a button:hover {
+          background-color: var(--text);
+          color: var(--black);
+        }
       }
 
       &-create-logo a img {
@@ -389,22 +390,7 @@ footer {
     }
   }
 
-  .nav-container {
-    .nav-container-center {
-      margin-left: 120px;
-      .search-container {
-        border: none;
-        input {
-          display: none;
-        }
-        a i {
-          font-size: 21px;
-          padding-top: 5px;
-        }
-      }
-    }
-  }
-  .nav-container-right {
-    gap: 20px;
+  .nav1 {
+    display: none;
   }
 }

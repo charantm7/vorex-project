@@ -77,6 +77,10 @@ nav .nav-container-left .change .bar2 {
 nav .nav-container-left .change .bar3 {
   transform: translate(0, -8.5px) rotate(45deg);
 }
+nav .nav-container-left .nav-links {
+  display: flex;
+  align-items: center;
+}
 nav .nav-container-left .nav-links a {
   text-decoration: none;
   color: var(--text);
@@ -87,35 +91,26 @@ nav .nav-container-center {
   flex-direction: row;
   justify-content: flex-end;
 }
-nav .nav-container-center .search-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid var(--text);
-  padding: 2px 0 2px 10px;
-  border-radius: 4px;
-  transform: translateX(15px);
-}
-nav .nav-container-center .search-container i {
-  color: var(--text);
-}
-nav .nav-container-center .search-container input {
-  color: var(--text);
-  background-color: transparent;
-  border: none;
-  padding: 4px 15px 4px 0;
-  outline: none;
-}
-nav .nav-container-center .search-container input:focus {
-  outline: none;
-  border: none;
-}
 nav .nav-container-right {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+}
+nav .nav-container-right .search-container {
+  border: 1px solid var(--text);
+  padding: 5px 8px 5px 8px;
+  border-radius: 4px;
+  transition: 0.5s ease;
+}
+nav .nav-container-right .search-container i {
+  color: var(--text);
+}
+nav .nav-container-right .search-container:hover {
+  background-color: white;
+}
+nav .nav-container-right .search-container:hover i {
+  color: black;
 }
 nav .nav-container-right [class^=nav-container-right-] {
   display: flex;
@@ -127,17 +122,18 @@ nav .nav-container-right-login-btn a button {
   border: 1px solid var(--text);
   border-radius: 4px;
   transition: 0.7s ease;
+  padding: 5px 8px;
 }
 nav .nav-container-right-login-btn a button:hover {
   background-color: var(--text);
   color: var(--black);
-  border: none;
 }
 nav .nav-container-right-signup-btn a button {
   color: var(--white);
   background-color: transparent;
   border: 1px solid var(--text);
   border-radius: 4px;
+  padding: 5px 8px;
 }
 nav .nav-container-right-signup-btn a button:hover {
   background-color: var(--text);
@@ -350,20 +346,7 @@ footer .footer-bottom {
   footer .footer-bottom {
     font-size: 2.5vw;
   }
-  .nav-container .nav-container-center {
-    margin-left: 120px;
-  }
-  .nav-container .nav-container-center .search-container {
-    border: none;
-  }
-  .nav-container .nav-container-center .search-container input {
+  .nav1 {
     display: none;
-  }
-  .nav-container .nav-container-center .search-container a i {
-    font-size: 21px;
-    padding-top: 5px;
-  }
-  .nav-container-right {
-    gap: 20px;
   }
 }/*# sourceMappingURL=style.css.map */

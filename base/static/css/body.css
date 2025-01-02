@@ -16,26 +16,25 @@ p {
   font-family: sans-serif;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: 3vw 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: 1fr 20%;
   grid-template-areas: "topic activity" "contents activity";
 }
 
-.topic {
-  grid-area: topic;
+div.topic {
   background-color: #2a2e38;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  font-size: 1vw;
+  overflow: auto;
+  white-space: nowrap;
 }
-.topic a {
-  text-decoration: none;
+div.topic a {
+  display: inline-block;
   color: var(--roomtext);
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
 }
-.topic a:hover {
-  color: var(--white);
+div.topic a:hover {
+  background-color: #1d2329;
 }
 
 .content {
@@ -152,8 +151,5 @@ p {
   }
   .content .card-top p {
     font-size: 0.7rem;
-  }
-  .topic {
-    font-size: 2.5vw;
   }
 }/*# sourceMappingURL=body.css.map */
