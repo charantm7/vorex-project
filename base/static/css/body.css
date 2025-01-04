@@ -21,19 +21,19 @@ p {
   grid-template-areas: "topic activity" "contents activity";
 }
 
-div.topic {
+.topic {
   background-color: #2a2e38;
-  overflow: auto;
+  overflow-x: auto;
   white-space: nowrap;
 }
-div.topic a {
+.topic a {
   display: inline-block;
   color: var(--roomtext);
   text-align: center;
   padding: 14px;
   text-decoration: none;
 }
-div.topic a:hover {
+.topic a:hover {
   background-color: #1d2329;
 }
 
@@ -113,7 +113,7 @@ div.topic a:hover {
 }
 .content .card-bottom a:hover {
   text-decoration: underline;
-  color: rgb(55, 88, 253);
+  color: #3758fd;
 }
 .content .card button {
   padding: 5px 20px;
@@ -141,7 +141,10 @@ div.topic a:hover {
     display: none;
   }
   .main-body {
-    display: block;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "topic" "contents";
   }
   .content {
     padding: 20px;

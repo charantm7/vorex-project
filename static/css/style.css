@@ -86,6 +86,9 @@ nav .nav-container-left .nav-links a {
   color: var(--text);
   font-size: 1.5rem;
 }
+nav .nav-container-left .nav-links .nav1 {
+  padding-left: 10px;
+}
 nav .nav-container-center {
   display: flex;
   flex-direction: row;
@@ -133,19 +136,40 @@ nav .nav-container-right-signup-btn a button {
   background-color: transparent;
   border: 1px solid var(--text);
   border-radius: 4px;
+  transition: 0.7s ease;
   padding: 5px 8px;
 }
 nav .nav-container-right-signup-btn a button:hover {
   background-color: var(--text);
   color: var(--black);
 }
-nav .nav-container-right-create-logo a img {
-  height: 28px;
-  width: 28px;
+nav .nav-container-right-create-logo {
+  border: 1px solid var(--text);
+  border-radius: 4px;
 }
-nav .nav-container-right-notification-logo a img {
-  height: 28px;
-  width: 28px;
+nav .nav-container-right-create-logo a i {
+  color: var(--text);
+  font-size: 20px;
+  padding: 5px 8px;
+  transition: 0.7s ease;
+}
+nav .nav-container-right-create-logo a i:hover {
+  background-color: var(--text);
+  color: var(--black);
+}
+nav .nav-container-right-notification-logo {
+  border: 1px solid var(--text);
+  border-radius: 4px;
+}
+nav .nav-container-right-notification-logo a i {
+  color: var(--text);
+  font-size: 20px;
+  padding: 5px 8px;
+  transition: 0.7s ease;
+}
+nav .nav-container-right-notification-logo a i:hover {
+  background-color: var(--text);
+  color: var(--black);
 }
 nav .nav-container-right-account-logo a img {
   height: 35px;

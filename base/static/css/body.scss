@@ -22,9 +22,9 @@ p {
     "contents activity";
 }
 
-div.topic {
+.topic {
   background-color: #2a2e38;
-  overflow: auto;
+  overflow-x: auto;
   white-space: nowrap;
 
   a {
@@ -115,7 +115,7 @@ div.topic {
       }
       a:hover {
         text-decoration: underline;
-        color: rgb(55, 88, 253);
+        color: #3758fd;
       }
     }
     button {
@@ -147,7 +147,12 @@ div.topic {
   }
 
   .main-body {
-    display: block;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "topic"
+      "contents";
   }
   .content {
     padding: 20px;

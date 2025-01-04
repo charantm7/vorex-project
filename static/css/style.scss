@@ -90,6 +90,10 @@ nav {
           color: var(--text);
           font-size: 1.5rem;
         }
+
+        .nav1 {
+          padding-left: 10px;
+        }
       }
     }
     &-center {
@@ -145,6 +149,7 @@ nav {
           background-color: transparent;
           border: 1px solid var(--text);
           border-radius: 4px;
+          transition: 0.7s ease;
           padding: 5px 8px;
         }
         a button:hover {
@@ -153,13 +158,33 @@ nav {
         }
       }
 
-      &-create-logo a img {
-        height: 28px;
-        width: 28px;
+      &-create-logo {
+        border: 1px solid var(--text);
+        border-radius: 4px;
+        a i {
+          color: var(--text);
+          font-size: 20px;
+          padding: 5px 8px;
+          transition: 0.7s ease;
+        }
+        a i:hover {
+          background-color: var(--text);
+          color: var(--black);
+        }
       }
-      &-notification-logo a img {
-        height: 28px;
-        width: 28px;
+      &-notification-logo {
+        border: 1px solid var(--text);
+        border-radius: 4px;
+        a i {
+          color: var(--text);
+          font-size: 20px;
+          padding: 5px 8px;
+          transition: 0.7s ease;
+        }
+        a i:hover {
+          background-color: var(--text);
+          color: var(--black);
+        }
       }
 
       &-account-logo a img {

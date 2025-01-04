@@ -2,9 +2,56 @@
 <title>Room</title>
 {% endblock %} {% block nav1 %}
 <a href="{% url 'Rooms' rooms.pk %}">/ {{rooms.name}}</a>
+{% endblock %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/room.css' %}" />
 {% endblock %} {% block content %}
 <div class="rooms">
-  <p>{{rooms.pk}}--{{rooms.name}}</p>
-</div>
+  <div class="tab">
+    <button
+      class="tablinks"
+      onclick="openCity(event, 'London')"
+      id="defaultOpen"
+    >
+      <i class="fas fa-tachometer-alt"></i>Dashboard
+    </button>
+    <button class="tablinks" onclick="openCity(event, 'Paris')">
+      <i class="fa-solid fa-user-group"></i>Group
+    </button>
+    <button class="tablinks" onclick="openCity(event, 'Tokyo')">
+      <i class="fa-solid fa-book"></i>Study Materials
+    </button>
+  </div>
 
+  <div id="London" class="tabcontent">
+    <div class="tabcontent-top">
+      <i class="fa-solid fa-calculator"></i>
+      <div class="tabcontent-top-1">
+        <p>{{rooms.name}}</p>
+        <small>{{rooms.description}}</small>
+        <small>created at: {{rooms.created_at|date:"Y F j"}}</small>
+      </div>
+      <div class="tabcontent-top-2">
+        <h6>Created by:</h6>
+        <div class="tabcontent-top-2-1">
+          <!-- <img
+            src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
+            alt="img"
+          /> -->
+          <p>{{rooms.created_by.username}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="Paris" class="tabcontent">
+    <h3>Paris</h3>
+    <p>Paris is the capital of France.</p>
+  </div>
+
+  <div id="Tokyo" class="tabcontent">
+    <h3>Tokyo</h3>
+    <p>Tokyo is the capital of Japan.</p>
+  </div>
+</div>
+<script src="{% static 'js/room.js'%}"></script>
 {% endblock %}
