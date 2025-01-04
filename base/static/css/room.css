@@ -57,20 +57,93 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #fff;
   gap: 70px;
   padding: 40px 40px;
 }
-.rooms .tabcontent-top i {
+.rooms .tabcontent-top-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+}
+.rooms .tabcontent-top-left i {
   font-size: 15vw;
 }
-.rooms .tabcontent-top-1 {
+.rooms .tabcontent-top-left-1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 20px;
 }
-.rooms .tabcontent-top-1 p {
+.rooms .tabcontent-top-left-1 p {
   font-family: "VT323", monospace;
   font-size: 4vw;
+}
+.rooms .tabcontent-top-left-1 small {
+  font-size: 1vw;
+}
+.rooms .tabcontent-top-right {
+  margin-right: 80px;
+  font-size: 1.2vw;
+}
+.rooms .tabcontent-top-right-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.rooms .tabcontent-top-right-1 img {
+  height: 35px;
+  width: 35px;
+  border-radius: 20px;
+}
+.rooms .tabcontent-top-right-1 a {
+  text-decoration: none;
+  color: var(--text);
+}
+.rooms .tabcontent-top-right-1 a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .rooms .tabcontent {
+    padding: 15px 10px;
+  }
+  .rooms .tabcontent-top {
+    padding: 20px 15px;
+  }
+  .rooms .tabcontent-top-left {
+    gap: 20px;
+  }
+  .rooms .tabcontent-top-left-1 {
+    gap: 5px;
+  }
+  .rooms .tabcontent-top-left-1 p {
+    font-size: 1.6em;
+  }
+  .rooms .tabcontent-top-left-1 small {
+    font-size: 0.6em;
+  }
+  .rooms .tabcontent-top-right {
+    margin-right: 20px;
+    font-size: 0.8em;
+  }
+  .rooms .tabcontent-top-right-1 {
+    margin-top: 5px;
+    font-size: 0.8em;
+    gap: 5px;
+  }
+  .rooms .tabcontent-top-right-1 img {
+    height: 25px;
+    width: 25px;
+  }
+  .rooms .tab button {
+    font-size: 0.8em;
+  }
+  .rooms .tab button .btn-txt {
+    display: none;
+  }
 }/*# sourceMappingURL=room.css.map */

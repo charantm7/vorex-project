@@ -12,32 +12,36 @@
       onclick="openCity(event, 'London')"
       id="defaultOpen"
     >
-      <i class="fas fa-tachometer-alt"></i>Dashboard
+      <i class="fas fa-tachometer-alt"></i
+      ><span class="btn-txt">Dashboard</span>
     </button>
     <button class="tablinks" onclick="openCity(event, 'Paris')">
-      <i class="fa-solid fa-user-group"></i>Group
+      <i class="fa-solid fa-user-group"></i><span class="btn-txt">Group</span>
     </button>
     <button class="tablinks" onclick="openCity(event, 'Tokyo')">
-      <i class="fa-solid fa-book"></i>Study Materials
+      <i class="fa-solid fa-book"></i
+      ><span class="btn-txt">Study Materials</span>
     </button>
   </div>
 
   <div id="London" class="tabcontent">
     <div class="tabcontent-top">
-      <i class="fa-solid fa-calculator"></i>
-      <div class="tabcontent-top-1">
-        <p>{{rooms.name}}</p>
-        <small>{{rooms.description}}</small>
-        <small>created at: {{rooms.created_at|date:"Y F j"}}</small>
+      <div class="tabcontent-top-left">
+        <i class="fa-solid fa-calculator"></i>
+        <div class="tabcontent-top-left-1">
+          <p>{{rooms.name}}</p>
+          <small>{{rooms.description}}</small>
+          <small>created on: {{rooms.created_at|date:"Y F j"}}</small>
+        </div>
       </div>
-      <div class="tabcontent-top-2">
-        <h6>Created by:</h6>
-        <div class="tabcontent-top-2-1">
-          <!-- <img
+      <div class="tabcontent-top-right">
+        <p>Created by:</p>
+        <div class="tabcontent-top-right-1">
+          <img
             src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
             alt="img"
-          /> -->
-          <p>{{rooms.created_by.username}}</p>
+          />
+          <a href="#">@{{rooms.created_by.username}}</a>
         </div>
       </div>
     </div>
