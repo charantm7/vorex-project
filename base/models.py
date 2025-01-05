@@ -27,8 +27,12 @@ class Room(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_private = models.BooleanField(default=False)
+    members_count = models.ManyToManyField(CustomUser, related_name="member_count")
     def __str__(self):
         return self.name
+    def member_count(self):
+        return self.members_count.count()
+
 
 class RoomMembership(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
