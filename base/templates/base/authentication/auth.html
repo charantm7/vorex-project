@@ -46,6 +46,7 @@
     <div class="form-box login">
       <h2 class="title animation" style="--i: 0; --j: 21">Login</h2>
       <form action="{% url 'User_login' %}" method="POST">
+        {% csrf_token %} {{form.as_p}}
         <div class="input-box animation" style="--i: 1; --j: 22">
           <input type="text" required />
           <label for="">Username</label>
@@ -91,6 +92,7 @@
       <h2 class="title animation" style="--i: 17; --j: 0">Sign Up</h2>
 
       <form action="{% url 'User_signup' %}" method="POST">
+        {% csrf_token %} {{form.as_p}}
         <div class="input-box animation" style="--i: 18; --j: 1">
           <input type="text" required />
           <label for="">Username</label>
