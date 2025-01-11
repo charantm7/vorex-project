@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tag, CustomUser, Room, RoomMembership, ChatBox, StudyMaterials
-from .forms import Signup, Login
-from django.contrib.auth import login, logout
+from .models import Tag, User, Room, RoomMembership, ChatBox, StudyMaterials
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 def home(request):
     room = Room.objects.all()
@@ -26,27 +26,26 @@ def auth_page(request):
 
 
 def user_signup(request):
-    if request.method == 'POST':
-        form = Signup(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request,user)
-            return redirect('Home')
-    else:
-        form = Signup()
-    return render(request, 'base/authentication/auth.html',{'form':form})
+    return render(request, 'base/authentication/auth.html')
 
 def user_login(request):
     if request.method == 'POST':
-        form = Login(request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request,user)
-            return redirect('Home')
-    else:
-        form = Login()
-    return render(request, 'base/authentication/auth.html', {'form':form})
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
+
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('Home')
+        else:
+            messages.error(request, 'Invalid password')
+
+    return render(request, 'base/authentication/auth.html')
 @login_required(login_url='User_login')
 def user_logout(request):
     logout(request)

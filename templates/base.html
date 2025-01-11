@@ -34,6 +34,13 @@
     {% endblock %} {% block link %} {% endblock %}
   </head>
   <body>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     <nav>
       <div class="nav-container">
         <div class="nav-container-left">
