@@ -79,3 +79,8 @@ def edit_room(request,pk):
         form = RoomForm(instance=room)
     context = {'form':form}
     return render(request, 'base/createroom.html',context)
+
+def delete_room(request, pk):
+    room = get_object_or_404(Room, pk=pk)
+    room.delete()
+    return redirect('Home')
