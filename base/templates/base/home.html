@@ -23,6 +23,9 @@
                 alt=""
               />
               <a href="#">@{{room.created_by.username}}</a>
+              {% if room.created_by == user %}
+              <a href="{% url 'Edit-room' room.pk %}">Edit</a>
+              {% endif %}
             </div>
             <p>created: {{room.created_at|date:"Y F j"}}</p>
           </div>

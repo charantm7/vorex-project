@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tag, User, Room, RoomMembership, ChatBox, StudyMaterials
+from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .forms import RoomForm
+from django.contrib.auth.models import User
 
 def home(request):
     room = Room.objects.all()
@@ -44,9 +46,36 @@ def user_login(request):
             return redirect('Home')
         else:
             messages.error(request, 'Invalid password')
-
     return render(request, 'base/authentication/auth.html')
+
 @login_required(login_url='User_login')
 def user_logout(request):
     logout(request)
     return redirect('Home')
+
+def create_room(request):
+    if request.method == 'POST':
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Home')
+        else:
+            messages.error(request, 'Invalid form')
+    else:
+        form = RoomForm()
+    context = {'form':form}
+    return render(request, 'base/createroom.html',context)
+
+def edit_room(request,pk):
+    room = get_object_or_404(Room, pk=pk)
+    if request.method == 'POST':
+        form = RoomForm(request.POST, instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('Home')
+        else:
+            messages.error(request, 'Invalid form')
+    else:
+        form = RoomForm(instance=room)
+    context = {'form':form}
+    return render(request, 'base/createroom.html',context)
