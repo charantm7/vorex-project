@@ -1,7 +1,7 @@
-{% extends 'base.html' %} {% load static %}{% block title %}
+{% extends 'base.html' %} {% load static %} {% block title %}
 <title>Room</title>
 {% endblock %} {% block nav %}
-<a href="#">ROOM</a>
+<h4>Room</h4>
 {% endblock %} {% block link %}
 <link rel="stylesheet" href="{% static 'css/tags.css' %}" />
 {% endblock %} {% block content %}
@@ -26,7 +26,7 @@
         </div>
         <div class="card-bottom">
           <p>
-            5k Joined / {% for tag in room.tags.all %}
+            {{room.member_count}} Joined / {% for tag in room.tags.all %}
             <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
             {% endfor %}
           </p>

@@ -20,7 +20,7 @@ def rooms(request,pk):
 def tag(request, tag_name):
     tag = get_object_or_404(Tag, name=tag_name)
     room = Room.objects.filter(tags=tag)
-    context = {'tags': tag,'rooms': room}
+    context = {'tag': tag,'rooms': room}
     return render(request, 'base/tags.html', context)
 
 def auth_page(request):
@@ -84,3 +84,13 @@ def delete_room(request, pk):
     room = get_object_or_404(Room, pk=pk)
     room.delete()
     return redirect('Home')
+
+def join_room(request, pk):
+    room = get_object_or_404(Room, pk=pk)
+    if request.user in room.members_count.all():
+        messages.error(request, 'You are already a member of this room')
+        return redirect('Rooms', pk=pk)
+    else:
+        room.members_count.add(request.user)
+        return redirect('Rooms', pk=pk)
+
