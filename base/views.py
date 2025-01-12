@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RoomForm
 from django.contrib.auth.models import User
+import logging
+logger = logging.getLogger(__name__)
 
 def home(request):
     room = Room.objects.all()
@@ -15,7 +17,11 @@ def home(request):
 def rooms(request,pk):
     room = get_object_or_404(Room, pk=pk)
     context = {'rooms': room,'members':room.member_count}
-    return render(request, 'base/room.html',context )
+    if request.user in room.members_count.all():
+        return render(request, 'base/room.html',context )
+    else:
+        messages.error(request, 'You are not a member of this room! join the room to continue')
+        return redirect('Home')
 
 def tag(request, tag_name):
     tag = get_object_or_404(Tag, name=tag_name)
@@ -28,6 +34,19 @@ def auth_page(request):
 
 
 def user_signup(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+        if password != confirm_password:
+            messages.error(request, 'Password does not match')
+            return redirect('User_signup')
+        else:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.save()
+            login(request, user)
+            return redirect('Home')
     return render(request, 'base/authentication/auth.html')
 
 def user_login(request):
@@ -39,10 +58,12 @@ def user_login(request):
             user = User.objects.get(username=username)
         except:
             messages.error(request, 'User does not exist')
+            return redirect('User_login')
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, 'You are logged in')
             return redirect('Home')
         else:
             messages.error(request, 'Invalid password')
@@ -51,8 +72,10 @@ def user_login(request):
 @login_required(login_url='User_login')
 def user_logout(request):
     logout(request)
+    messages.success(request, 'You are logged out')
     return redirect('Home')
 
+@login_required(login_url='User_login')
 def create_room(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
@@ -83,6 +106,7 @@ def edit_room(request,pk):
 def delete_room(request, pk):
     room = get_object_or_404(Room, pk=pk)
     room.delete()
+    messages.success(request, 'Room deleted successfully')
     return redirect('Home')
 
 def join_room(request, pk):
@@ -93,4 +117,16 @@ def join_room(request, pk):
     else:
         room.members_count.add(request.user)
         return redirect('Rooms', pk=pk)
+
+def exit_room(request, pk):
+    room = get_object_or_404(Room, pk=pk)
+    room.members_count.remove(request.user)
+    return redirect('Home') 
+
+@login_required(login_url='User_login')
+def profile(request):
+    user = request.user
+    context = {'user': user}
+    return render(request, 'base/profile.html', context)
+
 

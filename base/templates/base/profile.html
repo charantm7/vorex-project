@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>Profile</title>
+{% endblock %} {% block nav %}
+<a href="#">Profile </a>
+{% endblock %} {% block content %}
+<div class="profile-container">
+  <div class="profile-container-left">
+    <img src="{{ user.profile_pic.url }}" alt="profile pic" />
+  </div>
+  <div class="profile-container-right">
+    <h1>{{ user.username }}</h1>
+    <p>{{ user.email }}</p>
+  </div>
+  <div class="profile-container-bottom">
+    <h2>Rooms</h2>
+    <div class="profile-container-bottom-rooms">
+      {% for room in user.rooms.all %}
+      <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

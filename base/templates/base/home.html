@@ -18,10 +18,7 @@
         <div class="card">
           <div class="card-top">
             <div class="card-top-left">
-              <img
-                src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
-                alt=""
-              />
+              <img src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}" alt="" />
               <a href="#">@{{room.created_by.username}}</a>
             </div>
             <p>created: {{room.created_at|date:"Y F j"}}</p>
@@ -33,12 +30,8 @@
             </div>
             {% if room.created_by == user %}
             <div class="card-mid-right">
-              <a href="{% url 'Edit-room' room.pk %}"
-                ><i class="fa-solid fa-pen-to-square"></i
-              ></a>
-              <a href="{% url 'Delete-room' room.pk %}"
-                ><i class="fa-solid fa-trash"></i
-              ></a>
+              <a href="{% url 'Edit-room' room.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="{% url 'Delete-room' room.pk %}"><i class="fa-solid fa-trash"></i></a>
             </div>
             {% endif %}
           </div>
@@ -48,15 +41,15 @@
               <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
               {% endfor %}
             </p>
-            {% if request.user not in room.members_count.all %}
+            {% if user.is_authenticated %} {% if request.user not in room.members_count.all %}
             <button>
               <b><a href="{% url 'Join-room' room.pk %}">Join</a></b>
             </button>
             {% else %}
             <button>
-              <b><a href="#">Exit Room</a></b>
+              <b><a href="{% url 'Exit-room' room.pk %} ">Exit Room</a></b>
             </button>
-            {% endif %}
+            {% endif %} {% endif %}
           </div>
         </div>
       </div>

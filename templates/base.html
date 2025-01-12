@@ -10,19 +10,10 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/style.css'%}" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,13 +25,6 @@
     {% endblock %} {% block link %} {% endblock %}
   </head>
   <body>
-    {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
     <nav>
       <div class="nav-container">
         <div class="nav-container-left">
@@ -58,16 +42,14 @@
         </div>
         <div class="nav-container-center"></div>
         <div class="nav-container-right">
+          {% if not request.user.is_authenticated %}
           <div class="nav-container-right-login-btn">
-            <a href="{% url 'auth_page' %}?action=login"
-              ><button>Login</button></a
-            >
+            <a href="{% url 'auth_page' %}?action=login"><button>Login</button></a>
           </div>
           <div class="nav-container-right-signup-btn">
-            <a href="{% url 'auth_page' %}?action=signup"
-              ><button>Sign Up</button></a
-            >
+            <a href="{% url 'auth_page' %}?action=signup"><button>Sign Up</button></a>
           </div>
+          {% endif %}
           <div class="search-container">
             <a href="#"><i class="fas fa-search"></i></a>
           </div>
@@ -75,6 +57,7 @@
             <a href="{% url 'Create-room' %}">
               <i class="fa-solid fa-plus"></i>
             </a>
+            <span class="create-room-text">Create Room</span>
           </div>
 
           <div class="nav-container-right-notification-logo">
@@ -125,13 +108,13 @@
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{% url 'Profile' %}">
               <i class="fas fa-clock"></i>
               <span class="link_name">History</span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="{% url 'User_logout' %}">
               <i class="fas fa-cog"></i>
               <span class="link_name">Settings</span>
             </a>
@@ -140,14 +123,22 @@
       </div>
       {% block aside %}{% endblock %}
     </aside>
-    <main>{% block content %}{% endblock %}</main>
+    <main>
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}{% block content %}{% endblock %}
+    </main>
     <footer>
       <div class="footer-container">
         <div class="footer-column-1">
           <p>About Us</p>
           <small>
-            We provide quality tutorials, resources, and support to help
-            learners and professionals grow in their careers.
+            We provide quality tutorials, resources, and support to help learners and professionals grow in their
+            careers.
           </small>
         </div>
         <div class="footer-column-2">

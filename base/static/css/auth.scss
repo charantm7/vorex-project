@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
 :root {
   --white: #fff;
   --black: #000;
@@ -7,18 +8,17 @@
   --lightBulue: rgb(34, 237, 255);
   --links: rgb(34, 237, 255);
 }
-
 .main-body {
   display: flex;
   height: 100vh;
   align-items: center;
   justify-content: center;
 }
-
 .wrapper {
   position: relative;
   width: 750px;
   height: 500px;
+
   background: var(--bodydark);
   border-radius: 10px;
   box-shadow: 0 0 20px var(--black);
@@ -155,14 +155,12 @@ form .forget-pass {
   text-align: start;
   margin: 30px 0 10px;
 }
-
 .third-party-auth.login {
   position: absolute;
   margin-left: 66%;
   margin-top: 20px;
   z-index: 15;
 }
-
 .third-party-auth.login a {
   text-decoration: none;
   color: var(--white);
@@ -170,14 +168,12 @@ form .forget-pass {
   font-size: 2rem;
   pointer-events: auto;
 }
-
 .third-party-auth.register {
   position: absolute;
   margin-left: 20px;
   margin-top: 20px;
   z-index: 15;
 }
-
 .third-party-auth.register a {
   text-decoration: none;
   color: var(--white);
@@ -216,18 +212,15 @@ form .forget-pass {
   flex-direction: column;
   justify-content: center;
 }
-
 .wrapper.active .form-box.login {
   pointer-events: auto;
 }
-
 .wrapper .info-text.login {
   right: 0;
   text-align: right;
   pointer-events: auto;
   padding: 0 40px 250px 150px;
 }
-
 .wrapper.active .info-text.login {
   pointer-events: none;
 }
@@ -251,7 +244,6 @@ form .forget-pass {
   transition: 0.7s ease;
   transition-delay: calc(0.1s * var(--j));
 }
-
 .wrapper.active .info-text.login .animation {
   transform: translateX(120px);
   opacity: 0;
@@ -259,7 +251,6 @@ form .forget-pass {
   transition: 0.7s ease;
   transition-delay: calc(0.1s * var(--i));
 }
-
 .wrapper .third-party-auth.login .animation {
   transform: translateX(0);
   opacity: 1;
@@ -267,7 +258,6 @@ form .forget-pass {
   transition: 0.7s ease;
   transition-delay: calc(0.1s * var(--j));
 }
-
 .wrapper.active .third-party-auth.login .animation {
   transform: translateX(120px);
   opacity: 0;
@@ -343,7 +333,6 @@ form .forget-pass {
   filter: blur(0);
   transition-delay: calc(0.1s * var(--i));
 }
-
 .wrapper .third-party-auth.register .animation {
   transform: translateX(-120%);
   opacity: 0;
@@ -376,9 +365,8 @@ form .forget-pass {
   transform: rotate(-11deg) skewY(-40deg);
   transition-delay: 1.2s;
 }
-
 @media (max-width: 767px) {
   .wrapper {
     width: 50%;
   }
-}/*# sourceMappingURL=auth.css.map */
+}
