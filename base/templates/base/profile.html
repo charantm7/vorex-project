@@ -5,16 +5,21 @@
 {% endblock %} {% block content %}
 <div class="profile-container">
   <div class="profile-container-left">
-    <img src="{{ user.profile_pic.url }}" alt="profile pic" />
+    <a href="#">Update Profile</a>
+    {% if profile.profile_pic %}
+    <img src="#" alt="profile pic" />
+    {% else %}
+    <img src="#" alt="profile pic" />
+    {% endif %}
   </div>
   <div class="profile-container-right">
-    <h1>{{ user.username }}</h1>
-    <p>{{ user.email }}</p>
+    <h1>{{ profile.user.username }}</h1>
+    <p>{{ profile.user.email }}</p>
   </div>
   <div class="profile-container-bottom">
     <h2>Rooms</h2>
     <div class="profile-container-bottom-rooms">
-      {% for room in user.rooms.all %}
+      {% for room in profile.rooms.all %}
       <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
       {% endfor %}
     </div>

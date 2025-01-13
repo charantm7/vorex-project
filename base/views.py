@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials
+from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProfile
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RoomForm
+from .forms import RoomForm,ProfileForm
 from django.contrib.auth.models import User
 import logging
 logger = logging.getLogger(__name__)
@@ -123,10 +123,25 @@ def exit_room(request, pk):
     room.members_count.remove(request.user)
     return redirect('Home') 
 
+# def profile_update(request, user_name):
+#     profile = get_object_or_404(UserProfile, user__username=user_name)
+#     if request.method == 'POST':
+#         form = ProfileForm(request.POST, request.FILES, instance=profile)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('Profile', pk=profile.pk)
+#         else:
+#             messages.error(request, 'Invalid form')
+#     else:
+#         form = ProfileForm(instance=profile)
+#     context = {'form':form}
+#     return render(request, 'base/profile.html', context)
+
 @login_required(login_url='User_login')
-def profile(request):
-    user = request.user
-    context = {'user': user}
+def profile(request, pk):
+    profile = get_object_or_404(UserProfile, user__id=pk)
+    context = {'profile': profile}
     return render(request, 'base/profile.html', context)
+
 
 

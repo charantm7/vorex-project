@@ -108,10 +108,12 @@
             </a>
           </li>
           <li>
-            <a href="{% url 'Profile' %}">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'Profile' request.user.id %}">
               <i class="fas fa-clock"></i>
               <span class="link_name">History</span>
             </a>
+            {% endif %}
           </li>
           <li>
             <a href="{% url 'User_logout' %}">

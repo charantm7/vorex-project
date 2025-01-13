@@ -40,3 +40,14 @@ class ChatBox(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
+    profile_pic = models.ImageField(upload_to="profile_pics/", null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    rooms = models.ManyToManyField(Room, related_name="rooms")
+    study_materials = models.ManyToManyField(StudyMaterials, related_name="study_materials")
+
+    def __str__(self):
+        return self.user.username
+
