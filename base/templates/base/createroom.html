@@ -6,8 +6,21 @@
 <a href="{% url 'Create-room' %}">/ Create Room</a>
 {% endblock %} {% block content %}
 <div class="main-body">
-  <form action="" method="post">
-    {% csrf_token %} {{form.as_p}}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Create Room</h3>
+    <div class="room-title">
+      <label for="room_name">Room Name</label>
+      {{form.name}}
+    </div>
+    <div class="room-description">
+      <label for="room_description">Room Description</label>
+      {{form.description}}
+    </div>
+    <div class="room-tag">
+      <label for="room_tag">Room Tag</label>
+      {{form.tags}}
+    </div>
     <button type="submit">Create</button>
   </form>
 </div>

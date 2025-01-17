@@ -1,1 +1,55 @@
-/*# sourceMappingURL=createroom.css.map */
+.main-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.main-body form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  gap: 20px;
+  background-color: var(--navdark);
+  width: 30%;
+}
+.main-body form h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.main-body form input {
+  width: 100%;
+  background-color: var(--white);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+.main-body form textarea {
+  width: 100%;
+  height: 70px;
+  max-height: 120px;
+  background-color: var(--white);
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+.main-body form .room-title {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+.main-body form .room-description {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}
+.main-body form .room-tag {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+}/*# sourceMappingURL=createroom.css.map */
