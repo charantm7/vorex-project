@@ -5,8 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RoomForm,ProfileForm,UserForm
 from django.contrib.auth.models import User
-import logging
-logger = logging.getLogger(__name__)
 
 def home(request):
     room = Room.objects.all()
@@ -93,7 +91,7 @@ def create_room(request):
     else:
         form = RoomForm()
     context = {'form':form}
-    return render(request, 'base/createroom.html',context)
+    return render(request, 'base/home.html',context)
 
 def edit_room(request,pk):
     room = get_object_or_404(Room, pk=pk)
@@ -160,8 +158,8 @@ def profile_update(request):
     return render(request, 'base/updateprofile.html', context)
 
 @login_required(login_url='User_login')
-def user_update(request,username):
-    user = User.objects.get(username=username)
+def user_update(request,user_tag):
+    user = User.objects.get(username=user_tag)
     if request.method == 'POST':
         form = UserForm(request.POST, instance=user)
         if form.is_valid():
