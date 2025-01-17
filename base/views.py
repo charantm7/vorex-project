@@ -3,7 +3,7 @@ from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProf
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RoomForm,ProfileForm
+from .forms import RoomForm,ProfileForm,UserForm
 from django.contrib.auth.models import User
 import logging
 logger = logging.getLogger(__name__)
@@ -39,6 +39,10 @@ def user_signup(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists! Try another username')
+            return redirect('User_signup')
         if password != confirm_password:
             messages.error(request, 'Password does not match')
             return redirect('User_signup')
@@ -126,26 +130,48 @@ def exit_room(request, pk):
     return redirect('Home') 
 
 @login_required(login_url='User_login')
-def profile(request, pk):
-    user = get_object_or_404(User, pk=pk)
+def profile(request, user_tag):
+    user = User.objects.get(username=user_tag)
     room = Room.objects.filter(created_by=user)
-    profile = UserProfile.objects.get(user=user)
+    if not UserProfile.objects.filter(user=user).exists():
+        UserProfile.objects.create(user=user)
+        profile = UserProfile.objects.get(user=user)
+        
+    else:
+        profile = UserProfile.objects.get(user=user)
     context = {'user': user, 'rooms': room, 'profile': profile}
     return render(request, 'base/profile.html', context)
 
 @login_required(login_url='User_login')
-def profile_update(request, pk):
-    profile = get_object_or_404(UserProfile, pk=pk)
+def profile_update(request):
+    profile = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('Profile', pk=profile.user.pk)
+            return redirect('Profile', username=request.user.username)
         else:
-            messages.error(request, 'Invalid form')
+            messages.error(request, 'Invalid form') 
 
     else:
         form = ProfileForm(instance=profile)
    
     context = {'form':form}
     return render(request, 'base/updateprofile.html', context)
+
+@login_required(login_url='User_login')
+def user_update(request,username):
+    user = User.objects.get(username=username)
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            updated_user = form.save()
+            updated_user.save()
+            return redirect('Profile', user_tag=updated_user.username)
+        
+        else:
+            messages.error(request, 'Invalid form')
+    else:
+        form = UserForm(instance=user)
+    context = {'form':form}
+    return render(request, 'base/updateuser.html', context)

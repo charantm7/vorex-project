@@ -5,7 +5,11 @@
 
 <div class="profile-container">
   <div class="profile-container-left">
+    {% if profile.profile_pic %}
     <img src="{{profile.profile_pic.url}}" alt="profile pic" />
+    {% else %}
+    <img src="{% static 'assets/default.png' %}" alt="profile pic" />
+    {% endif %}
   </div>
   <div class="profile-container-right">
     <h1>{{ profile.user.username }}</h1>
@@ -13,8 +17,10 @@
     <p>{{ profile.bio }}</p>
     {% for room in rooms %}
     <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
-    {% endfor %}
-    <button class="btn btn-primary"><a href="{% url 'Update-profile' profile.user.pk %}">Update Profile</a></button>
+    {% endfor %} {% if profile.user == user %}
+    <a href="{% url 'Update-profile'  %}" style="text-decoration: none;color: white;"><button class="btn btn-primary" >Update Profile</a></button></a>
+    <a href="{% url 'Update-user' profile.user.username %}" style="text-decoration: none;color: white;"><button class="btn btn-primary" >Update User</a></button></a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
