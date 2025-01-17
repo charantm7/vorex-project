@@ -6,6 +6,8 @@ urlpatterns = [
     path('rooms/<str:pk>',views.rooms, name='Rooms'),
     path('authentication/',views.auth_page, name='auth_page'),
     path('user_login/',views.user_login, name='User_login'),
+    path('profile/<str:pk>/',views.profile, name='Profile'),
+    path('update_profile/<str:pk>/',views.profile_update, name='Update-profile'),
     path('user_signup/',views.user_signup, name='User_signup'),
     path('user_logout/',views.user_logout, name='User_logout'),
     path('create_room/',views.create_room, name='Create-room'),
@@ -14,7 +16,7 @@ urlpatterns = [
     path('<str:tag_name>/',views.tag, name='Tag'),
     path('join_room/<str:pk>/',views.join_room, name='Join-room'),
     path('exit_room/<str:pk>/',views.exit_room, name='Exit-room'),
-    path('profile/<int:pk>/',views.profile, name='Profile'),
+    
     
     
 ]

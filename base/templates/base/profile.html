@@ -1,28 +1,20 @@
 {% extends 'base.html' %} {% load static %} {% block title %}
 <title>Profile</title>
-{% endblock %} {% block nav %}
-<a href="#">Profile </a>
 {% endblock %} {% block content %}
+<h1>Profile</h1>
+
 <div class="profile-container">
   <div class="profile-container-left">
-    <a href="#">Update Profile</a>
-    {% if profile.profile_pic %}
-    <img src="#" alt="profile pic" />
-    {% else %}
-    <img src="#" alt="profile pic" />
-    {% endif %}
+    <img src="{{profile.profile_pic.url}}" alt="profile pic" />
   </div>
   <div class="profile-container-right">
     <h1>{{ profile.user.username }}</h1>
     <p>{{ profile.user.email }}</p>
-  </div>
-  <div class="profile-container-bottom">
-    <h2>Rooms</h2>
-    <div class="profile-container-bottom-rooms">
-      {% for room in profile.rooms.all %}
-      <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
-      {% endfor %}
-    </div>
+    <p>{{ profile.bio }}</p>
+    {% for room in rooms %}
+    <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
+    {% endfor %}
+    <button class="btn btn-primary"><a href="{% url 'Update-profile' profile.user.pk %}">Update Profile</a></button>
   </div>
 </div>
 {% endblock %}

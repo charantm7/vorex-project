@@ -80,6 +80,8 @@ def create_room(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
+            form = form.save(commit=False)
+            form.created_by = request.user
             form.save()
             return redirect('Home')
         else:
@@ -123,25 +125,27 @@ def exit_room(request, pk):
     room.members_count.remove(request.user)
     return redirect('Home') 
 
-# def profile_update(request, user_name):
-#     profile = get_object_or_404(UserProfile, user__username=user_name)
-#     if request.method == 'POST':
-#         form = ProfileForm(request.POST, request.FILES, instance=profile)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('Profile', pk=profile.pk)
-#         else:
-#             messages.error(request, 'Invalid form')
-#     else:
-#         form = ProfileForm(instance=profile)
-#     context = {'form':form}
-#     return render(request, 'base/profile.html', context)
-
 @login_required(login_url='User_login')
 def profile(request, pk):
-    profile = get_object_or_404(UserProfile, user__id=pk)
-    context = {'profile': profile}
+    user = get_object_or_404(User, pk=pk)
+    room = Room.objects.filter(created_by=user)
+    profile = UserProfile.objects.get(user=user)
+    context = {'user': user, 'rooms': room, 'profile': profile}
     return render(request, 'base/profile.html', context)
 
+@login_required(login_url='User_login')
+def profile_update(request, pk):
+    profile = get_object_or_404(UserProfile, pk=pk)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('Profile', pk=profile.user.pk)
+        else:
+            messages.error(request, 'Invalid form')
 
-
+    else:
+        form = ProfileForm(instance=profile)
+   
+    context = {'form':form}
+    return render(request, 'base/updateprofile.html', context)
