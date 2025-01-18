@@ -1,33 +1,6 @@
-{% if messages %}
-<style>
-  .messages {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    list-style: none;
-    padding: 10px;
-    z-index: 1;
-    li {
-      border: 1px solid var(--roomtext);
-      padding: 5px 10px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      span {
-        cursor: pointer;
-        font-weight: bold;
-        color: var(--roomtext);
-        margin-left: 10px;
-        font-size: 20px;
-        &:hover {
-          color: red;
-        }
-      }
-    }
-  }
-</style>
+{% if messages %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/popmessage.css' %}" />
 <ul class="messages">
   {% for message in messages %}
   <li>{{ message }}<span onclick="closeMessage(this)">&times;</span></li>

@@ -125,7 +125,7 @@
       </div>
       {% block aside %}{% endblock %}
     </aside>
-    <main>{% block content %}{% endblock %}</main>
+    <main>{% include 'base/popmessage.html' %}{% block content %}{% endblock %}</main>
     <footer>
       <div class="footer-container">
         <div class="footer-column-1">

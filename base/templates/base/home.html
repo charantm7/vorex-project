@@ -11,7 +11,6 @@
     <a href="{% url 'Tag' tag.name %}">{{tag.name}}</a>
     {% endfor %}
   </div>
-  <div class="messages">{% include 'base/popmessage.html' %}</div>
   <div class="create-room-btn">
     <button onclick="openModal()">Create Room</button>
   </div>
@@ -55,14 +54,26 @@
               {% endfor %}
             </p>
             <div class="card-bottom-right">
-              {% if user.is_authenticated %} {% if request.user not in room.members_count.all %}
-              <button>
-                <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
-              </button>
-              {% else %}
-              <button>
-                <b><a href="{% url 'Exit-room' room.name %} ">Exit</a></b>
-              </button>
+              {% if user.is_authenticated %} {% if request.user not in room.members_count.all %} {% if not room.created_by == user %}
+              <div>
+                {% if room.is_private %}
+                <button>
+                  <b><a href="#">Request</a></b>
+                </button>
+                {% else %}
+                <button>
+                  <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
+                </button>
+                {% endif %}
+              </div>
+              {% endif %} {% else %}
+              <div>
+                {% if not room.created_by == user %}
+                <button>
+                  <b><a href="{% url 'Exit-room' room.name %} ">Exit</a></b>
+                </button>
+                {% endif %}
+              </div>
               {% endif %} {% endif %}
             </div>
           </div>

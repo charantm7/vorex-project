@@ -38,7 +38,7 @@ nav {
   top: 0;
   position: sticky;
   display: flex;
-  z-index: 100;
+  z-index: 99999;
   width: 100%;
   .nav-container {
     display: flex;

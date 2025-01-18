@@ -10,7 +10,7 @@
   <div class="wrapper">
     <span class="rotate-bg"></span>
     <span class="rotate-bg2"></span>
-    <div class="third-party-auth login">
+    <div class="third-party-auth login" id="third-party-login">
       <a href="https://www.google.com/" class="animation" style="--i: 3; --j: 24">
         <i class="fa-brands fa-google"></i>
       </a>
@@ -21,7 +21,7 @@
         ><i class="fa-brands fa-facebook"></i
       ></a>
     </div>
-    <div class="third-party-auth register">
+    <div class="third-party-auth register" id="third-party-register">
       <a href="https://www.google.com/" class="animation" style="--i: 17; --j: 0">
         <i class="fa-brands fa-google"></i>
       </a>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-box login" data-action="login">
-      <h2 class="title animation" style="--i: 0; --j: 21; z-index: 1000000">Login</h2>
+      <h2 class="title animation" style="--i: 0; --j: 21; z-index: 100">Login</h2>
       <form action="{% url 'User_login' %}" method="POST">
         {% csrf_token %}
         <div class="input-box animation" style="--i: 1; --j: 22">
@@ -73,7 +73,7 @@
     </div>
 
     <div class="form-box register" data-action="register">
-      <h2 class="title animation" style="--i: 17; --j: 0; z-index: 1000000">Sign Up</h2>
+      <h2 class="title animation" style="--i: 17; --j: 0; z-index: 1001">Sign Up</h2>
 
       <form action="{% url 'User_signup' %}" method="POST">
         {% csrf_token %} {{form.as_p}}

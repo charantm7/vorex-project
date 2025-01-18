@@ -47,8 +47,10 @@ class UserProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     rooms = models.ManyToManyField(Room, related_name="rooms")
     study_materials = models.ManyToManyField(StudyMaterials, related_name="study_materials")
-    bio = models.TextField(blank=True, null=True)
-
+    bio = models.TextField(blank=True, null=True, max_length=100)
+    followers = models.ManyToManyField(User, related_name="followers")
+    following = models.ManyToManyField(User, related_name="following")
     def __str__(self):
         return self.user.username
+
 

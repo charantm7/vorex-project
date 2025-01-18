@@ -159,7 +159,7 @@ form .forget-pass {
   position: absolute;
   margin-left: 66%;
   margin-top: 20px;
-  z-index: 15;
+  z-index: 10;
 }
 .third-party-auth.login a {
   text-decoration: none;
@@ -172,7 +172,7 @@ form .forget-pass {
   position: absolute;
   margin-left: 20px;
   margin-top: 20px;
-  z-index: 15;
+  z-index: 10;
 }
 .third-party-auth.register a {
   text-decoration: none;

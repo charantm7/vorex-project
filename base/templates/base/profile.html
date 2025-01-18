@@ -15,19 +15,34 @@
       <img src="{% static 'assets/default.png' %}" alt="profile pic" />
       {% endif %}
     </div>
+    {% if request.user == profile.user %}
     <i class="fa-solid fa-pen-to-square" onclick="updateProfile()"></i>
+    {% endif %}
     <div class="profile-container-top-mid">
-      <h1>{{ profile.user.username }}</h1>
-      <p>{{ profile.user.email }}</p>
-      <p>{{ profile.bio }}</p>
+      <div class="username">
+        <h1>{{ profile.user.username }}</h1>
+        <p>{{ profile.user.email }}</p>
+      </div>
+      <div class="bio">
+        <p>{{ profile.bio }}</p>
+      </div>
       {% if request.user == profile.user %}
       <button onclick="editProfile()">Edit Profile</button>
       {% endif %}
     </div>
     <div class="profile-container-top-right">
-      <p>Rooms</p>
-      <p>Followers</p>
-      <p>Following</p>
+      <div class="profile-container-top-right-top">
+        <p>Rooms</p>
+        <p>{{ profile.user.rooms.count }}</p>
+      </div>
+      <div class="profile-container-top-right-mid">
+        <p>Followers</p>
+        <p>{{ profile.user.followers.count }}</p>
+      </div>
+      <div class="profile-container-top-right-bottom">
+        <p>Following</p>
+        <p>{{ profile.user.following.count }}</p>
+      </div>
     </div>
   </div>
   <div class="profile-container-mid">

@@ -16,9 +16,9 @@ p {
   font-family: sans-serif;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: auto auto 1fr;
   grid-template-columns: 1fr 20%;
-  grid-template-areas: "topic activity" "messages activity" "create-room-btn activity" "contents activity";
+  grid-template-areas: "topic activity" "create-room-btn activity" "contents activity";
 }
 
 .topic {
@@ -35,17 +35,6 @@ p {
 }
 .topic a:hover {
   background-color: #1d2329;
-}
-
-.messages {
-  grid-area: messages;
-  display: inline-block;
-  position: absolute;
-  z-index: 100;
-  flex-direction: row;
-  top: 55px;
-  left: 0;
-  width: 100%;
 }
 
 .create-room-btn {

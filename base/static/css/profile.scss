@@ -17,6 +17,7 @@
     flex-direction: row;
     align-items: center;
     gap: 40px;
+    border-bottom: 1px solid white;
     &-left {
       img {
         width: 260px;
@@ -37,10 +38,44 @@
       margin-left: 180px;
       cursor: pointer;
     }
+    &-mid {
+      width: 19%;
+      margin-top: 60px;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "username"
+        "bio";
+      &-username {
+        grid-area: username;
+        margin-bottom: 10px;
+      }
+
+      &-bio {
+        grid-area: bio;
+      }
+    }
     &-right {
       display: flex;
       flex-direction: row;
+      margin-left: 10px;
       gap: 20px;
+      &-top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      &-mid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      &-bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
   &-mid {

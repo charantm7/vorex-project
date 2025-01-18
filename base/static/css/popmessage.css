@@ -1,0 +1,31 @@
+.messages {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 10px;
+  z-index: 1;
+  position: absolute;
+  top: 110px;
+  left: 40%;
+}
+.messages li {
+  border: 1px solid var(--roomtext);
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.messages li span {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--roomtext);
+  margin-left: 10px;
+  font-size: 20px;
+}
+.messages li span:hover {
+  color: red;
+}/*# sourceMappingURL=popmessage.css.map */
