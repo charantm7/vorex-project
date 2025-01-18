@@ -60,7 +60,7 @@ p {
   background-color: var(--roomdark);
   border: 1px solid var(--roomdark);
   color: var(--white);
-  z-index: 9999;
+  z-index: 1;
 }
 
 .content {
@@ -103,11 +103,12 @@ p {
 .content .card-mid {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   border-bottom: 1px solid var(--borderbottom);
   height: 60%;
 }
 .content .card-mid-left {
-  width: 88%;
+  width: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -134,11 +135,18 @@ p {
   gap: 10px;
 }
 .content .card-mid-right a {
-  margin-left: 10px;
-  margin-top: 20px;
+  margin-left: 5px;
+  margin-top: 25px;
   text-decoration: none;
   color: var(--roomtext);
   transition: 0.4s ease;
+}
+.content .card-mid-right-gobal {
+  margin-top: 25px;
+  color: var(--roomtext);
+}
+.content .card-mid-right-gobal i {
+  margin-left: 5px;
 }
 .content .card-bottom {
   display: flex;
@@ -160,7 +168,13 @@ p {
   text-decoration: underline;
   color: #3758fd;
 }
-.content .card button {
+.content .card-bottom .card-bottom-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.content .card-bottom .card-bottom-right button {
   padding: 5px 20px;
   background-color: var(--roomdark);
   border: 1px solid var(--roomdark);
@@ -168,12 +182,12 @@ p {
   border-radius: 20px;
   transition: 0.6s ease;
 }
-.content .card button:hover {
+.content .card-bottom .card-bottom-right button:hover {
   background-color: var(--white);
   border: 1px solid var(--white);
   color: var(--roomdark);
 }
-.content .card button:hover a {
+.content .card-bottom .card-bottom-right button:hover a {
   color: var(--black);
   text-decoration: none;
 }
@@ -186,14 +200,11 @@ p {
 }
 
 @media (max-width: 576px) {
-  .activity {
-    display: none;
-  }
   .main-body {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
     grid-template-columns: 1fr;
-    grid-template-areas: "topic" "contents";
+    grid-template-areas: "topic" "create-room-btn" "contents";
   }
   .content {
     padding: 20px;
@@ -203,5 +214,8 @@ p {
   }
   .content .card-top p {
     font-size: 0.7rem;
+  }
+  .content .card-mid-right {
+    margin-right: 30px;
   }
 }/*# sourceMappingURL=body.css.map */

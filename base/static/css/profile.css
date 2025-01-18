@@ -1,0 +1,43 @@
+.profile-container {
+  font-family: "Poppins", sans-serif;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas: "top" "mid";
+  border: 1px solid white;
+  padding: 20px 40px 20px 40px;
+  height: 100%;
+}
+.profile-container-top {
+  grid-area: top;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px;
+}
+.profile-container-top-left img {
+  width: 260px;
+  height: 250px;
+  border-radius: 50%;
+}
+.profile-container-top i {
+  position: absolute;
+  font-size: 15px;
+  color: var(--white);
+  z-index: 1;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: var(--navdark);
+  margin-top: 210px;
+  margin-left: 180px;
+  cursor: pointer;
+}
+.profile-container-top-right {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.profile-container-mid {
+  grid-area: mid;
+}/*# sourceMappingURL=profile.css.map */

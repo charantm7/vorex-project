@@ -92,7 +92,6 @@ def create_room(request):
         if form.is_valid():
             form = form.save(commit=False)
             form.created_by = request.user
-            
             form.save()
             return redirect('Home')
         
@@ -116,7 +115,7 @@ def edit_room(request,room_name):
     else:
         form = RoomForm(instance=room)
     context = {'form':form}
-    return render(request, 'base/createroom.html',context)
+    return render(request, 'base/editroom.html',context)
 
 def delete_room(request, room_name):
     room = get_object_or_404(Room, name=room_name)
@@ -152,13 +151,14 @@ def profile(request, user_tag):
     return render(request, 'base/profile.html', context)
 
 @login_required(login_url='User_login')
-def profile_update(request):
-    profile = UserProfile.objects.get(user=request.user)
+def profile_update(request, user_tag):
+    user = User.objects.get(username=user_tag)
+    profile = UserProfile.objects.get(user=user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
-            form.save()
-            return redirect('Profile', username=request.user.username)
+            form.save() 
+            return redirect('Profile', user_tag=user_tag)
         else:
             messages.error(request, 'Invalid form') 
 

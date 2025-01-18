@@ -1,26 +1,47 @@
 {% extends 'base.html' %} {% load static %} {% block title %}
 <title>Profile</title>
+{% endblock %} {% block nav1 %}
+<a href="{% url 'Profile' profile.user.username %}">/ profile</a>
+{% endblock %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
 {% endblock %} {% block content %}
-<h1>Profile</h1>
 
 <div class="profile-container">
-  <div class="profile-container-left">
-    {% if profile.profile_pic %}
-    <img src="{{profile.profile_pic.url}}" alt="profile pic" />
-    {% else %}
-    <img src="{% static 'assets/default.png' %}" alt="profile pic" />
-    {% endif %}
+  <div class="profile-container-top">
+    <div class="profile-container-top-left">
+      {% if profile.profile_pic %}
+      <img src="{{profile.profile_pic.url}}" alt="profile pic" />
+      {% else %}
+      <img src="{% static 'assets/default.png' %}" alt="profile pic" />
+      {% endif %}
+    </div>
+    <i class="fa-solid fa-pen-to-square" onclick="updateProfile()"></i>
+    <div class="profile-container-top-mid">
+      <h1>{{ profile.user.username }}</h1>
+      <p>{{ profile.user.email }}</p>
+      <p>{{ profile.bio }}</p>
+      {% if request.user == profile.user %}
+      <button onclick="editProfile()">Edit Profile</button>
+      {% endif %}
+    </div>
+    <div class="profile-container-top-right">
+      <p>Rooms</p>
+      <p>Followers</p>
+      <p>Following</p>
+    </div>
   </div>
-  <div class="profile-container-right">
-    <h1>{{ profile.user.username }}</h1>
-    <p>{{ profile.user.email }}</p>
-    <p>{{ profile.bio }}</p>
+  <div class="profile-container-mid">
     {% for room in rooms %}
     <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
-    {% endfor %} {% if request.user == profile.user %}
-    <a href="{% url 'Update-profile'  %}" style="text-decoration: none;color: white;"><button class="btn btn-primary" >Update Profile</a></button></a>
-    <a href="{% url 'Update-user' profile.user.username %}" style="text-decoration: none;color: white;"><button class="btn btn-primary" >Update User</a></button></a>
-    {% endif %}
+    {% endfor %}
   </div>
 </div>
+<script>
+  function editProfile() {
+    window.location.href = "{% url 'Update-user' profile.user.username %}";
+  }
+  function updateProfile() {
+    window.location.href = "{% url 'Update-profile' profile.user.username %}";
+  }
+</script>
 {% endblock %}

@@ -62,7 +62,7 @@ p {
     background-color: var(--roomdark);
     border: 1px solid var(--roomdark);
     color: var(--white);
-    z-index: 9999;
+    z-index: 1;
   }
 }
 .content {
@@ -105,10 +105,11 @@ p {
     &-mid {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       border-bottom: 1px solid var(--borderbottom);
       height: 60%;
       &-left {
-        width: 88%;
+        width: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -135,11 +136,18 @@ p {
         gap: 10px;
 
         a {
-          margin-left: 10px;
-          margin-top: 20px;
+          margin-left: 5px;
+          margin-top: 25px;
           text-decoration: none;
           color: var(--roomtext);
           transition: 0.4s ease;
+        }
+        &-gobal {
+          margin-top: 25px;
+          color: var(--roomtext);
+          i {
+            margin-left: 5px;
+          }
         }
       }
     }
@@ -162,22 +170,28 @@ p {
         text-decoration: underline;
         color: #3758fd;
       }
-    }
-    button {
-      padding: 5px 20px;
-      background-color: var(--roomdark);
-      border: 1px solid var(--roomdark);
-      color: var(--white);
-      border-radius: 20px;
-      transition: 0.6s ease;
-    }
-    button:hover {
-      background-color: var(--white);
-      border: 1px solid var(--white);
-      color: var(--roomdark);
-      a {
-        color: var(--black);
-        text-decoration: none;
+      .card-bottom-right {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        button {
+          padding: 5px 20px;
+          background-color: var(--roomdark);
+          border: 1px solid var(--roomdark);
+          color: var(--white);
+          border-radius: 20px;
+          transition: 0.6s ease;
+        }
+        button:hover {
+          background-color: var(--white);
+          border: 1px solid var(--white);
+          color: var(--roomdark);
+          a {
+            color: var(--black);
+            text-decoration: none;
+          }
+        }
       }
     }
   }
@@ -191,16 +205,13 @@ p {
 }
 
 @media (max-width: 576px) {
-  .activity {
-    display: none;
-  }
-
   .main-body {
     display: grid;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto auto 1fr;
     grid-template-columns: 1fr;
     grid-template-areas:
       "topic"
+      "create-room-btn"
       "contents";
   }
   .content {
@@ -210,6 +221,11 @@ p {
       padding: 15px 10px 15px 10px;
       p {
         font-size: 0.7rem;
+      }
+    }
+    .card-mid {
+      &-right {
+        margin-right: 30px;
       }
     }
   }

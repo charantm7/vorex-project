@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/createroom.css' %}" />
+{% endblock %} {% block content %}
+<div class="main-body">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="room-title">
+      <label for="room-title">Room Title</label>
+      {{form.name}}
+    </div>
+    <div class="room-description">
+      <label for="room-description">Room Description</label>
+      {{form.description}}
+    </div>
+    <div class="room-tag">
+      <label for="room-tags">Room Tags</label>
+      {{form.tags}}
+    </div>
+    <div class="room-private">
+      <label for="room-private">Private</label>
+      {{form.is_private}}
+    </div>
+    <button type="submit">Update</button>
+  </form>
+</div>
+{% endblock %}

@@ -32,12 +32,21 @@
               <a href="{% url 'Rooms' room.name %}">{{room.name}}</a>
               <small>{{room.description}}</small>
             </div>
-            {% if room.created_by == user %}
+
             <div class="card-mid-right">
+              {% if room.created_by == user %}
               <a href="{% url 'Edit-room' room.name %}"><i class="fa-solid fa-pen-to-square"></i></a>
               <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash"></i></a>
+              {% endif %} {% if room.is_private %}
+              <div class="card-mid-right-gobal">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              {% else %}
+              <div class="card-mid-right-gobal">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              {% endif %}
             </div>
-            {% endif %}
           </div>
           <div class="card-bottom">
             <p>
@@ -45,15 +54,17 @@
               <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
               {% endfor %}
             </p>
-            {% if user.is_authenticated %} {% if request.user not in room.members_count.all %}
-            <button>
-              <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
-            </button>
-            {% else %}
-            <button>
-              <b><a href="{% url 'Exit-room' room.name %} ">Exit Room</a></b>
-            </button>
-            {% endif %} {% endif %}
+            <div class="card-bottom-right">
+              {% if user.is_authenticated %} {% if request.user not in room.members_count.all %}
+              <button>
+                <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
+              </button>
+              {% else %}
+              <button>
+                <b><a href="{% url 'Exit-room' room.name %} ">Exit</a></b>
+              </button>
+              {% endif %} {% endif %}
+            </div>
           </div>
         </div>
       </div>
