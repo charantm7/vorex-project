@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
+  font-size: 1vw;
+  font-family: "Poppins", sans-serif;
 }
 .main-body form {
   display: flex;
@@ -12,7 +14,7 @@
   border-radius: 10px;
   gap: 20px;
   background-color: var(--navdark);
-  width: 30%;
+  width: 25%;
 }
 .main-body form h3 {
   font-size: 20px;
@@ -52,4 +54,14 @@
   flex-direction: column;
   align-items: start;
   justify-content: center;
+}
+.main-body form .room-private {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+.main-body form .room-private input {
+  width: 10%;
+  margin: 0;
 }/*# sourceMappingURL=createroom.css.map */

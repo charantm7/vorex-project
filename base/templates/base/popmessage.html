@@ -1,0 +1,42 @@
+{% if messages %}
+<style>
+  .messages {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    padding: 10px;
+    z-index: 100;
+    li {
+      border: 1px solid var(--roomtext);
+      padding: 10px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        cursor: pointer;
+        font-weight: bold;
+        color: var(--roomtext);
+        margin-left: 10px;
+        font-size: 20px;
+        &:hover {
+          color: red;
+        }
+      }
+    }
+  }
+</style>
+<ul class="messages">
+  {% for message in messages %}
+  <li>{{ message }}<span onclick="closeMessage(this)">&times;</span></li>
+  {% endfor %}
+</ul>
+
+<script>
+  function closeMessage(element) {
+    element.parentElement.remove();
+  }
+</script>
+{% endif %}

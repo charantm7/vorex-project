@@ -11,37 +11,11 @@
     <a href="{% url 'Tag' tag.name %}">{{tag.name}}</a>
     {% endfor %}
   </div>
+  <div class="messages">{% include 'base/popmessage.html' %}</div>
+  <div class="create-room-btn">
+    <button onclick="openModal()">Create Room</button>
+  </div>
   <div class="content">
-    <a href="{% url 'Create-room' %}?action=create"> Create Room </a>
-    <div class="modal-container">
-      <div id="id01" class="modal">
-        <form class="modal-content animate" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          <div class="imgcontainer">
-            <a href="{% url 'Home' %}?action=cancel"><span class="close" title="Close Modal">&times;</span></a>
-            <h3>Create Room</h3>
-          </div>
-
-          <div class="container">
-            <label for="uname"><b>Room Name</b></label>
-            {{form.name}}
-
-            <label for="psw"><b>Description</b></label>
-            {{form.description}}
-
-            <label for="psw"><b>Tags</b></label>
-            {{form.tags}}
-
-            <button type="submit">Create</button>
-          </div>
-
-          <div class="container" style="background-color:#f1f1f1">
-            <a href="{% url 'Home' %}?action=cancel" class="cancelbtn">Cancel</a>
-          </div>
-        </form>
-      </div>
-    </div>
-
     <div class="row g-5">
       {% for room in rooms %}
       <div class="col-md-6 col-lg-12 col-md-12">
@@ -55,13 +29,13 @@
           </div>
           <div class="card-mid">
             <div class="card-mid-left">
-              <a href="{% url 'Rooms' room.pk %}">{{room.name}}</a>
+              <a href="{% url 'Rooms' room.name %}">{{room.name}}</a>
               <small>{{room.description}}</small>
             </div>
             {% if room.created_by == user %}
             <div class="card-mid-right">
-              <a href="{% url 'Edit-room' room.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
-              <a href="{% url 'Delete-room' room.pk %}"><i class="fa-solid fa-trash"></i></a>
+              <a href="{% url 'Edit-room' room.name %}"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash"></i></a>
             </div>
             {% endif %}
           </div>
@@ -73,11 +47,11 @@
             </p>
             {% if user.is_authenticated %} {% if request.user not in room.members_count.all %}
             <button>
-              <b><a href="{% url 'Join-room' room.pk %}">Join</a></b>
+              <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
             </button>
             {% else %}
             <button>
-              <b><a href="{% url 'Exit-room' room.pk %} ">Exit Room</a></b>
+              <b><a href="{% url 'Exit-room' room.name %} ">Exit Room</a></b>
             </button>
             {% endif %} {% endif %}
           </div>

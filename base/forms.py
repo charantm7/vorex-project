@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class RoomForm(ModelForm):
     class Meta:
         model = Room
-        fields = '__all__'
-        exclude = ['created_by', 'created_at', 'updated_at','members_count']
+        fields = ['name', 'description', 'tags','is_private']
+        
 
 class ProfileForm(ModelForm):
     class Meta:

@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
+  font-size: 1vw;
+  font-family: "Poppins", sans-serif;
 
   form {
     display: flex;
@@ -12,7 +14,7 @@
     border-radius: 10px;
     gap: 20px;
     background-color: var(--navdark);
-    width: 30%;
+    width: 25%;
 
     h3 {
       font-size: 20px;
@@ -53,6 +55,17 @@
       flex-direction: column;
       align-items: start;
       justify-content: center;
+    }
+    .room-private {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+
+      input {
+        width: 10%;
+        margin: 0;
+      }
     }
   }
 }

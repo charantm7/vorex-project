@@ -12,10 +12,11 @@ p {
 .rooms {
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   grid-template-columns: 1fr;
   grid-template-areas:
     "tabs"
+    "messages"
     "room-content";
 }
 
@@ -47,6 +48,14 @@ p {
   }
   .tablinks i {
     padding-right: 10px;
+  }
+
+  .messages {
+    grid-area: messages;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
   .tabcontent {

@@ -17,7 +17,7 @@
     <p>{{ profile.bio }}</p>
     {% for room in rooms %}
     <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
-    {% endfor %} {% if profile.user == user %}
+    {% endfor %} {% if request.user == profile.user %}
     <a href="{% url 'Update-profile'  %}" style="text-decoration: none;color: white;"><button class="btn btn-primary" >Update Profile</a></button></a>
     <a href="{% url 'Update-user' profile.user.username %}" style="text-decoration: none;color: white;"><button class="btn btn-primary" >Update User</a></button></a>
     {% endif %}

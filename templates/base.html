@@ -54,7 +54,7 @@
             <a href="#"><i class="fas fa-search"></i></a>
           </div>
           <div class="nav-container-right-create-logo">
-            <a href="{% url 'Create-room' %}?action=create">
+            <a href="{% url 'Create-room' %}">
               <i class="fa-solid fa-plus"></i>
             </a>
             <span class="create-room-text">Create Room</span>
@@ -125,15 +125,7 @@
       </div>
       {% block aside %}{% endblock %}
     </aside>
-    <main>
-      {% if messages %}
-      <ul class="messages">
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-      {% endif %}{% block content %}{% endblock %}
-    </main>
+    <main>{% block content %}{% endblock %}</main>
     <footer>
       <div class="footer-container">
         <div class="footer-column-1">

@@ -7,14 +7,22 @@ from .forms import RoomForm,ProfileForm,UserForm
 from django.contrib.auth.models import User
 
 def home(request):
-    room = Room.objects.all()
+    
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            room = Room.objects.all()
+        else:
+            room = Room.objects.filter(is_private=False) | Room.objects.filter(created_by=request.user)
+    else:
+        room = Room.objects.filter(is_private=False)
     tag = Tag.objects.all()
-    return render(request, 'base/home.html', {'rooms': room,'tags': tag})
+    context = {'rooms': room,'tags': tag}
+    return render(request, 'base/home.html', context)
 
 @login_required(login_url='User_login')
-def rooms(request,pk):
-    room = get_object_or_404(Room, pk=pk)
-    context = {'rooms': room,'members':room.member_count}
+def rooms(request,room_name):
+    room = get_object_or_404(Room, name=room_name)
+    context = {'rooms': room,'members':room.member_count}   
     if request.user in room.members_count.all():
         return render(request, 'base/room.html',context )
     else:
@@ -84,17 +92,20 @@ def create_room(request):
         if form.is_valid():
             form = form.save(commit=False)
             form.created_by = request.user
+            
             form.save()
             return redirect('Home')
+        
         else:
             messages.error(request, 'Invalid form')
+            return redirect('Create-room')
     else:
         form = RoomForm()
     context = {'form':form}
-    return render(request, 'base/home.html',context)
+    return render(request, 'base/createroom.html',context)
 
-def edit_room(request,pk):
-    room = get_object_or_404(Room, pk=pk)
+def edit_room(request,room_name):
+    room = get_object_or_404(Room, name=room_name)
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=room)
         if form.is_valid():
@@ -107,23 +118,23 @@ def edit_room(request,pk):
     context = {'form':form}
     return render(request, 'base/createroom.html',context)
 
-def delete_room(request, pk):
-    room = get_object_or_404(Room, pk=pk)
+def delete_room(request, room_name):
+    room = get_object_or_404(Room, name=room_name)
     room.delete()
     messages.success(request, 'Room deleted successfully')
     return redirect('Home')
 
-def join_room(request, pk):
-    room = get_object_or_404(Room, pk=pk)
+def join_room(request, room_name):
+    room = get_object_or_404(Room, name=room_name)
     if request.user in room.members_count.all():
         messages.error(request, 'You are already a member of this room')
-        return redirect('Rooms', pk=pk)
+        return redirect('Rooms', room_name=room_name)
     else:
         room.members_count.add(request.user)
-        return redirect('Rooms', pk=pk)
+        return redirect('Rooms', room_name=room_name)
 
-def exit_room(request, pk):
-    room = get_object_or_404(Room, pk=pk)
+def exit_room(request, room_name):
+    room = get_object_or_404(Room, name=room_name)
     room.members_count.remove(request.user)
     return redirect('Home') 
 

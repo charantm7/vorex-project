@@ -7,23 +7,17 @@
 {% endblock %} {% block content %}
 <div class="rooms">
   <div class="tab">
-    <button
-      class="tablinks"
-      onclick="openCity(event, 'London')"
-      id="defaultOpen"
-    >
-      <i class="fas fa-tachometer-alt"></i
-      ><span class="btn-txt">Dashboard</span>
+    <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">
+      <i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span>
     </button>
     <button class="tablinks" onclick="openCity(event, 'Paris')">
       <i class="fa-solid fa-user-group"></i><span class="btn-txt">Group</span>
     </button>
     <button class="tablinks" onclick="openCity(event, 'Tokyo')">
-      <i class="fa-solid fa-book"></i
-      ><span class="btn-txt">Study Materials</span>
+      <i class="fa-solid fa-book"></i><span class="btn-txt">Study Materials</span>
     </button>
   </div>
-
+  <div class="messages">{% include 'base/popmessage.html' %}</div>
   <div id="London" class="tabcontent">
     <div class="tabcontent-top">
       <div class="tabcontent-top-left">
@@ -37,10 +31,7 @@
       <div class="tabcontent-top-right">
         <p>Created by:</p>
         <div class="tabcontent-top-right-1">
-          <img
-            src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}"
-            alt="img"
-          />
+          <img src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}" alt="img" />
           <a href="#">@{{rooms.created_by.username}}</a>
         </div>
         <p>{{members}} Joined</p>

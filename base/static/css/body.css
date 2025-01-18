@@ -16,9 +16,9 @@ p {
   font-family: sans-serif;
   min-height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto auto 1fr;
   grid-template-columns: 1fr 20%;
-  grid-template-areas: "topic activity" "contents activity";
+  grid-template-areas: "topic activity" "messages activity" "create-room-btn activity" "contents activity";
 }
 
 .topic {
@@ -37,110 +37,35 @@ p {
   background-color: #1d2329;
 }
 
+.messages {
+  grid-area: messages;
+  display: inline-block;
+  position: absolute;
+  z-index: 100;
+  flex-direction: row;
+  top: 55px;
+  left: 0;
+  width: 100%;
+}
+
+.create-room-btn {
+  grid-area: create-room-btn;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 40px 0 40px;
+}
+.create-room-btn button {
+  padding: 10px 20px;
+  background-color: var(--roomdark);
+  border: 1px solid var(--roomdark);
+  color: var(--white);
+  z-index: 9999;
+}
+
 .content {
   grid-area: contents;
-  padding: 40px;
-  /* General styling for modal container */
-  /* Input fields styling */
-  /* Buttons styling */
-  /* Cancel button */
-  /* Container padding */
-  /* Close button styling */
-  /* Modal background styling */
-  /* Modal content box */
-  /* Add zoom animation for modal */
-  /* Responsive styles for smaller screens */
-}
-.content .modal-container input[type=text],
-.content .modal-container input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-.content .modal-container button {
-  background-color: #04aa6d;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-.content .modal-container button:hover {
-  opacity: 0.8;
-}
-.content .modal-container .cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  display: inline-block;
-  border: none;
-  cursor: pointer;
-}
-.content .modal-container .cancelbtn:hover {
-  opacity: 0.8;
-}
-.content .modal-container .container {
-  padding: 16px;
-}
-.content .modal-container .close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-  text-decoration: none;
-}
-.content .modal-container .close:hover,
-.content .modal-container .close:focus {
-  color: red;
-  cursor: pointer;
-}
-.content .modal-container .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-.content .modal-container .modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* Centered box */
-  border: 1px solid #888;
-  width: 80%; /* Adjust as needed */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-@keyframes animatezoom {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-.content .modal-container .animate {
-  animation: animatezoom 0.6s;
-}
-@media screen and (max-width: 300px) {
-  .content .modal-container span.psw {
-    display: block;
-    float: none;
-  }
-  .content .modal-container .cancelbtn {
-    width: 100%;
-  }
+  padding: 10px 40px 40px 40px;
 }
 .content .card {
   background-color: var(--roomdark);
