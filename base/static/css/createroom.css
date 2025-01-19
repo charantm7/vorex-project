@@ -6,6 +6,8 @@
   height: 100%;
   font-size: 1vw;
   font-family: "Poppins", sans-serif;
+  overflow: auto;
+  padding: 40px 0;
 }
 .main-body form {
   display: flex;
@@ -23,43 +25,58 @@
 }
 .main-body form input {
   width: 100%;
-  background-color: var(--white);
+  background-color: var(--bodydark);
   padding: 10px;
   border: none;
   border-radius: 5px;
+  color: white;
+  border: 1px solid rgb(130, 129, 129);
 }
 .main-body form textarea {
   width: 100%;
   height: 70px;
   max-height: 120px;
-  background-color: var(--white);
+  background-color: var(--bodydark);
   padding: 10px;
   border: none;
   border-radius: 5px;
+  color: white;
+  border: 1px solid rgb(130, 129, 129);
 }
 .main-body form .room-title {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  gap: 10px;
 }
 .main-body form .room-description {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  gap: 10px;
 }
 .main-body form .room-tag {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  gap: 10px;
+}
+.main-body form .room-tag select {
+  background-color: var(--bodydark);
+  border: 1px solid rgb(130, 129, 129);
+  border-radius: 5px;
+  padding: 10px;
+  color: white;
 }
 .main-body form .room-private {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: start;
+  gap: 10px;
 }
 .main-body form .room-private input {
   width: 10%;

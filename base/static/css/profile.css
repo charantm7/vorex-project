@@ -15,6 +15,7 @@
   align-items: center;
   gap: 40px;
   border-bottom: 1px solid white;
+  padding-bottom: 40px;
 }
 .profile-container-top-left img {
   width: 260px;
@@ -45,9 +46,11 @@
 .profile-container-top-mid-username {
   grid-area: username;
   margin-bottom: 10px;
+  position: fixed;
 }
 .profile-container-top-mid-bio {
   grid-area: bio;
+  position: fixed;
 }
 .profile-container-top-right {
   display: flex;

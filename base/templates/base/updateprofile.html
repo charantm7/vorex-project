@@ -1,7 +1,33 @@
-{% extends 'base.html' %} {% block content %}
-<h2>Update Profile</h2>
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">Update Profile</button>
-</form>
+{% extends 'base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/updateprofile.css' %}" />
+{% endblock %} {% block title %}
+<title>Update Profile</title>
+{% endblock %} {% block nav1 %}
+<a href="{% url 'Update-profile' user.username %}">/ Update Profile</a>
+{% endblock %} {% block content %}
+<div class="update-profile-container">
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h2 class="title">Update Profile</h2>
+    <div class="top">
+      <div class="current-picture">
+        {% if profile.profile_pic %}
+        <img src="{{profile.profile_pic.url}}" alt="profile pic" />
+        {% else %}
+        <img src="{% static 'assets/default.png' %}" alt="profile pic" />
+        {% endif %}
+        <label for="currrent_picture">Current Picture</label>
+      </div>
+      <div class="new-picture">{{form.profile_pic}}</div>
+    </div>
+    <div class="bottom">
+      <div class="bio">
+        <label for="bio">Bio</label>
+        {{form.bio}}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+  </form>
+</div>
 {% endblock %}

@@ -225,10 +225,10 @@ def profile_update(request, user_tag):
         else:
             messages.error(request, 'Invalid form')
 
-    else:
+    else:   
         form = ProfileForm(instance=profile)
 
-    context = {'form': form}
+    context = {'form': form, 'profile': profile}
     return render(request, 'base/updateprofile.html', context)
 
 

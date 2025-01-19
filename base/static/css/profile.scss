@@ -18,6 +18,7 @@
     align-items: center;
     gap: 40px;
     border-bottom: 1px solid white;
+    padding-bottom: 40px;
     &-left {
       img {
         width: 260px;
@@ -50,10 +51,12 @@
       &-username {
         grid-area: username;
         margin-bottom: 10px;
+        position: fixed;
       }
 
       &-bio {
         grid-area: bio;
+        position: fixed;
       }
     }
     &-right {
