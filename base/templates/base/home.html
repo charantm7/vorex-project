@@ -56,13 +56,13 @@
             <div class="card-bottom-right">
               {% if user.is_authenticated %} {% if request.user not in room.members_count.all %} {% if not room.created_by == user %}
               <div>
-                {% if room.is_private %}
-                <button>
-                  <b><a href="#">Request</a></b>
-                </button>
-                {% else %}
+                {% if not room.is_private %}
                 <button>
                   <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
+                </button>
+                {% elif room.is_private == True %}
+                <button>
+                  <b><a href="#">Request</a></b>
                 </button>
                 {% endif %}
               </div>

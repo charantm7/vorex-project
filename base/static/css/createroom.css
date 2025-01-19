@@ -71,6 +71,12 @@
   padding: 10px;
   color: white;
 }
+.main-body form .room-tag select ::webkit-scrollbar {
+  background-color: var(--bodydark);
+  border: 1px solid rgb(130, 129, 129);
+  border-radius: 5px;
+  width: 10px;
+}
 .main-body form .room-private {
   display: flex;
   flex-direction: row;

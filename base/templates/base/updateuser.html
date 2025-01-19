@@ -1,7 +1,29 @@
-{% extends 'base.html' %} {% block content %}
-<h2>Update User</h2>
-<form method="POST">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit" class="btn btn-primary">Update User</button>
-</form>
+{% extends 'base.html' %} {% load static %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/updateprofile.css' %}" />
+{% endblock %} {% block content %}
+<div class="update-user-container">
+  <h2>Update User</h2>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="user-username">
+      <label for="username">Username</label>
+      {{form.username}}
+    </div>
+    <div class="user-email">
+      <label for="email">Email</label>
+      {{form.email}}
+    </div>
+    <div class="user-first_name">
+      <label for="first_name">First Name</label>
+      {{form.first_name}}
+    </div>
+    <div class="user-last_name">
+      <label for="last_name">Last Name</label>
+      {{form.last_name}}
+    </div>
+    <div class="btn">
+      <button type="submit" class="btn btn-primary">Update User</button>
+    </div>
+  </form>
+</div>
 {% endblock %}

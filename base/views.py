@@ -201,14 +201,16 @@ def exit_room(request, room_name):
 @login_required(login_url='User_login')
 def profile(request, user_tag):
     user = User.objects.get(username=user_tag)
-    room = Room.objects.filter(created_by=user)
+    room = Room.objects.filter(created_by=user) | Room.objects.filter(members_count=user)
+    if user.username == user_tag:
+        private = Room.objects.filter(is_private=True) | Room.objects.filter(is_private=False)
     if not UserProfile.objects.filter(user=user).exists():
         UserProfile.objects.create(user=user)
         profile = UserProfile.objects.get(user=user)
 
     else:
         profile = UserProfile.objects.get(user=user)
-    context = {'user': user, 'rooms': room, 'profile': profile}
+    context = {'user': user, 'rooms': room, 'profile': profile, 'private': private}
     return render(request, 'base/profile.html', context)
 
 

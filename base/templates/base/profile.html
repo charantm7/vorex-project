@@ -46,9 +46,69 @@
     </div>
   </div>
   <div class="profile-container-mid">
-    {% for room in rooms %}
-    <a href="{% url 'Rooms' room.id %}">{{ room.name }}</a>
-    {% endfor %}
+    <div class="row g-5">
+      {% for room in rooms %}
+      <div class="col-md-6 col-lg-12 col-md-12">
+        <div class="card">
+          <div class="card-top">
+            <div class="card-top-left">
+              <img src="{% static 'assets/2019_07_29_77135_1564383613._large.jpg' %}" alt="" />
+              <a href="{% url 'Profile' room.created_by.username %}">@{{room.created_by.username}}</a>
+            </div>
+            <p>created: {{room.created_at|date:"Y F j"}}</p>
+          </div>
+          <div class="card-mid">
+            <div class="card-mid-left">
+              <a href="{% url 'Rooms' room.name %}">{{room.name}}</a>
+              <small>{{room.description}}</small>
+            </div>
+
+            <div class="card-mid-right">
+              {% if room.created_by == user %}
+              <a href="{% url 'Edit-room' room.name %}"><i class="fa-solid fa-pen-to-square"></i></a>
+              <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash"></i></a>
+              {% endif %} {% if room.is_private %}
+              <div class="card-mid-right-gobal">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              {% else %}
+              <div class="card-mid-right-gobal">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="card-bottom">
+            <p>
+              {{room.member_count}} Joined / {% for tag in room.tags.all %}
+              <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
+              {% endfor %}
+            </p>
+            <div class="card-bottom-right">
+              {% if not rooms.created_by == user %}
+              <div>
+                <button>
+                  <b><a href="#">Request</a></b>
+                </button>
+
+                <button>
+                  <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
+                </button>
+              </div>
+              {% endif %}
+              <div>
+                {% if not room.created_by == user %}
+                <button>
+                  <b><a href="{% url 'Exit-room' room.name %} ">Exit</a></b>
+                </button>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 <script>
