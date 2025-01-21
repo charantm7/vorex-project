@@ -17,5 +17,5 @@ urlpatterns = [
     path('<str:tag_name>/',views.tag, name='Tag'),
     path('join_room/<str:room_name>/',views.join_room, name='Join-room'),
     path('exit_room/<str:room_name>/',views.exit_room, name='Exit-room'),
-    
+    path('room-members/<str:room_name>/',views.room_member_count, name='Room-members'),
 ]

@@ -47,7 +47,7 @@
   </div>
   <div class="profile-container-mid">
     <div class="row g-5">
-      {% for room in rooms %}
+      {% for room in room %}
       <div class="col-md-6 col-lg-12 col-md-12">
         <div class="card">
           <div class="card-top">
@@ -64,7 +64,7 @@
             </div>
 
             <div class="card-mid-right">
-              {% if room.created_by == user %}
+              {% if room.created_by == request.user %}
               <a href="{% url 'Edit-room' room.name %}"><i class="fa-solid fa-pen-to-square"></i></a>
               <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash"></i></a>
               {% endif %} {% if room.is_private %}
@@ -85,24 +85,19 @@
               {% endfor %}
             </p>
             <div class="card-bottom-right">
-              {% if not rooms.created_by == user %}
+              {% if request.user.is_authenticated %} {% if not room.created_by == user %}
               <div>
-                <button>
-                  <b><a href="#">Request</a></b>
-                </button>
-
+                {% if request.user not in room.member_count %}
                 <button>
                   <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
                 </button>
-              </div>
-              {% endif %}
-              <div>
-                {% if not room.created_by == user %}
+                {% elif request.user in room.member_count%}
                 <button>
                   <b><a href="{% url 'Exit-room' room.name %} ">Exit</a></b>
                 </button>
                 {% endif %}
               </div>
+              {% endif %} {% endif %}
             </div>
           </div>
         </div>

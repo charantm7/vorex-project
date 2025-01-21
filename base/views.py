@@ -13,8 +13,7 @@ def home(request):
         if request.user.is_superuser:
             room = Room.objects.all()
         else:
-            room = Room.objects.filter(is_private=False) | Room.objects.filter(
-                created_by=request.user)
+            room = Room.objects.filter(is_private=False)
     else:
         room = Room.objects.filter(is_private=False)
     tag = Tag.objects.all()
@@ -193,24 +192,27 @@ def join_room(request, room_name):
 def exit_room(request, room_name):
     room = get_object_or_404(Room, name=room_name)
     room.members_count.remove(request.user)
-    room.save()
     messages.success(request, 'Exited from the room successfully')
     return redirect('Home')
 
 
 @login_required(login_url='User_login')
 def profile(request, user_tag):
-    user = User.objects.get(username=user_tag)
-    room = Room.objects.filter(created_by=user) | Room.objects.filter(members_count=user)
-    if user.username == user_tag:
-        private = Room.objects.filter(is_private=True) | Room.objects.filter(is_private=False)
+    user = User.objects.get(username=user_tag) 
+    if request.user.is_authenticated:
+        if request.user.is_superuser:
+            room = Room.objects.filter(created_by=user)
+        elif request.user == user:
+            room = Room.objects.filter(created_by=user)
+        else:
+            room = Room.objects.filter(is_private=False,created_by=user)
+
     if not UserProfile.objects.filter(user=user).exists():
         UserProfile.objects.create(user=user)
         profile = UserProfile.objects.get(user=user)
-
     else:
         profile = UserProfile.objects.get(user=user)
-    context = {'user': user, 'rooms': room, 'profile': profile, 'private': private}
+    context = {'user': user, 'room': room, 'profile': profile}
     return render(request, 'base/profile.html', context)
 
 
@@ -251,3 +253,8 @@ def user_update(request, user_tag):
         form = UserForm(instance=user)
     context = {'form': form}
     return render(request, 'base/updateuser.html', context)
+
+
+def room_memeber_count(request, room_tag):
+    user = User.objects.all()
+    room_memebers = Room.objects.filter(name=room_tag, members_count=user.member
