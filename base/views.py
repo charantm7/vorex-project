@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProfile
+from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProfile, Followrequest
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -198,7 +198,8 @@ def exit_room(request, room_name):
 
 @login_required(login_url='User_login')
 def profile(request, user_tag):
-    user = User.objects.get(username=user_tag) 
+    user = User.objects.get(username=user_tag)
+    
     if request.user.is_authenticated:
         if request.user.is_superuser:
             room = Room.objects.filter(created_by=user)
@@ -212,6 +213,7 @@ def profile(request, user_tag):
         profile = UserProfile.objects.get(user=user)
     else:
         profile = UserProfile.objects.get(user=user)
+    send_follow_request = Followrequest.objects.filter(from_user=request.user).values_list('to_user__id', flat=True)
     context = {'user': user, 'room': room, 'profile': profile}
     return render(request, 'base/profile.html', context)
 
@@ -255,6 +257,57 @@ def user_update(request, user_tag):
     return render(request, 'base/updateuser.html', context)
 
 
-def room_memeber_count(request, room_tag):
-    user = User.objects.all()
-    room_memebers = Room.objects.filter(name=room_tag, members_count=user.member
+def room_member_count(request, room_tag):
+    room = get_object_or_404(Room, name=room_tag)
+    members = room.members_count.all()
+    context = {'room':room,'members':members}
+    return render(request, 'base/room_members.html', context)
+
+@login_required(login_url='User_login')
+def send_follow_request(request, user_id):
+    to_user = get_object_or_404(User, id=user_id)
+    if Followrequest.objects.filter(from_user=request.user, to_user=to_user).exists():
+        return redirect('Profile', user_tag=to_user.username)
+    request = Followrequest.objects.create(from_user=request.user, to_user=to_user)
+    request.save()
+    return redirect('Profile', user_tag=to_user.username)
+
+@login_required(login_url='User_login')
+def accept_follow_request(request, request_id):
+    followrequest = get_object_or_404(Followrequest, id=request_id , to_user=request.user)
+    request.user.profile.followers.add(followrequest.from_user)
+    followrequest.from_user.profile.followers.add(request.user)
+    followrequest.delete()
+    return redirect('Profile', user_tag=request.user.username)
+import logging
+logger = logging.getLogger(__name__)
+@login_required(login_url='User_login')
+def reject_follow_request(request, request_id):
+    logger.info(f"Rejecting follow request: {request_id}")
+    logger.info(f"Logged-in user: {request.user}")
+    follow_request = Followrequest.objects.filter(id=request_id, to_user=request.user).first()
+    if not follow_request:
+        logger.error(f"No follow request found for ID {request_id} and user {request.user}")
+        return redirect('Error-page')  # Replace with an actual error page
+    follow_request.delete()
+    return redirect('Profile', user_tag=request.user.username)
+
+def followers_list(request, user_tag):
+    user = get_object_or_404(User, username=user_tag)
+    followers = user.profile.followers.all()
+    return render(request, 'base/follower_list.html', {'followers': followers})
+
+
+def following_list(request, user_tag):
+    user = get_object_or_404(User, username=user_tag)
+    following = user.following.all()
+    return render(request, 'base/follower_list.html', {'following': following})
+    
+def follow_request(request, user_tag):
+    user = get_object_or_404(User, username=user_tag)
+    follow_request = Followrequest.objects.filter(to_user=request.user)
+    context = {'user': user, 'follow_request': follow_request}
+    return render(request, 'base/follow_request.html', context)
+
+def error_404(request):
+    return render(request, 'base/error_page.html')

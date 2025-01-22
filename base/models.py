@@ -49,8 +49,15 @@ class UserProfile(models.Model):
     study_materials = models.ManyToManyField(StudyMaterials, related_name="study_materials")
     bio = models.TextField(blank=True, null=True, max_length=100)
     followers = models.ManyToManyField(User, related_name="followers")
-    following = models.ManyToManyField(User, related_name="following")
     def __str__(self):
         return self.user.username
 
+class Followrequest(models.Model):
+    from_user = models.ForeignKey(User, related_name="send_follow_request", on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name="recieved_follow_request", on_delete=models.CASCADE)
+    time = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.from_user.username} -> {self.to_user.username}"
+    
+    

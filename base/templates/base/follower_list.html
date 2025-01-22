@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<form action="{% url 'followers-list' user.username %}">
+  <p>followers</p>
+  {% for followers in followers %}
+  <p>{{followers.username}}</p>
+  {% endfor %}
+</form>
+<form action="{% url 'following-list' user.username %}">
+  {% for follower in following %}
+  <p>{{follower.username}}</p>
+  {% endfor %}
+</form>
+
+{% endblock %}

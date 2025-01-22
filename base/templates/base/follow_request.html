@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Follow Requests</h1>
+<ul>
+  {% if follow_request %} {% for request in follow_request %}
+  <li>
+    {{ request.from_user.username }}
+    <a href="{% url 'accept-follow-request' request.id %}">Accept</a>
+    <a href="{% url 'decline-follow-request' request.id %}">Decline</a>
+  </li>
+  {% endfor %} {% else %}
+  <p>None</p>
+  {% endif %}
+</ul>
+{% endblock %}

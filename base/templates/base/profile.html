@@ -26,7 +26,25 @@
       <div class="bio">
         <p>{{ profile.bio }}</p>
       </div>
-      {% if request.user == profile.user %}
+      {% if request.user != user %}
+      <div class="follow_request">
+        {% if user in request.user.profile.followers.all %}
+        <button>
+          <b><a href="{% url 'decline-follow-request' user.id %}">Unfollow</a></b>
+        </button>
+        {% elif user.id in send_follow_request %}
+        <p>Request Sent</p>
+        {% else %}
+        <button>
+          <b><a href="{% url 'send-follow-request' user.id %}">Follow</a></b>
+        </button>
+        {% endif %}
+      </div>
+      {% endif %} {% if request.user == profile.user%}
+      <button>
+        <b><a href="{% url 'follow-request' profile.user.username %}">Follow Request</a></b>
+      </button>
+      {% endif %} {% if request.user == user %}
       <button onclick="editProfile()">Edit Profile</button>
       {% endif %}
     </div>
@@ -36,12 +54,26 @@
         <p>{{ profile.user.rooms.count }}</p>
       </div>
       <div class="profile-container-top-right-mid">
+        {% if request.user == user %}
+        <div>
+          {% if request.user in user.profile.followers.all %}
+          <a href="{% url 'followers-list' user.username %}">Followers</a>
+          {% else %}
+          <a href="{% url 'followers-list' user.username %}"><p>Followers</p></a>
+          {% endif %}
+        </div>
+        {% else %}
         <p>Followers</p>
-        <p>{{ profile.user.followers.count }}</p>
+        {% endif %}
+        <p>{{ user.profile.followers.count }}</p>
       </div>
       <div class="profile-container-top-right-bottom">
+        {% if request.user == user and request.user in profile.user.following.all %}
+        <a href="{% url 'following-list' user.username %}">Following</a>
+        {% else %}
         <p>Following</p>
-        <p>{{ profile.user.following.count }}</p>
+        {% endif %}
+        <p>{{ user.profile.following.count }}</p>
       </div>
     </div>
   </div>
@@ -80,24 +112,29 @@
           </div>
           <div class="card-bottom">
             <p>
-              {{room.member_count}} Joined / {% for tag in room.tags.all %}
+              {% if room.created_by == request.user %}
+              <a href="{% url 'Room-members' room.name %}">{{room.member_count}} Joined</a>
+              {% else %} {{room.member_count}} Joined{% endif %} / {% for tag in room.tags.all %}
               <a href="{% url 'Tag' tag.name %}">{{ tag.name }}</a>
               {% endfor %}
             </p>
             <div class="card-bottom-right">
-              {% if request.user.is_authenticated %} {% if not room.created_by == user %}
+              {% if request.user.is_authenticated and not room.created_by == request.user %}
               <div>
-                {% if request.user not in room.member_count %}
+                {% if request.user not in room.members_count.all %}
+                <!-- Exit Room Button -->
                 <button>
                   <b><a href="{% url 'Join-room' room.name %}">Join</a></b>
                 </button>
-                {% elif request.user in room.member_count%}
+
+                {% else %}
+                <!-- Join Room Button -->
                 <button>
-                  <b><a href="{% url 'Exit-room' room.name %} ">Exit</a></b>
+                  <b><a href="{% url 'Exit-room' room.name %}">Exit</a></b>
                 </button>
                 {% endif %}
               </div>
-              {% endif %} {% endif %}
+              {% endif %}
             </div>
           </div>
         </div>
