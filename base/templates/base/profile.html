@@ -28,9 +28,9 @@
       </div>
       {% if request.user != user %}
       <div class="follow_request">
-        {% if user in request.user.profile.followers.all %}
+        {% if is_follower %}
         <button>
-          <b><a href="{% url 'decline-follow-request' user.id %}">Unfollow</a></b>
+          <b><a href="{% url 'Unfollow' user.id %}">Unfollow</a></b>
         </button>
         {% elif user.id in send_follow_request %}
         <p>Request Sent</p>

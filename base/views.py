@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RoomForm, ProfileForm, UserForm
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+
 
 
 def home(request):
@@ -213,8 +215,12 @@ def profile(request, user_tag):
         profile = UserProfile.objects.get(user=user)
     else:
         profile = UserProfile.objects.get(user=user)
+
+    if request.user.is_authenticated:
+        is_follower = user.profile in request.user.profile.followers.all()
+
     send_follow_request = Followrequest.objects.filter(from_user=request.user).values_list('to_user__id', flat=True)
-    context = {'user': user, 'room': room, 'profile': profile}
+    context = {'user': user, 'room': room, 'profile': profile,'is_follower':is_follower,'send_follow_request':send_follow_request}
     return render(request, 'base/profile.html', context)
 
 
@@ -272,24 +278,37 @@ def send_follow_request(request, user_id):
     request.save()
     return redirect('Profile', user_tag=to_user.username)
 
+
+def unfollow_request(request, user_id):
+    to_user = get_object_or_404(User, id=user_id)
+    to_user_profile = to_user.profile
+
+    if request.user.is_authenticated:
+        current_user = request.user.profile
+    
+        if current_user in to_user_profile.followers.all():
+            to_user_profile.followers.remove(current_user)
+            return JsonResponse({'success': True, 'message': 'Unfollowed successfully.'})
+        else:
+            return JsonResponse({'success': False, 'message': 'You are not following this user.'})
+    return redirect('Profile', user_tag=to_user.username)
+
 @login_required(login_url='User_login')
 def accept_follow_request(request, request_id):
     followrequest = get_object_or_404(Followrequest, id=request_id , to_user=request.user)
-    request.user.profile.followers.add(followrequest.from_user)
-    followrequest.from_user.profile.followers.add(request.user)
+    request.user.profile.followers.add(followrequest.from_user.profile  )
+    followrequest.from_user.profile.followers.add(request.user.profile)
     followrequest.delete()
     return redirect('Profile', user_tag=request.user.username)
-import logging
-logger = logging.getLogger(__name__)
+
+
 @login_required(login_url='User_login')
 def reject_follow_request(request, request_id):
-    logger.info(f"Rejecting follow request: {request_id}")
-    logger.info(f"Logged-in user: {request.user}")
-    follow_request = Followrequest.objects.filter(id=request_id, to_user=request.user).first()
-    if not follow_request:
-        logger.error(f"No follow request found for ID {request_id} and user {request.user}")
-        return redirect('Error-page')  # Replace with an actual error page
-    follow_request.delete()
+    follow_request = Followrequest.objects.filter(id=request_id, to_user=request.user).first() # Replace with an actual error page
+    if follow_request:
+        # If the follow request exists, delete it
+        follow_request.delete()
+        return redirect('Profile', user_tag=request.user.username)
     return redirect('Profile', user_tag=request.user.username)
 
 def followers_list(request, user_tag):
@@ -297,6 +316,15 @@ def followers_list(request, user_tag):
     followers = user.profile.followers.all()
     return render(request, 'base/follower_list.html', {'followers': followers})
 
+def user_profile_view(request, user_tag):
+    user = get_object_or_404(User, username=user_tag)
+    if request.user.is_authenticated:
+        is_follower = user.profile in request.user.profile.followers.all()
+
+    return render(request, 'base/profile.html', {
+        'user': user,
+        'is_follower': is_follower,
+    })   
 
 def following_list(request, user_tag):
     user = get_object_or_404(User, username=user_tag)

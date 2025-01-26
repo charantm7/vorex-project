@@ -18,13 +18,13 @@ urlpatterns = [
     path('<str:tag_name>/',views.tag, name='Tag'),
     path('join_room/<str:room_name>/',views.join_room, name='Join-room'),
     path('exit_room/<str:room_name>/',views.exit_room, name='Exit-room'),
-    path('404-error/',views.error_404, name='Error-page'),
     path('room-members/<str:room_tag>/',views.room_member_count, name='Room-members'),
     path('send-follow-request/<int:user_id>/', views.send_follow_request, name='send-follow-request'),
+    path('unfollow-/<str:user_id>/', views.unfollow_request, name='Unfollow'),
     path('accept-follow-request/<int:request_id>/', views.accept_follow_request, name='accept-follow-request'),
     path('decline-follow-request/<int:request_id>/', views.reject_follow_request, name='decline-follow-request'),
     path('followers/<str:user_tag>/', views.followers_list, name='followers-list'),
     path('following/<str:user_tag>/', views.following_list, name='following-list'),
     path('follow-request/<str:user_tag>', views.follow_request, name='follow-request'),
-    
+    path('404-error/',views.error_404, name='Error-page'),
 ]

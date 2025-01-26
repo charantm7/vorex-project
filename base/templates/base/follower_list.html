@@ -1,14 +1,29 @@
-{% extends 'base.html' %} {% block content %}
-<form action="{% url 'followers-list' user.username %}">
-  <p>followers</p>
-  {% for followers in followers %}
-  <p>{{followers.username}}</p>
-  {% endfor %}
-</form>
-<form action="{% url 'following-list' user.username %}">
-  {% for follower in following %}
-  <p>{{follower.username}}</p>
-  {% endfor %}
-</form>
-
+{% extends 'base.html' %}{% load static %} {% block content %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/follow_list.css' %}" />
+{% endblock %}
+<div class="main">
+  <div class="follower">
+    <form action="{% url 'followers-list' user.username %}">
+      <div class="top">
+        <h5>Followers</h5>
+      </div>
+      <div class="bottom">
+        <ol>
+          {% for follower in followers %}
+          <li>
+            <a href="{% url 'Profile' follower.user.username %}">{{ follower.user.username }}</a>
+          </li>
+          {% endfor %}
+        </ol>
+      </div>
+    </form>
+  </div>
+  <div class="following">
+    <form action="{% url 'following-list' user.username %}">
+      {% for follower in following %}
+      <p>{{follower.user.username}}</p>
+      {% endfor %}
+    </form>
+  </div>
+</div>
 {% endblock %}

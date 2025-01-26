@@ -1,0 +1,37 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  .follower {
+    display: flex;
+    border: 1px solid white;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    background-color: var(--navdark);
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      .top {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+      }
+
+      .bottom {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        padding: 10px 10px;
+        background-color: var(--bodydark);
+      }
+    }
+  }
+}

@@ -45,10 +45,10 @@ class UserProfile(models.Model):
     profile_pic = models.ImageField(upload_to="profile_pics/", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    rooms = models.ManyToManyField(Room, related_name="rooms")
+    rooms = models.ManyToManyField(Room, related_name="profile-rooms+")
     study_materials = models.ManyToManyField(StudyMaterials, related_name="study_materials")
     bio = models.TextField(blank=True, null=True, max_length=100)
-    followers = models.ManyToManyField(User, related_name="followers")
+    followers = models.ManyToManyField("self", related_name="followers")
     def __str__(self):
         return self.user.username
 
