@@ -14,7 +14,7 @@
             {% if profile_pic and profile_pic.profile_pic %}
             <img src="{{ profile_pic.profile_pic.url }}" alt="Profile Picture" />
             {% else %}
-            <img src="/static/images/default-profile.png" alt="Default Profile Picture" />
+            <img src="{% static 'assets/default.png' %}" alt="Default Profile Picture" />
             {% endif %}
             <a href="{% url 'Profile' follower.user.username %}">{{ follower.user.username }}</a>
           </li>

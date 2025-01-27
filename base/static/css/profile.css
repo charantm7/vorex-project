@@ -46,40 +46,88 @@
 .profile-container-top-mid {
   width: 19%;
   margin-top: 60px;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr;
-  grid-template-areas: "username" "bio";
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.profile-container-top-mid-username {
-  grid-area: username;
-  margin-bottom: 10px;
-  position: fixed;
+.profile-container-top-mid .bio {
+  display: flex;
+  flex-direction: column;
 }
-.profile-container-top-mid-bio {
-  grid-area: bio;
-  position: fixed;
+.profile-container-top-mid .follow_request button {
+  background-color: var(--navdark);
+  border: none;
+  padding: 7px 20px;
+  border-radius: 20px;
+  transition: 0.6s ease;
+}
+.profile-container-top-mid .follow_request button b a {
+  text-decoration: none;
+  color: var(--white);
+  font-size: 13px;
+}
+.profile-container-top-mid .follow_request button:hover {
+  background-color: var(--white);
+}
+.profile-container-top-mid .follow_request button:hover a {
+  color: var(--black);
+}
+.profile-container-top-mid button {
+  background-color: var(--navdark);
+  border: none;
+  padding: 7px 20px;
+  border-radius: 20px;
+  transition: 0.6s ease;
+  color: var(--white);
+}
+.profile-container-top-mid button a {
+  text-decoration: none;
+  color: var(--white);
+}
+.profile-container-top-mid button:hover {
+  background-color: var(--white);
+  color: var(--black);
+}
+.profile-container-top-mid button:hover a {
+  color: var(--black);
 }
 .profile-container-top-right {
   display: flex;
   flex-direction: row;
-  margin-left: 10px;
+  margin-left: 30px;
   gap: 20px;
+  margin-bottom: 40px;
 }
-.profile-container-top-right-top {
+.profile-container-top-right-1 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.profile-container-top-right-mid {
+.profile-container-top-right-2 {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.profile-container-top-right-bottom {
+.profile-container-top-right-2 a {
+  text-decoration: none;
+  color: var(--white);
+}
+.profile-container-top-right-2 a:hover {
+  text-decoration: underline;
+  color: #3758fd;
+}
+.profile-container-top-right-3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.profile-container-top-right-3 a {
+  text-decoration: none;
+  color: var(--white);
+}
+.profile-container-top-right-3 a:hover {
+  text-decoration: underline;
+  color: #3758fd;
 }
 .profile-container-mid {
   grid-area: mid;

@@ -49,42 +49,94 @@
     &-mid {
       width: 19%;
       margin-top: 60px;
-      display: grid;
-      grid-template-rows: 1fr 1fr;
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "username"
-        "bio";
-      &-username {
-        grid-area: username;
-        margin-bottom: 10px;
-        position: fixed;
-      }
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-      &-bio {
-        grid-area: bio;
-        position: fixed;
+      .bio {
+        display: flex;
+        flex-direction: column;
+      }
+      .follow_request {
+        button {
+          background-color: var(--navdark);
+          border: none;
+          padding: 7px 20px;
+          border-radius: 20px;
+          transition: 0.6s ease;
+
+          b {
+            a {
+              text-decoration: none;
+              color: var(--white);
+              font-size: 13px;
+            }
+          }
+        }
+        button:hover {
+          background-color: var(--white);
+          a {
+            color: var(--black);
+          }
+        }
+      }
+      button {
+        background-color: var(--navdark);
+        border: none;
+        padding: 7px 20px;
+        border-radius: 20px;
+        transition: 0.6s ease;
+        color: var(--white);
+
+        a {
+          text-decoration: none;
+          color: var(--white);
+        }
+      }
+      button:hover {
+        background-color: var(--white);
+        color: var(--black);
+        a {
+          color: var(--black);
+        }
       }
     }
     &-right {
       display: flex;
       flex-direction: row;
-      margin-left: 10px;
+      margin-left: 30px;
       gap: 20px;
-      &-top {
+      margin-bottom: 40px;
+      &-1 {
         display: flex;
         flex-direction: column;
         align-items: center;
       }
-      &-mid {
+      &-2 {
         display: flex;
         flex-direction: column;
         align-items: center;
+        a {
+          text-decoration: none;
+          color: var(--white);
+        }
+        a:hover {
+          text-decoration: underline;
+          color: #3758fd;
+        }
       }
-      &-bottom {
+      &-3 {
         display: flex;
         flex-direction: column;
         align-items: center;
+        a {
+          text-decoration: none;
+          color: var(--white);
+        }
+        a:hover {
+          text-decoration: underline;
+          color: #3758fd;
+        }
       }
     }
   }

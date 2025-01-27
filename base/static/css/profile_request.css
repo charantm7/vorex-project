@@ -1,0 +1,42 @@
+:root {
+  --bottom: #151b23;
+  --top: #0d1117;
+  --btnbackground: #2d08fd;
+  --black: black;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-1 {
+  border: 2px solid var(--top);
+  width: 30%;
+  border-radius: 4px;
+  box-shadow: 20px 20px 20px var(--black);
+}
+.main-1 .top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--top);
+  width: 100%;
+  padding: 10px;
+}
+.main-1 .bottom {
+  background-color: var(--bottom);
+  padding: 20px;
+  font-size: 20px;
+}
+.main-1 .bottom a {
+  padding: 3px 7px;
+  font-size: 15px;
+  background-color: var(--btnbackground);
+  text-decoration: none;
+  color: var(--white);
+  border-radius: 8px;
+}/*# sourceMappingURL=profile_request.css.map */

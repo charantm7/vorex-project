@@ -33,7 +33,7 @@
           <b><a href="{% url 'Unfollow' user.id %}">Unfollow</a></b>
         </button>
         {% elif user.id in send_follow_request %}
-        <p>Request Sent</p>
+        <button>Request Sent</button>
         {% else %}
         <button>
           <b><a href="{% url 'send-follow-request' user.id %}">Follow</a></b>
@@ -49,11 +49,11 @@
       {% endif %}
     </div>
     <div class="profile-container-top-right">
-      <div class="profile-container-top-right-top">
+      <div class="profile-container-top-right-1">
         <p>Rooms</p>
         <p>{{ profile.user.rooms.count }}</p>
       </div>
-      <div class="profile-container-top-right-mid">
+      <div class="profile-container-top-right-2">
         {% if request.user == user %}
         <div>
           {% if request.user in user.profile.followers.all %}
@@ -67,7 +67,7 @@
         {% endif %}
         <p>{{ user.profile.followers.count }}</p>
       </div>
-      <div class="profile-container-top-right-bottom">
+      <div class="profile-container-top-right-3">
         {% if request.user == user and request.user in profile.user.following.all %}
         <a href="{% url 'following-list' user.username %}">Following</a>
         {% else %}
