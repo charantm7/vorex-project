@@ -28,8 +28,26 @@
 }
 .main .follower form .bottom {
   display: flex;
+  flex-direction: column;
   width: 100%;
   justify-content: flex-start;
   padding: 10px 10px;
   background-color: var(--bodydark);
+  gap: 20px;
+}
+.main .follower form .bottom ol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.main .follower form .bottom ol li a {
+  text-decoration: none;
+  color: var(--white);
+}
+.main .follower form .bottom ol li a:hover {
+  text-decoration: underline;
+}
+.main .follower form .bottom ol li img {
+  width: 20px;
+  height: 20px;
 }/*# sourceMappingURL=follow_list.css.map */

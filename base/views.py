@@ -314,17 +314,11 @@ def reject_follow_request(request, request_id):
 def followers_list(request, user_tag):
     user = get_object_or_404(User, username=user_tag)
     followers = user.profile.followers.all()
-    return render(request, 'base/follower_list.html', {'followers': followers})
-
-def user_profile_view(request, user_tag):
-    user = get_object_or_404(User, username=user_tag)
-    if request.user.is_authenticated:
-        is_follower = user.profile in request.user.profile.followers.all()
-
-    return render(request, 'base/profile.html', {
-        'user': user,
-        'is_follower': is_follower,
-    })   
+    profile_pic = None
+    if request.user.profile in followers:
+        profile_pic = request.user.profile.profile_pic
+    
+    return render(request, 'base/follower_list.html', {'followers': followers,'profile_pic':profile_pic})  
 
 def following_list(request, user_tag):
     user = get_object_or_404(User, username=user_tag)
