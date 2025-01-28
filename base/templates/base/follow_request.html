@@ -11,7 +11,7 @@
         {% if follow_request %} {% for request in follow_request %}
         <li>
           {{ request.from_user.username }}
-          <a href="{% url 'accept-follow-request' request.id %}">Accept</a>
+          <a href="{% url 'accept-follow-request' request.id %}">Acceptt</a>
           <a href="{% url 'decline-follow-request' request.id %}">Decline</a>
         </li>
         {% endfor %} {% else %}
