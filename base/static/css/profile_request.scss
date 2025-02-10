@@ -1,8 +1,10 @@
 :root {
   --bottom: #151b23;
   --top: #0d1117;
-  --btnbackground: #2d08fd;
+  --accept-btn-background: #2d08fd;
+  --decline-btn-background: red;
   --black: black;
+  --white: white;
 }
 
 .main {
@@ -30,11 +32,26 @@
       background-color: var(--bottom);
       padding: 20px;
       font-size: 20px;
+      .name {
+        text-decoration: none;
+        color: var(--white);
+      }
+      .name:hover {
+        text-decoration: underline;
+      }
 
-      a {
+      .accept {
         padding: 3px 7px;
         font-size: 15px;
-        background-color: var(--btnbackground);
+        background-color: var(--accept-btn-background);
+        text-decoration: none;
+        color: var(--white);
+        border-radius: 8px;
+      }
+      .decline {
+        padding: 3px 7px;
+        font-size: 15px;
+        background-color: var(--decline-btn-background);
         text-decoration: none;
         color: var(--white);
         border-radius: 8px;

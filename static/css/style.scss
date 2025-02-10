@@ -15,6 +15,12 @@
   margin: 0;
   padding: 0;
 }
+.vorex {
+  font-family: "Orbitron", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
 ul,
 li {
   margin: 0;
@@ -410,7 +416,14 @@ footer {
       flex-direction: row;
       color: var(--lwhite);
       margin-left: 100px;
+
       p {
+        .vorex {
+          font-family: "Orbitron", serif;
+          font-optical-sizing: auto;
+          font-weight: 500;
+          font-style: normal;
+        }
         a {
           text-decoration: none;
           color: var(--lwhite);

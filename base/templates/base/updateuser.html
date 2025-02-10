@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="{% static 'css/updateprofile.css' %}" />
 {% endblock %} {% block content %}
 <div class="update-user-container">
-  <h2>Update User</h2>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    <h2>Update User</h2>
     <div class="user-username">
       <label for="username">Username</label>
       {{form.username}}

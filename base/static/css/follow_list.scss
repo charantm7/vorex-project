@@ -36,18 +36,22 @@
         ol {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 15px;
           li {
             a {
               text-decoration: none;
               color: var(--white);
+              margin-left: 5px;
             }
             a:hover {
               text-decoration: underline;
             }
             img {
-              width: 20px;
-              height: 20px;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              object-fit: cover;
+              margin-left: 5px;
             }
           }
         }

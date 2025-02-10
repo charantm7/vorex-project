@@ -320,11 +320,8 @@ def reject_follow_request(request, request_id):
 def followers_list(request, user_tag):
     user = get_object_or_404(User, username=user_tag)
     followers = user.profile.followers.all()
-    profile_pic = None
-    if request.user.profile in followers:
-        profile_pic = request.user.profile.profile_pic
-    
-    return render(request, 'base/follower_list.html', {'followers': followers,'profile_pic':profile_pic})  
+    context = {'followers': followers}
+    return render(request, 'base/follower_list.html', context)
 
 def following_list(request, user_tag):
     user = get_object_or_404(User, username=user_tag)

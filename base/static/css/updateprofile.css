@@ -90,6 +90,10 @@
   justify-content: center;
   width: 30%;
 }
+.update-user-container form h2 {
+  padding: 5px;
+  border-bottom: 0.1px solid white;
+}
 .update-user-container form [class^=user-] {
   display: flex;
   flex-direction: column;

@@ -94,6 +94,10 @@
     align-items: center;
     justify-content: center;
     width: 30%;
+    h2 {
+      padding: 5px;
+      border-bottom: 0.1px solid white;
+    }
 
     [class^="user-"] {
       display: flex;

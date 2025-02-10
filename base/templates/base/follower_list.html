@@ -11,13 +11,15 @@
         <ol>
           {% for follower in followers %}
           <li>
-            {% if profile_pic and profile_pic.profile_pic %}
-            <img src="{{ profile_pic.profile_pic.url }}" alt="Profile Picture" />
+            {% if follower.user.profile.profile_pic %}
+            <img src="{{ follower.user.profile.profile_pic.url }}" alt="{{ follower.username }}'s Profile Picture" width="50" height="50" />
             {% else %}
-            <img src="{% static 'assets/default.png' %}" alt="Default Profile Picture" />
+            <img src="{% static 'assets/default.png' %}" alt="Default Profile Picture" width="50" height="50" />
             {% endif %}
             <a href="{% url 'Profile' follower.user.username %}">{{ follower.user.username }}</a>
           </li>
+          {% empty %}
+          <p>No followers yet.</p>
           {% endfor %}
         </ol>
       </div>

@@ -38,16 +38,21 @@
 .main .follower form .bottom ol {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
 }
 .main .follower form .bottom ol li a {
   text-decoration: none;
   color: var(--white);
+  margin-left: 5px;
 }
 .main .follower form .bottom ol li a:hover {
   text-decoration: underline;
 }
 .main .follower form .bottom ol li img {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-left: 5px;
 }/*# sourceMappingURL=follow_list.css.map */

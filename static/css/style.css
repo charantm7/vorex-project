@@ -17,6 +17,13 @@
   padding: 0;
 }
 
+.vorex {
+  font-family: "Orbitron", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
 ul,
 li {
   margin: 0;
@@ -376,6 +383,12 @@ footer .foot-left .copyrights {
   flex-direction: row;
   color: var(--lwhite);
   margin-left: 100px;
+}
+footer .foot-left .copyrights p .vorex {
+  font-family: "Orbitron", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
 footer .foot-left .copyrights p a {
   text-decoration: none;
