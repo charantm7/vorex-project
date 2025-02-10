@@ -38,15 +38,19 @@
 
             <div class="card-mid-right">
               {% if room.created_by == user %}
-              <a href="{% url 'Edit-room' room.name %}"><i class="fa-solid fa-pen-to-square"></i></a>
-              <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash"></i></a>
+              <a href="{% url 'Edit-room' room.name %}"
+                ><i class="fa-solid fa-pen-to-square" id="tooltip"><span class="tooltiptext">Edit</span></i></a
+              >
+              <a href="{% url 'Delete-room' room.name %}"
+                ><i class="fa-solid fa-trash" id="tooltip"><span class="tooltiptext">Delete</span></i></a
+              >
               {% endif %} {% if room.is_private %}
               <div class="card-mid-right-gobal">
-                <i class="fa-solid fa-lock"></i>
+                <i class="fa-solid fa-lock" id="tooltip"><span class="tooltiptext">Private</span></i>
               </div>
               {% else %}
               <div class="card-mid-right-gobal">
-                <i class="fa-solid fa-globe"></i>
+                <i class="fa-solid fa-globe" id="tooltip"><span class="tooltiptext">Public</span></i>
               </div>
               {% endif %}
             </div>

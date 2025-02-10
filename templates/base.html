@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Silkscreen&family=VT323&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Orbitron:wght@500&family=Silkscreen&family=VT323&display=swap"
+      rel="stylesheet"
+    />
     {% block title %}
     <title>Home</title>
     {% endblock %} {% block link %} {% endblock %}
@@ -48,18 +50,20 @@
             <a href="{% url 'auth_page' %}?action=signup"><button>Sign Up</button></a>
           </div>
           {% endif %}
-          <div class="search-container">
+          <div class="search-container" id="tooltip">
             <a href="#"><i class="fas fa-search"></i></a>
+            <span class="tooltiptext" style="margin-top: 40px">Search</span>
           </div>
-          <div class="nav-container-right-create-logo">
+          <div class="nav-container-right-create-logo" id="tooltip">
             <a href="{% url 'Create-room' %}">
               <i class="fa-solid fa-plus"></i>
             </a>
-            <span class="create-room-text">Create Room</span>
+            <span class="tooltiptext" style="margin-left: 1px; margin-top: 40px">Create Room</span>
           </div>
 
-          <div class="nav-container-right-notification-logo">
+          <div class="nav-container-right-notification-logo" id="tooltip">
             <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <span class="tooltiptext" style="margin-left: 1px; margin-top: 40px">Inbox</span>
           </div>
           <div class="nav-container-right-account-logo">
             <a href="#"><img src="{% static 'assets/main.png' %}" alt="account img" /></a>

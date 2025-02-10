@@ -5,6 +5,7 @@
   --roomlight: #151b23;
   --borderbottom: #4e4e4eb9;
   --white: white;
+  --room-bottom: #2a2e38;
 }
 
 p {
@@ -147,7 +148,7 @@ p {
   text-align: center;
   padding: 30px;
   height: 20%;
-  background-color: #2a2e38;
+  background-color: var(--room-bottom);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }

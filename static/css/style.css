@@ -10,6 +10,7 @@
   --tablet: 768px;
   --mobile: 576px;
   --border: #4e4e4eb9;
+  --room-bottom: #2a2e38;
 }
 
 * {
@@ -36,6 +37,29 @@ html ::-webkit-scrollbar {
 
 p {
   all: unset;
+}
+
+#tooltip .tooltiptext {
+  font-family: "Open Sans", serif;
+  visibility: hidden;
+  background-color: var(--room-bottom);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 10px;
+  font-size: 10px;
+  position: absolute;
+  z-index: 1;
+}
+
+#tooltip:hover .tooltiptext {
+  visibility: visible;
+  margin-top: 30px;
+  margin-left: -40px;
+}
+
+span {
+  font-family: "Open Sans", serif;
 }
 
 body {
@@ -275,6 +299,7 @@ aside .nav_list li {
   position: relative;
 }
 aside .nav_list a {
+  all: unset;
   display: flex;
   align-items: center;
   color: var(--bodylight);
@@ -283,6 +308,8 @@ aside .nav_list a {
   padding: 10px 10px;
   border-radius: 5px;
   transition: background 0.3s ease;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
 }
 aside .nav_list a:hover {
   background: var(--white);
