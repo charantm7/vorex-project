@@ -29,8 +29,9 @@
     &-left {
       img {
         width: 260px;
-        height: 250px;
+        height: 260px;
         border-radius: 50%;
+        object-fit: cover;
       }
     }
     i {
@@ -56,49 +57,38 @@
       .bio {
         display: flex;
         flex-direction: column;
+        margin-bottom: 20px;
       }
       .follow_request {
         button {
           background-color: var(--navdark);
           border: none;
-          padding: 7px 20px;
+          padding: 7px 30px;
           border-radius: 20px;
-          transition: 0.6s ease;
-
-          b {
-            a {
-              text-decoration: none;
-              color: var(--white);
-              font-size: 13px;
-            }
-          }
+          transition: 0.2s ease;
+          color: var(--white);
+          font-size: 13px;
+          font-weight: bold;
         }
         button:hover {
           background-color: var(--white);
-          a {
-            color: var(--black);
-          }
+          color: var(--black);
         }
       }
       button {
+        width: 70%;
         background-color: var(--navdark);
         border: none;
-        padding: 7px 20px;
+        padding: 7px 30px;
         border-radius: 20px;
-        transition: 0.6s ease;
+        transition: 0.2s ease;
         color: var(--white);
-
-        a {
-          text-decoration: none;
-          color: var(--white);
-        }
+        font-weight: bold;
+        font-size: 13px;
       }
       button:hover {
         background-color: var(--white);
         color: var(--black);
-        a {
-          color: var(--black);
-        }
       }
     }
     &-right {

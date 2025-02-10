@@ -29,21 +29,16 @@
       {% if request.user != user %}
       <div class="follow_request">
         {% if is_follower %}
-        <button>
-          <b><a href="{% url 'Unfollow' user.id %}">Unfollow</a></b>
-        </button>
+        <button onclick="unfollow()">Unfollow</button>
         {% elif user.id in send_follow_request %}
         <button>Request Sent</button>
         {% else %}
-        <button>
-          <b><a href="{% url 'send-follow-request' user.id %}">Follow</a></b>
-        </button>
+        <button onclick="follow()">Follow</button>
         {% endif %}
       </div>
       {% endif %} {% if request.user == profile.user%}
-      <button>
-        <b><a href="{% url 'follow-request' profile.user.username %}">Follow Request</a></b>
-      </button>
+      <button onclick="followrequest()">Follow request</button>
+
       {% endif %} {% if request.user == user %}
       <button onclick="editProfile()">Edit Profile</button>
       {% endif %}
@@ -149,6 +144,17 @@
   }
   function updateProfile() {
     window.location.href = "{% url 'Update-profile' profile.user.username %}";
+  }
+
+  function follow() {
+    window.location.href = "{% url 'send-follow-request' user.id %}";
+  }
+
+  function unfollow() {
+    window.location.href = "{% url 'Unfollow' user.id %}";
+  }
+  function followrequest() {
+    window.location.href = "{% url 'follow-request' profile.user.username %}";
   }
 </script>
 {% endblock %}

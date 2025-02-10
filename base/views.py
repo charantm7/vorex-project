@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import RoomForm, ProfileForm, UserForm
 from django.contrib.auth.models import User
 from django.http import JsonResponse
+from django.db.models import Q
 
 
 
@@ -15,9 +16,12 @@ def home(request):
         if request.user.is_superuser:
             room = Room.objects.all()
         else:
-            room = Room.objects.filter(is_private=False)
+            room = Room.objects.filter(
+                Q(is_private=False) | Q(members_count=request.user)
+            ).distinct()
     else:
-        room = Room.objects.filter(is_private=False)
+        room = Room.objects.filter(
+            Q(is_private=False))
     tag = Tag.objects.all()
     context = {'rooms': room, 'tags': tag}
     return render(request, 'base/home.html', context)
@@ -26,7 +30,9 @@ def home(request):
 @login_required(login_url='User_login')
 def rooms(request, room_name):
     room = get_object_or_404(Room, name=room_name)
-    context = {'rooms': room, 'members': room.member_count}
+    # user = get_object_or_404(User, username=room.created_by)
+    profile = get_object_or_404(UserProfile, user=room.created_by)
+    context = {'rooms': room, 'members': room.member_count, 'profile':profile}
     if request.user in room.members_count.all():
         return render(request, 'base/room.html', context)
     else:

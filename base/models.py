@@ -42,7 +42,7 @@ class ChatBox(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
-    profile_pic = models.ImageField(upload_to="profile_pics/", null=True, blank=True)
+    profile_pic = models.ImageField(upload_to="profile_pics/", null=True, blank=True, default='assets/default.png')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     rooms = models.ManyToManyField(Room, related_name="profile-rooms+")

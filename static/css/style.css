@@ -12,10 +12,23 @@
   --border: #4e4e4eb9;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 ul,
 li {
   margin: 0;
   padding: 0;
+}
+
+html ::-webkit-scrollbar {
+  display: none;
+}
+
+p {
+  all: unset;
 }
 
 body {
@@ -329,39 +342,89 @@ footer {
   font-size: 0.95vw;
   background-color: var(--navdark);
   z-index: 100;
-}
-footer .footer-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: center;
+  padding: 30px;
+  border-top: 1px solid var(--border);
 }
-footer .footer-container [class^=footer-column-] {
-  width: 33.3333333333%;
-}
-footer .footer-container [class^=footer-column-] p {
-  font-size: 1.3vw;
-}
-footer .footer-container .footer-column-2,
-footer .footer-container .footer-column-3 {
+footer .foot-left {
+  width: 40%;
   display: flex;
   flex-direction: column;
+  align-items: start;
   justify-content: center;
-  align-items: center;
+  gap: 20px;
 }
-footer .footer-container .footer-column-2 ul li a,
-footer .footer-container .footer-column-3 ul li a {
-  text-decoration: none;
-  color: var(--text);
-}
-footer .footer-bottom {
-  font-family: sans-serif;
+footer .foot-left .logo {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 10px 0;
-  font-size: 1vw;
+  gap: 8px;
+  margin-left: 100px;
+}
+footer .foot-left .logo img {
+  height: 42px;
+  width: 40px;
+}
+footer .foot-left .logo p {
+  font-size: 1.5vw;
+}
+footer .foot-left .copyrights {
+  display: flex;
+  flex-direction: row;
+  color: var(--lwhite);
+  margin-left: 100px;
+}
+footer .foot-left .copyrights p a {
+  text-decoration: none;
+  color: var(--lwhite);
+}
+footer .foot-left .copyrights p a:hover {
+  text-decoration: underline;
+}
+footer .foot-left .devcontact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--lwhite);
+  margin-left: 100px;
+}
+footer .foot-left .devcontact [class^=c-] {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+footer .foot-left .devcontact [class^=c-] a {
+  text-decoration: none;
+  color: var(--lwhite);
+}
+footer .foot-left .devcontact [class^=c-] a:hover {
+  text-decoration: underline;
+}
+footer .foot-right {
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: first baseline;
+  gap: 15%;
+}
+footer .foot-right [class^=r-] {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+footer .foot-right [class^=r-] p {
+  margin-bottom: 5px;
+}
+footer .foot-right [class^=r-] a {
+  text-decoration: none;
+  color: var(--lwhite);
+}
+footer .foot-right [class^=r-] a:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 576px) {

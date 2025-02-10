@@ -10,10 +10,19 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="{% static 'css/style.css'%}" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -44,10 +53,14 @@
         <div class="nav-container-right">
           {% if not request.user.is_authenticated %}
           <div class="nav-container-right-login-btn">
-            <a href="{% url 'auth_page' %}?action=login"><button>Login</button></a>
+            <a href="{% url 'auth_page' %}?action=login"
+              ><button>Login</button></a
+            >
           </div>
           <div class="nav-container-right-signup-btn">
-            <a href="{% url 'auth_page' %}?action=signup"><button>Sign Up</button></a>
+            <a href="{% url 'auth_page' %}?action=signup"
+              ><button>Sign Up</button></a
+            >
           </div>
           {% endif %}
           <div class="search-container">
@@ -65,9 +78,7 @@
           </div>
           <div class="nav-container-right-account-logo">
             <a href="#"
-              ><img
-                src="https://res.cloudinary.com/dljndgwcl/image/upload/t_main logo/v1733589526/main_logo-removebg_1_c35fah.png"
-                alt="account img"
+              ><img src="{% static 'assets/main.png' %}" alt="account img"
             /></a>
           </div>
         </div>
@@ -125,36 +136,55 @@
       </div>
       {% block aside %}{% endblock %}
     </aside>
-    <main>{% include 'base/popmessage.html' %}{% block content %}{% endblock %}</main>
+    <main>
+      {% include 'base/popmessage.html' %}{% block content %}{% endblock %}
+    </main>
     <footer>
-      <div class="footer-container">
-        <div class="footer-column-1">
-          <p>About Us</p>
-          <small>
-            We provide quality tutorials, resources, and support to help learners and professionals grow in their
-            careers.
-          </small>
+      <div class="foot-left">
+        <div class="logo">
+          <img src="{% static 'assets/main.png' %}" alt="logo" />
+          <p class="vorex">vorex</p>
         </div>
-        <div class="footer-column-2">
-          <p>Quick Links</p>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-          </ul>
+        <div class="icon-links">
+          <i></i>
         </div>
-        <div class="footer-column-3">
-          <p>Follow Us</p>
-          <ul>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">LinkedIn</a></li>
-          </ul>
+        <div class="copyrights">
+          <p>
+            &copy; 2024 <a href="/" class="vorex">VOREX</a>. All rights
+            reserved.
+          </p>
+        </div>
+        <div class="devcontact">
+          <p>Developer contact:</p>
+          <div class="c-1">
+            <p>email:</p>
+            <a href="#">charantm8787@gmail.com</a>
+          </div>
+          <div class="c-2">
+            <p>GitHub:</p>
+            <a href="https://github.com/charantm7">charantm7</a>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">&copy; 2024 VOREX. All rights reserved.</div>
+      <div class="foot-right">
+        <div class="r-1">
+          <p><b>Capabilities</b></p>
+          <a href="#">vorex Bs</a>
+          <a href="#">vorex Cmp</a>
+          <a href="#">vorex Dc</a>
+        </div>
+        <div class="r-2">
+          <p><b>Models</b></p>
+          <a href="#">Desktop</a>
+          <a href="#">Mobile</a>
+        </div>
+        <div class="r-3">
+          <p><b>Legal & Safety</b></p>
+          <a href="#">Privacy Policy </a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Report Vulnerabilities</a>
+        </div>
+      </div>
     </footer>
     <script src="{% static 'js/script.js' %}"></script>
   </body>
