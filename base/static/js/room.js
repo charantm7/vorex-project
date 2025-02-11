@@ -1,4 +1,4 @@
-function openCity(evt, cityName) {
+function openTab(evt, cityName) {
   var i, tabcontent, tablinks;
 
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -9,8 +9,10 @@ function openCity(evt, cityName) {
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
-
-  document.getElementById(cityName).style.display = "block";
+  if (cityName === "Group") {
+    document.getElementById("Group").style.overflow = "hidden";
+  }
+  document.getElementById(cityName).style.display = "flex";
   evt.currentTarget.className += " active";
 }
 document.getElementById("defaultOpen").click();

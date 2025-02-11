@@ -44,6 +44,8 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .update-profile-container form .top .new-picture {
   padding: 20px;

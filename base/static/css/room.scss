@@ -3,6 +3,9 @@
   --roombg: #0d1117;
   --text: white;
   --border: #4e4e4eb9;
+  --members: #2a2e38;
+  --lwhite: rgb(189, 188, 188);
+  --scroll-hover: rgb(160, 160, 160);
 }
 p {
   margin: 0;
@@ -10,13 +13,9 @@ p {
 }
 
 .rooms {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "tabs"
-    "room-content";
+  // min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .rooms {
@@ -25,6 +24,7 @@ p {
     grid-area: tabs;
     overflow: hidden;
     background-color: var(--roombg);
+    // border-bottom: 1px solid var(--border);
   }
 
   .tab button {
@@ -41,17 +41,21 @@ p {
 
   .tab button:hover {
     background-color: var(--hover);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   .tab button.active {
     background-color: var(--hover);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   .tablinks i {
     padding-right: 10px;
   }
-
+  #Info {
+    min-height: 100vh;
+  }
   .tabcontent {
-    grid-area: room-content;
-    display: none;
     padding: 20px 30px;
     border-top: none;
     background-color: var(--hover);
@@ -63,6 +67,8 @@ p {
       border-bottom: 1px solid #fff;
       gap: 70px;
       padding: 40px 40px;
+      width: 100%;
+      height: 100%;
       &-left {
         display: flex;
         flex-direction: row;
@@ -157,4 +163,136 @@ p {
       }
     }
   }
+}
+
+#Group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0 0;
+  background-color: var(--roombg);
+  .members {
+    padding: 15px 0;
+    width: 20%;
+    // border: 1px solid white;
+    background-color: var(--members);
+    border-top-left-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    height: 100%;
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      padding: 0 15px;
+      &-1 {
+        padding: 10px 5px 10px 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        i {
+          padding: 5px;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+      }
+      &-2 {
+        // border: 1px solid white;
+        background-color: var(--hover);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 5px;
+        border-bottom: 2px solid var(--lwhite);
+        input {
+          width: 85%;
+          height: 35px;
+          border: none;
+          outline: none;
+          padding: 5px 10px;
+          border-radius: 5px;
+          background-color: var(--hover);
+          color: var(--text);
+          font-size: 14px;
+        }
+        i {
+          cursor: pointer;
+        }
+      }
+    }
+    .bottom {
+      display: flex;
+      flex-direction: column;
+      // border: 1px solid var(--white);
+      gap: 5px;
+      padding: 10px 10px;
+      overflow-y: scroll;
+      max-height: 70vh;
+      min-height: 70vh;
+      &::-webkit-scrollbar {
+        display: flex;
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--lwhite);
+        border-radius: 10px;
+        border: 2px solid var(--members);
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scroll-hover);
+      }
+      .members-chat {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        gap: 10px;
+        // border: 1px solid var(--white);
+        padding: 10px;
+        overflow: hidden;
+        max-width: 100%;
+        width: 100%;
+        .left {
+          img {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+            flex-shrink: 0;
+          }
+        }
+        .mid {
+          display: block;
+          max-width: 100%;
+          min-width: 0;
+          flex-grow: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      .members-chat:hover {
+        background-color: rgba(199, 194, 194, 0.115);
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .chat-area {
+    max-height: 85.5vh;
+    width: 80%;
+    border: 1px solid white;
+    background-color: var(--hover);
+  }
+}
+
+footer {
+  display: none;
 }

@@ -31,8 +31,9 @@ def home(request):
 def rooms(request, room_name):
     room = get_object_or_404(Room, name=room_name)
     # user = get_object_or_404(User, username=room.created_by)
+    members_joined = room.members_count.all()
     profile = get_object_or_404(UserProfile, user=room.created_by)
-    context = {'rooms': room, 'members': room.member_count, 'profile':profile}
+    context = {'rooms': room, 'members': room.member_count, 'profile':profile, 'members_joined': members_joined}
     if request.user in room.members_count.all():
         return render(request, 'base/room.html', context)
     else:

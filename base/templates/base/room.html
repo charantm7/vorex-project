@@ -7,23 +7,15 @@
 {% endblock %} {% block content %}
 <div class="rooms">
   <div class="tab">
-    <button
-      class="tablinks"
-      onclick="openCity(event, 'London')"
-      id="defaultOpen"
-    >
-      <i class="fas fa-tachometer-alt"></i
-      ><span class="btn-txt">Dashboard</span>
-    </button>
-    <button class="tablinks" onclick="openCity(event, 'Paris')">
+    <button class="tablinks" onclick="openTab(event, 'Info')"><i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span></button>
+    <button class="tablinks" onclick="openTab(event, 'Group')" id="defaultOpen">
       <i class="fa-solid fa-user-group"></i><span class="btn-txt">Group</span>
     </button>
-    <button class="tablinks" onclick="openCity(event, 'Tokyo')">
-      <i class="fa-solid fa-book"></i
-      ><span class="btn-txt">Study Materials</span>
+    <button class="tablinks" onclick="openTab(event, 'Materials')">
+      <i class="fa-solid fa-book"></i><span class="btn-txt">Study Materials</span>
     </button>
   </div>
-  <div id="London" class="tabcontent">
+  <div id="Info" class="tabcontent">
     <div class="tabcontent-top">
       <div class="tabcontent-top-left">
         <i class="fa-solid fa-calculator"></i>
@@ -37,21 +29,45 @@
         <p>Created by:</p>
         <div class="tabcontent-top-right-1">
           <img src="{{profile.profile_pic.url}}" alt="img" />
-          <a href="{% url 'Profile' rooms.created_by.username %}"
-            >@{{rooms.created_by.username}}</a
-          >
+          <a href="{% url 'Profile' rooms.created_by.username %}">@{{rooms.created_by.username}}</a>
         </div>
         <p>Squad stats: {{members}} Joined</p>
       </div>
     </div>
   </div>
 
-  <div id="Paris" class="tabcontent">
-    <h3>Group</h3>
-    <p>Collaborate with your friends and study together</p>
+  <div id="Group" class="tabcontent">
+    <div class="members">
+      <div class="top">
+        <div class="top-1">
+          <p>Chat</p>
+          <i class="fa-solid fa-plus" id="tooltip"><span class="tooltiptext">Chat with individual</span></i>
+        </div>
+        <div class="top-2">
+          <input type="text" placeholder="Search" />
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <div class="bottom">
+        {% for members in members_joined %}
+        <div class="members-chat">
+          <div class="left">
+            {% if members.profile.profile_pic %}
+            <img src="{{ members.profile.profile_pic.url}}" alt="img" />
+            {% endif %}
+          </div>
+          <div class="mid"><p>{{members.username}}</p></div>
+          <div class="right">
+            <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="chat-area">chat area</div>
   </div>
 
-  <div id="Tokyo" class="tabcontent">
+  <div id="Materials" class="tabcontent">
     <h3>Study Materials</h3>
     <p>upload your study materials hear</p>
     <p>
