@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Room, UserProfile
+from .models import Room, UserProfile, ChatBox
 from django.contrib.auth.models import User
 from django import forms
 
@@ -25,3 +25,11 @@ class UserForm(ModelForm):
         model = User
         fields = ['username', 'email','first_name','last_name']
 
+
+class ChatBoxForm(forms.ModelForm):
+    class Meta:
+        model = ChatBox
+        fields = ['content']
+        widgets = {
+            'content': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Type a message...'})
+        }

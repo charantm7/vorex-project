@@ -1,5 +1,6 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
+
 
 urlpatterns = [
     path('',views.home, name='Home'),
@@ -27,4 +28,6 @@ urlpatterns = [
     path('following/<str:user_tag>/', views.following_list, name='following-list'),
     path('follow-request/<str:user_tag>', views.follow_request, name='follow-request'),
     path('404-error/',views.error_404, name='Error-page'),
+
 ]
+

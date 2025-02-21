@@ -7,7 +7,9 @@
 {% endblock %} {% block content %}
 <div class="rooms">
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Info')"><i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span></button>
+    <button class="tablinks" onclick="openTab(event, 'Info')">
+      <i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span>
+    </button>
     <button class="tablinks" onclick="openTab(event, 'Group')" id="defaultOpen">
       <i class="fa-solid fa-user-group"></i><span class="btn-txt">Group</span>
     </button>
@@ -64,7 +66,45 @@
         {% endfor %}
       </div>
     </div>
-    <div class="chat-area">chat area</div>
+    <div class="chat-area">
+      <h2>Group Chat - {{ room.name }}</h2>
+
+      <div id="chat-log" style="height: 300px; overflow-y: scroll; border: 1px solid #ccc"></div>
+      <input id="chat-message-input" type="text" placeholder="Type your message..." size="100" />
+      <button id="chat-message-submit">Send</button>
+
+      <script>
+        const roomName = "{{ room.name }}";
+        const userId = "{{ request.user.id }}";
+        const chatSocket = new WebSocket("ws://" + window.location.host + "/ws/group_chat/" + roomName + "/");
+
+        chatSocket.onmessage = function (e) {
+          const data = JSON.parse(e.data);
+          const chatLog = document.getElementById("chat-log");
+          chatLog.innerHTML += `<p><strong>${data.user}</strong>: ${data.message} <em>${data.created_at}</em></p>`;
+          chatLog.scrollTop = chatLog.scrollHeight;
+        };
+
+        chatSocket.onclose = function (e) {
+          console.error("Chat socket closed unexpectedly");
+        };
+
+        document.getElementById("chat-message-submit").onclick = function () {
+          const messageInput = document.getElementById("chat-message-input");
+          const message = messageInput.value;
+
+          if (message.trim() !== "") {
+            chatSocket.send(
+              JSON.stringify({
+                message: message,
+                user_id: userId,
+              })
+            );
+            messageInput.value = "";
+          }
+        };
+      </script>
+    </div>
   </div>
 
   <div id="Materials" class="tabcontent">

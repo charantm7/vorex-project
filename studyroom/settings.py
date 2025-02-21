@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
+    'channels',
+    
+    
     
 ]
 
@@ -52,6 +55,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'studyroom.urls'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 TEMPLATES = [
     {
@@ -72,6 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'studyroom.wsgi.application'
+ASGI_APPLICATION = 'studyroom.asgi.application' 
 
 
 # Database

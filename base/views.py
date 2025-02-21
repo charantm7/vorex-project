@@ -3,7 +3,7 @@ from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProf
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RoomForm, ProfileForm, UserForm
+from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
@@ -337,3 +337,20 @@ def follow_request(request, user_tag):
 
 def error_404(request):
     return render(request, 'base/error_page.html')
+
+def chat_view(request, room_id):
+    room = Room.objects.get(id=room_id)
+    messages = ChatBox.objects.filter(room=room).order_by('created_at')
+
+    if request.method == 'POST':
+        form = ChatBoxForm(request.POST)
+        if form.is_valid():
+            chat_message = form.save(commit=False)
+            chat_message.user = request.user
+            chat_message.room = room
+            chat_message.save()
+            return redirect('chat_view', room_id=room_id)
+    else:
+        form = ChatBoxForm()
+
+    return render(request, 'base/room.html', {'room': room, 'messages': messages, 'form': form})
