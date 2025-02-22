@@ -1,3 +1,36 @@
+.roboto-mono {
+  font-family: "Roboto Mono", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.silkscreen-regular {
+  font-family: "Silkscreen", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.vt323-regular {
+  font-family: "VT323", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.orbitron {
+  font-family: "Orbitron", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.open-sans {
+  font-family: "Open Sans", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+.quicksand {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 :root {
   --bodydark: #151b23;
   --navdark: #0d1117;
@@ -57,7 +90,7 @@ p {
     margin-left: -40px;
   }
 }
-span {
+.tooltiptext {
   font-family: "Open Sans", serif;
 }
 
@@ -70,6 +103,7 @@ body {
   color: var(--white);
   width: 100%;
   display: grid;
+  overflow: auto;
   grid-template-rows: 58.6px 1fr auto;
   grid-template-columns: 58px 1fr;
   grid-template-areas:
@@ -310,7 +344,6 @@ aside {
     gap: 2px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    font-family: "Silkscreen", sans-serif;
   }
 
   .sidebar.active .logo_name {
@@ -332,12 +365,11 @@ aside {
     display: flex;
     align-items: center;
     color: var(--bodylight);
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     padding: 10px 10px;
     border-radius: 5px;
     transition: background 0.3s ease;
-    font-family: "Poppins", sans-serif;
     cursor: pointer;
   }
 
@@ -405,6 +437,7 @@ aside {
 
 main {
   grid-area: main;
+  flex: 1;
 }
 
 footer {
