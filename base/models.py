@@ -27,12 +27,32 @@ class RoomMembership(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+class Folder(models.Model):
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User,on_delete=models.SET_NULL, null=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="folders",null=True, blank=True)  # 📁 Folder belongs to Room
+
+    def __str__(self):
+        return self.name
+
 class StudyMaterials(models.Model):
     upload_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="myuploads")
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="myuploads", null=True)  
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE, related_name='study_materials',null=True, blank=True)  
     title = models.CharField(max_length=255, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    file = models.FileField(upload_to="study_materials/")   
+    file = models.FileField(upload_to="study_materials/")
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if self.room != self.folder.room:
+            raise ValueError("The study material's room must match the folder's room.")
+        super().save(*args, **kwargs)
+ 
 
 class ChatBox(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -63,11 +83,3 @@ class Followrequest(models.Model):
         return f"{self.from_user.username} -> {self.to_user.username}"
     
 
-class Folder(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    study_materials = models.ManyToManyField(StudyMaterials, related_name="folders")
-    def __str__(self):
-        return self.name

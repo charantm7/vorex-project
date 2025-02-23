@@ -300,7 +300,10 @@ aside .sidebar {
   transition: all 0.3s ease;
   overflow: hidden;
   justify-content: center;
-  z-index: 50;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 aside .sidebar.active {
   width: 170px;
@@ -328,15 +331,15 @@ aside .logo_name {
 aside .sidebar.active .logo_name {
   opacity: 1;
 }
-aside .nav_list {
+aside .nav_list-top {
   margin-top: 20px;
   list-style: none;
   position: relative;
 }
-aside .nav_list li {
+aside .nav_list-top li {
   position: relative;
 }
-aside .nav_list a {
+aside .nav_list-top a {
   all: unset;
   display: flex;
   align-items: center;
@@ -348,11 +351,41 @@ aside .nav_list a {
   transition: background 0.3s ease;
   cursor: pointer;
 }
-aside .nav_list a:hover {
+aside .nav_list-top a:hover {
   background: var(--white);
   color: var(--black);
 }
-aside .nav_list i {
+aside .nav_list-top i {
+  font-size: 1rem;
+  padding: 0 10px;
+  min-width: 40px;
+  align-items: center;
+}
+aside .nav-list-bottom {
+  list-style: none;
+  position: relative;
+  margin-bottom: 80px;
+}
+aside .nav-list-bottom li {
+  position: relative;
+}
+aside .nav-list-bottom a {
+  all: unset;
+  display: flex;
+  align-items: center;
+  color: var(--bodylight);
+  font-size: 18px;
+  text-decoration: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+aside .nav-list-bottom a:hover {
+  background: var(--white);
+  color: var(--black);
+}
+aside .nav-list-bottom i {
   font-size: 1rem;
   padding: 0 10px;
   min-width: 40px;

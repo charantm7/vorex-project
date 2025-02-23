@@ -1,0 +1,81 @@
+{% extends 'base.html' %}{% load static %} {% block title %}
+<title>Files</title>
+{% endblock %} {% block nav1 %}
+<a href="{% url 'Folder' folder.name %}">/ {{folder.name}}</a>
+{% endblock %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/file_in_folder.css' %}" />
+{% endblock %} {% block content %}
+<div class="upload-file open-sans">
+  <div class="top">
+    <p>Upload File</p>
+    <i class="fas fa-times" onclick="closeFile()"></i>
+  </div>
+  <form action="{% url 'Upload-file' folder.name %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="title">
+      <label for="title">Title</label>
+      {{form.title}}
+    </div>
+    <div class="file">
+      <label for="file">File</label>
+      {{form.file}}
+    </div>
+    <button type="submit">Upload</button>
+  </form>
+</div>
+<div class="main">
+  <div class="top">
+    <div class="top-1">
+      <a href="{% url 'Rooms' folder.room.name %}" id="back-icon"
+        ><i class="fa-solid fa-arrow-left" title="Back"></i
+      ></a>
+      <div class="upload-file-icon" title="Upload file" onclick="Uploadfile()">
+        <p>Files</p>
+        <i class="fa-solid fa-plus"> </i>
+      </div>
+    </div>
+    <div class="top-2">
+      <input type="text" placeholder="Search" />
+      <i class="fas fa-search"></i>
+    </div>
+  </div>
+  <div class="file">
+    <div class="row g-4">
+      {% for material in study_materials %}
+      <div class="col-5 col-sm-4 col-md-3 col-lg-3">
+        <div class="file-materials">
+          <div class="file-icon-name">
+            <i class="fa-solid fa-file"></i>
+            <a href="{{ material.file.url }}" class="quicksand" download title="{{material.title}}"
+              >{{ material.title }}</a
+            >
+          </div>
+
+          <div class="file-data">
+            <p class="quicksand">By: @{{ material.upload_by}}</p>
+            <a href="{{ material.file.url }}" download title="Download"
+              ><i class="fa-solid fa-download"></i
+            ></a>
+            {% if request.user == material.upload_by %}
+            <a href="{% url 'Delete-file' folder.name  material.pk %}" title="Delete"
+              ><i class="fa-solid fa-trash" id="tooltip"></i
+            ></a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <p>No files uploaded yet.</p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<script>
+  function Uploadfile() {
+    document.querySelector(".upload-file").style.display = "block";
+  }
+  function closeFile() {
+    document.querySelector(".upload-file").style.display = "none";
+  }
+</script>
+{% endblock %}

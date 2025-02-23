@@ -73,14 +73,14 @@
             <span class="tooltiptext" style="margin-left: 1px; margin-top: 40px">Inbox</span>
           </div>
           <div class="nav-container-right-account-logo">
-            <a href="#"><img src="{% static 'assets/main.png' %}" alt="account img" /></a>
+            <a href="/"><img src="{% static 'assets/main.png' %}" alt="account img" /></a>
           </div>
         </div>
       </div>
     </nav>
     <aside>
       <div class="sidebar quicksand" id="sidebar">
-        <ul class="nav_list">
+        <ul class="nav_list-top">
           <li>
             <a href="/">
               <i class="fas fa-home"></i>
@@ -105,27 +105,28 @@
               <span class="link_name">Analytics</span>
             </a>
           </li>
-
           <li>
             <a href="#">
               <i class="fas fa-lightbulb"></i>
               <span class="link_name">Ideas</span>
             </a>
           </li>
+        </ul>
+        <ul class="nav-list-bottom">
+          {% if request.user.is_authenticated %}
           <li>
-            {% if request.user.is_authenticated %}
             <a href="{% url 'Profile' request.user.username %}">
-              <i class="fas fa-clock"></i>
-              <span class="link_name">History</span>
+              <i class="fa-solid fa-user"></i>
+              <span class="link_name">Account</span>
             </a>
-            {% endif %}
           </li>
           <li>
             <a href="{% url 'User_logout' %}">
-              <i class="fas fa-cog"></i>
-              <span class="link_name">Settings</span>
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span class="link_name">Logout</span>
             </a>
           </li>
+          {% endif %}
         </ul>
       </div>
       {% block aside %}{% endblock %}

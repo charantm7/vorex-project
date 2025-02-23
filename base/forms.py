@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Room, UserProfile, ChatBox, Folder
+from .models import Room, UserProfile, ChatBox, Folder, StudyMaterials
 from django.contrib.auth.models import User
 from django import forms
 
@@ -39,3 +39,14 @@ class FolderForm(ModelForm):
     class Meta:
         model = Folder
         fields = ['name']
+
+class StudyMaterialForm(ModelForm):
+    class Meta:
+        model = StudyMaterials
+        fields = ['title', 'file']
+        widgets = {
+            'file': forms.ClearableFileInput(attrs={'accept': 'application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),
+        }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['file'].initial = None

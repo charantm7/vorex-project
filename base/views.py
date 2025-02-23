@@ -3,7 +3,7 @@ from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProf
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm, FolderForm
+from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm, FolderForm, StudyMaterialForm
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
@@ -30,7 +30,7 @@ def home(request):
 @login_required(login_url='User_login')
 def rooms(request, room_name):
     room = get_object_or_404(Room, name=room_name)
-    folder = Folder.objects.all()
+    folder = Folder.objects.filter(room=room)
     # user = get_object_or_404(User, username=room.created_by)
     members_joined = room.members_count.all()
     profile = get_object_or_404(UserProfile, user=room.created_by)
@@ -39,9 +39,10 @@ def rooms(request, room_name):
     if request.method == 'POST':
         form = FolderForm(request.POST)
         if form.is_valid():
-            form = form.save(commit=False)  
-            form.user = request.user
-            form.save()
+            folder = form.save(commit=False)  
+            folder.created_by = request.user
+            folder.room = room
+            folder.save()
             return redirect('Rooms', room_name=room_name)
         else:
             messages.error(request, 'Invalid form')
@@ -371,4 +372,36 @@ def chat_view(request, room_id):
 
     return render(request, 'base/room.html', {'room': room, 'messages': messages, 'form': form})
     
+def files_in_folder(request, f_name):
+    folder = get_object_or_404(Folder, name=f_name)
+    study_materials = StudyMaterials.objects.filter(folder=folder)
+    if request.method == 'POST':
+        form = StudyMaterialForm(request.POST, request.FILES)
+        if form.is_valid():
+            form= form.save(commit=False)
+            form.upload_by = request.user
+            form.folder = folder
+            form.room = folder.room
+            form.save()
+            return redirect('Folder', f_name=f_name)
+        else:   
+            messages.error(request, 'Invalid form')
+            return redirect('Folder', f_name=f_name)
+        
+    else:
+        form = StudyMaterialForm()
+    context = { 'form': form, 'study_materials': study_materials, 'folder': folder}
+    return render(request, 'base/files_in_folder.html', context)
 
+def delete_file(request, file_id, f_name):
+    folder = get_object_or_404(Folder, name=f_name)
+    study_materials = get_object_or_404(StudyMaterials,folder=folder, pk=file_id)
+    study_materials.delete()
+    return redirect("Folder", f_name=f_name)
+
+
+def delete_folder(request, f_name, room_name):
+    room = get_object_or_404(Room, name=room_name)
+    folder = get_object_or_404(Folder, name=f_name, room=room)
+    folder.delete()
+    return redirect('Rooms', room_name=room_name)

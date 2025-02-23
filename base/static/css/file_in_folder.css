@@ -1,0 +1,175 @@
+.upload-file {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  top: 38%;
+  left: 38%;
+  height: 35%;
+  width: 20%;
+  border-radius: 10px;
+  background-color: rgba(47, 47, 47, 0.789);
+}
+.upload-file .top {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.upload-file .top p {
+  font-size: 18px;
+}
+.upload-file .top i {
+  font-size: 1.2vw;
+  cursor: pointer;
+}
+.upload-file form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  gap: 15px;
+}
+.upload-file form .title {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.upload-file form .title input {
+  background-color: transparent;
+  outline: none;
+  border: 1px solid var(--border);
+  height: 40px;
+  padding: 5px;
+  color: var(--text);
+}
+.upload-file form .file {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.upload-file form button {
+  width: 50%;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px 30px 30px;
+  gap: 20px;
+}
+.main .top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+.main .top-1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+.main .top-1 #back-icon {
+  font-size: 1.3vw;
+  background-color: var(--navdark);
+  padding: 5px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--white);
+}
+.main .top-1 .upload-file-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: var(--navdark);
+  border-radius: 8px;
+}
+.main .top-1 .upload-file-icon p {
+  font-size: 20px;
+}
+.main .top-2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px 5px 10px;
+  background-color: var(--navdark);
+  border-radius: 8px;
+}
+.main .top-2 input {
+  width: 200px;
+  height: 33px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--white);
+  font-size: 20px;
+}
+.main .top-2 i {
+  padding: 5px;
+}
+.main .file {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+}
+.main .file .file-materials {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 10px 20px;
+  background-color: rgba(13, 17, 23, 0.6274509804);
+  border-radius: 10px;
+  gap: 5px;
+}
+.main .file .file-materials .file-icon-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+.main .file .file-materials .file-icon-name i {
+  font-size: 3vw;
+  color: var(--text);
+}
+.main .file .file-materials .file-icon-name a {
+  text-decoration: none;
+  color: var(--white);
+  font-size: 1.15vw;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.main .file .file-materials .file-icon-name a:hover {
+  text-decoration: underline;
+}
+.main .file .file-materials .file-data {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.main .file .file-materials .file-data a {
+  color: var(--white);
+}
+.main .file .file-materials .file-data p {
+  font-size: 0.8rem;
+  display: block;
+  max-width: 68%;
+  min-width: 0;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}/*# sourceMappingURL=file_in_folder.css.map */

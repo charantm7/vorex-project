@@ -29,6 +29,10 @@ urlpatterns = [
     path('follow-request/<str:user_tag>', views.follow_request, name='follow-request'),
     path('404-error/',views.error_404, name='Error-page'),
     path('create-folder/<str:room_name>/',views.rooms, name='Create-folder'),
+    path('folder/<str:f_name>/',views.files_in_folder, name='Folder'),
+    path('upload-file/<str:f_name>/',views.files_in_folder, name='Upload-file'),
+    path('delete-file/<str:f_name>/<str:file_id>',views.delete_file, name='Delete-file'),
+    path('delete-folder/<str:room_name>/<str:f_name>/',views.delete_folder,name='Delete-folder')
 
 ]
 

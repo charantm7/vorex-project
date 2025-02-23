@@ -387,6 +387,42 @@ p {
   padding: 2px 5px;
   border-radius: 10px;
 }
+#Materials .delete {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 17%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(57, 57, 57, 0.878);
+  gap: 20px;
+  transition: transform 0.3s ease-in;
+  transform: scale(1.1);
+}
+#Materials .delete .bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+#Materials .delete .bottom .cancel-btn {
+  padding: 1px 8px;
+  border-radius: 5px;
+  border: 0.5px solid var(--text);
+  color: var(--text);
+  font-size: 15px;
+  background-color: transparent;
+}
+#Materials .delete .bottom .delete-btn {
+  padding: 3px 10px;
+  border-radius: 5px;
+  border: 0.5px solid rgb(22, 22, 22);
+  font-size: 15px;
+  background-color: rgb(22, 22, 22);
+  outline: none;
+  color: white;
+}
 #Materials .materials-top {
   display: flex;
   flex-direction: row;
@@ -453,6 +489,9 @@ p {
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 #Materials .materials-bottom .card .card-top {
   display: flex;
@@ -467,11 +506,36 @@ p {
   text-decoration: none;
   color: var(--text);
   font-weight: bold;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#Materials .materials-bottom .card .card-top a:hover {
+  text-decoration: underline;
 }
 #Materials .materials-bottom .card .card-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+#Materials .materials-bottom .card .card-bottom p {
   margin-top: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--secondary-text);
+}
+#Materials .materials-bottom .card .card-bottom a {
+  margin-top: 0.5rem;
+  text-decoration: none;
+  color: var(--white);
+}
+#Materials .materials-bottom .card .card-bottom a i {
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 footer {
