@@ -28,6 +28,7 @@ urlpatterns = [
     path('following/<str:user_tag>/', views.following_list, name='following-list'),
     path('follow-request/<str:user_tag>', views.follow_request, name='follow-request'),
     path('404-error/',views.error_404, name='Error-page'),
+    path('create-folder/<str:room_name>/',views.rooms, name='Create-folder'),
 
 ]
 

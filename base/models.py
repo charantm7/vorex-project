@@ -62,4 +62,12 @@ class Followrequest(models.Model):
     def __str__(self):
         return f"{self.from_user.username} -> {self.to_user.username}"
     
-    
+
+class Folder(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    study_materials = models.ManyToManyField(StudyMaterials, related_name="folders")
+    def __str__(self):
+        return self.name

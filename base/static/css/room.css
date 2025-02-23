@@ -299,6 +299,8 @@ p {
 }
 #Group .chat-area-mid {
   flex: 1;
+  overflow-y: auto;
+  padding: 20px 50px;
 }
 #Group .chat-area-bottom {
   display: flex;
@@ -329,6 +331,147 @@ p {
 #Group .chat-area-bottom-item i {
   cursor: pointer;
   padding: 15px 20px;
+}
+
+#Materials {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px 20px;
+  gap: 10px;
+}
+#Materials .create-folder {
+  display: none;
+  position: absolute;
+  z-index: 9999;
+  width: 20%;
+  height: 28%;
+  top: 35%;
+  left: 35%;
+  background-color: rgba(57, 57, 57, 0.878);
+  border-radius: 10px;
+  overflow-y: hidden;
+}
+#Materials .create-folder-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 10px 20px;
+}
+#Materials .create-folder-top i {
+  cursor: pointer;
+}
+#Materials .create-folder-bottom form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px;
+  gap: 30px;
+}
+#Materials .create-folder-bottom form .input-folder-name {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#Materials .create-folder-bottom form .input-folder-name input {
+  height: 40px;
+  outline: none;
+  background-color: rgba(53, 53, 53, 0.863);
+  border: 1px solid var(--text);
+  color: var(--text);
+  padding: 0 10px;
+  border-radius: 5px;
+}
+#Materials .create-folder-bottom form button {
+  width: 35%;
+  padding: 2px 5px;
+  border-radius: 10px;
+}
+#Materials .materials-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+#Materials .materials-top-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+#Materials .materials-top-left-folder {
+  padding: 10px;
+  background-color: var(--roombg);
+  border-radius: 10px;
+  cursor: pointer;
+}
+#Materials .materials-top-left-code {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: var(--roombg);
+  border-radius: 10px;
+}
+#Materials .materials-top-mid {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--roombg);
+  border-radius: 10px;
+}
+#Materials .materials-top-mid input {
+  width: 100%;
+  height: 40px;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--hover);
+  color: var(--text);
+  font-size: 16px;
+  background-color: transparent;
+}
+#Materials .materials-top-mid i {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+#Materials .materials-bottom {
+  border: 1px solid var(--border);
+  flex: 1;
+  min-height: 100vh;
+  padding: 1rem;
+}
+#Materials .materials-bottom .card {
+  background-color: var(--roombg);
+  color: var(--text);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 210px;
+}
+#Materials .materials-bottom .card .card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+#Materials .materials-bottom .card .card-top i {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+#Materials .materials-bottom .card .card-top a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: bold;
+}
+#Materials .materials-bottom .card .card-bottom {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--secondary-text);
 }
 
 footer {

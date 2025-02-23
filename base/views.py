@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProfile, Followrequest
+from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProfile, Followrequest, Folder
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm
+from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm, FolderForm
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
@@ -30,10 +30,26 @@ def home(request):
 @login_required(login_url='User_login')
 def rooms(request, room_name):
     room = get_object_or_404(Room, name=room_name)
+    folder = Folder.objects.all()
     # user = get_object_or_404(User, username=room.created_by)
     members_joined = room.members_count.all()
     profile = get_object_or_404(UserProfile, user=room.created_by)
-    context = {'rooms': room, 'members': room.member_count, 'profile':profile, 'members_joined': members_joined}
+    
+
+    if request.method == 'POST':
+        form = FolderForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)  
+            form.user = request.user
+            form.save()
+            return redirect('Rooms', room_name=room_name)
+        else:
+            messages.error(request, 'Invalid form')
+            return redirect('Create-folder')
+    else:
+        form = FolderForm()
+    context = {'rooms': room, 'members': room.member_count, 'profile':profile, 'members_joined': members_joined, 'folders':folder, 'form': form}
+    
     if request.user in room.members_count.all():
         return render(request, 'base/room.html', context)
     else:
@@ -354,3 +370,5 @@ def chat_view(request, room_id):
         form = ChatBoxForm()
 
     return render(request, 'base/room.html', {'room': room, 'messages': messages, 'form': form})
+    
+

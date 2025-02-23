@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Room, UserProfile, ChatBox
+from .models import Room, UserProfile, ChatBox, Folder
 from django.contrib.auth.models import User
 from django import forms
 
@@ -33,3 +33,9 @@ class ChatBoxForm(forms.ModelForm):
         widgets = {
             'content': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Type a message...'})
         }
+
+
+class FolderForm(ModelForm):
+    class Meta:
+        model = Folder
+        fields = ['name']
