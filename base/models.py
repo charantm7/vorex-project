@@ -95,7 +95,7 @@ class UserProfile(models.Model):
     rooms = models.ManyToManyField(Room, related_name="profile-rooms+")
     study_materials = models.ManyToManyField(StudyMaterials, related_name="study_materials")
     bio = models.TextField(blank=True, null=True, max_length=100)
-    followers = models.ManyToManyField("self", related_name="followers")
+    followers = models.ManyToManyField("self", related_name="following", symmetrical=False, blank=True)
     def __str__(self):
         return self.user.username
 

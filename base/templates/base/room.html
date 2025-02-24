@@ -106,23 +106,23 @@
     <div class="chat-area">
       <div class="chat-area-top">
         <div class="chat-area-top-left">
-          <p>Group Chat</p>
+          <p id="chat-title">Select a chat</p>
         </div>
         <div class="chat-area-top-right">
           <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
         </div>
       </div>
-      <div class="chat-area-mid">
-        {% for chat in group_chat_member %}
-        <p>{{chat.content}}</p>
-        {% endfor %}
+
+      <div class="chat-area-mid" id="chat-messages">
+        <!-- Messages will be loaded here -->
       </div>
-      <form action="{% url 'Create-message' rooms.name %}" method="post">
+
+      <form id="message-form" method="post" onsubmit="sendMessage(event)">
         {% csrf_token %}
         <div class="chat-area-bottom">
           <div class="chat-area-bottom-item">
-            {{group_chat_member_form.content}}
-            <button type="submit" name="group_chat_member_submit">
+            <input type="text" id="message-content" placeholder="Type a message..." required />
+            <button type="submit">
               <i class="fas fa-paper-plane"></i>
             </button>
           </div>
