@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, UserProfile, Followrequest, Folder
+from .models import Tag, Room, RoomMembership, ChatBox, StudyMaterials, RoomChatIndividual,UserProfile, Followrequest, Folder, ChatBoxMembership
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm, FolderForm, StudyMaterialForm
+from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm, FolderForm, StudyMaterialForm, ChatBoxMemberForm
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
@@ -31,32 +31,86 @@ def home(request):
 def rooms(request, room_name):
     room = get_object_or_404(Room, name=room_name)
     folder = Folder.objects.filter(room=room)
-    # user = get_object_or_404(User, username=room.created_by)
     members_joined = room.members_count.all()
     profile = get_object_or_404(UserProfile, user=room.created_by)
-    
+    group_chat = ChatBox.objects.filter(room=room)
+    group_chat_member = ChatBoxMembership.objects.filter(chat_box__in=group_chat)
+
+    # Initialize forms
+    folder_form = FolderForm()
+    group_chat_form = ChatBoxForm()
+    group_chat_member_form = ChatBoxMemberForm()
 
     if request.method == 'POST':
-        form = FolderForm(request.POST)
-        if form.is_valid():
-            folder = form.save(commit=False)  
-            folder.created_by = request.user
-            folder.room = room
-            folder.save()
-            return redirect('Rooms', room_name=room_name)
-        else:
-            messages.error(request, 'Invalid form')
-            return redirect('Create-folder')
-    else:
-        form = FolderForm()
-    context = {'rooms': room, 'members': room.member_count, 'profile':profile, 'members_joined': members_joined, 'folders':folder, 'form': form}
-    
-    if request.user in room.members_count.all():
-        return render(request, 'base/room.html', context)
-    else:
-        messages.error(
-            request, 'You are not a member of this room! join the room to continue')
-        return redirect('Home')
+        if 'folder_submit' in request.POST:
+            folder_form = FolderForm(request.POST)
+            if folder_form.is_valid():
+                folder_instance = folder_form.save(commit=False)
+                folder_instance.created_by = request.user
+                folder_instance.room = room
+                folder_instance.save()
+                return redirect('Rooms', room_name=room_name)
+            else:
+                messages.error(request, 'Invalid Folder Form')
+
+        elif 'group_chat_submit' in request.POST:
+            group_chat_form = ChatBoxForm(request.POST)
+            if group_chat_form.is_valid():
+                chat = group_chat_form.save(commit=False)
+                chat.created_by = request.user
+                chat.room = room
+                chat.save()
+                return redirect('Rooms', room_name=room_name)
+            else:
+                messages.error(request, 'Invalid Group Chat Form')
+
+        elif 'group_chat_member_submit' in request.POST:
+            group_chat_member_form = ChatBoxMemberForm(request.POST)
+            if group_chat_member_form.is_valid():
+                group_member = group_chat_member_form.save(commit=False)
+                group_member.message_by = request.user
+                group_member.chatbox__in = group_chat
+                group_member.save()
+                return redirect('Rooms', room_name=room_name)
+            else:
+                messages.error(request, "Invalid Member Form")
+
+    if request.user not in room.members_count.all():
+        messages.error(request, "You are not a member of this room! Join to continue.")
+        return redirect("Home")
+
+    context = {
+        'rooms': room,
+        'members': room.member_count,
+        'profile': profile,
+        'members_joined': members_joined,
+        'folders': folder,
+        'form': folder_form,
+        'group_chat': group_chat,
+        'group_chat_member': group_chat_member,
+        'group_chat_form': group_chat_form,
+        'group_chat_member_form': group_chat_member_form
+    }
+
+    return render(request, 'base/room.html', context)
+
+def fetch_messages(request, room_name, chat_type, chat_id):
+    room = get_object_or_404(Room, name=room_name)
+    messages = []
+
+    if chat_type == 'group':
+        chat = get_object_or_404(ChatBox, id=chat_id, room=room)
+        messages = ChatBoxMembership.objects.filter(chatbox=chat).order_by('created_at')
+    elif chat_type == 'individual':
+        user = get_object_or_404(User, id=chat_id)
+        messages = RoomChatIndividual.objects.filter(
+            room=room, sender=request.user, receiver=user
+        ).order_by('created_at')
+
+    message_data = [{"user": msg.user.username if hasattr(msg, 'user') else msg.sender.username,
+                     "content": msg.content, "created_at": msg.created_at.strftime('%H:%M')} for msg in messages]
+
+    return JsonResponse({"messages": message_data})
 
 
 def tag(request, tag_name):
@@ -405,3 +459,4 @@ def delete_folder(request, f_name, room_name):
     folder = get_object_or_404(Folder, name=f_name, room=room)
     folder.delete()
     return redirect('Rooms', room_name=room_name)
+

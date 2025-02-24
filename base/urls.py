@@ -32,7 +32,14 @@ urlpatterns = [
     path('folder/<str:f_name>/',views.files_in_folder, name='Folder'),
     path('upload-file/<str:f_name>/',views.files_in_folder, name='Upload-file'),
     path('delete-file/<str:f_name>/<str:file_id>',views.delete_file, name='Delete-file'),
-    path('delete-folder/<str:room_name>/<str:f_name>/',views.delete_folder,name='Delete-folder')
+    path('delete-folder/<str:room_name>/<str:f_name>/',views.delete_folder,name='Delete-folder'),
+
+    path('create-group-chat/<str:room_name>/',views.rooms, name='Create-group-chat'),
+    path('message/<str:room_name>/',views.rooms, name='Create-message'),
+    path('fetch-messages/<str:room_name>/<str:chat_type>/<int:chat_id>/', views.fetch_messages, name='fetch-messages'),
+
+
+
 
 ]
 

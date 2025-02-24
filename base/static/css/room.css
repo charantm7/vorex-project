@@ -163,6 +163,59 @@ p {
   padding: 0 0;
   background-color: var(--roombg);
 }
+#Group .create-chat-group {
+  position: absolute;
+  z-index: 9999;
+  display: none;
+  flex-direction: column;
+  width: 20%;
+  height: 25%;
+  top: 38%;
+  left: 38%;
+  background-color: rgba(75, 75, 75, 0.8823529412);
+  padding: 20px;
+  border-radius: 8px;
+  gap: 18px;
+}
+#Group .create-chat-group .top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#Group .create-chat-group .top i {
+  cursor: pointer;
+}
+#Group .create-chat-group .top p {
+  font-size: 17px;
+}
+#Group .create-chat-group form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#Group .create-chat-group form .input-g-name {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+#Group .create-chat-group form .input-g-name input {
+  height: 35px;
+  outline: none;
+  border: 1px solid var(--text);
+  background-color: transparent;
+  border-radius: 5px;
+  color: var(--white);
+  padding: 2px 5px;
+}
+#Group .create-chat-group form .input-g-name label {
+  font-size: 15px;
+}
+#Group .create-chat-group button {
+  height: 35px;
+  width: 50%;
+  border-radius: 8px;
+  border: none;
+}
 #Group .members {
   padding: 15px 0;
   width: 20%;

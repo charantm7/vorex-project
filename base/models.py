@@ -55,12 +55,37 @@ class StudyMaterials(models.Model):
  
 
 class ChatBox(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="messages")
-    content = models.TextField()
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="messages", null=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="groupcreation", null=True)
+    group_name = models.CharField(max_length=20,null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return f"{self.user.username}: {self.content[:20]}"
+        return self.group_name or "No-Name"
+    
+class ChatBoxMembership(models.Model):
+    message_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name="chatbox", null=True)
+    chat_box = models.ForeignKey(ChatBox, on_delete=models.CASCADE, related_name="members",null=True)
+    content = models.CharField(max_length=255,null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__ (self):
+        return f'{self.message_by.username if self.message_by else "Unknown user"} : {self.content or ""}'
+    
+    class Meta:
+        ordering = ['created_at']
+
+class RoomChatIndividual(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="individual_messages", null=True)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender", null=True)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver", null=True)
+    content = models.CharField(max_length=255, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__ (self):
+        return f'{self.sender.username} : {self.content}'
+
+
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")

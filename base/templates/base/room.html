@@ -13,10 +13,10 @@
 {% endblock %} {% block content %}
 <div class="rooms">
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Info')" id="defaultOpen">
+    <button class="tablinks" onclick="openTab(event, 'Info')">
       <i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span>
     </button>
-    <button class="tablinks" onclick="openTab(event, 'Group')">
+    <button class="tablinks" onclick="openTab(event, 'Group')" id="defaultOpen">
       <i class="fa-solid fa-user-group"></i><span class="btn-txt">Group</span>
     </button>
     <button class="tablinks" onclick="openTab(event, 'Materials')">
@@ -45,26 +45,57 @@
   </div>
 
   <div id="Group" class="tabcontent">
+    <div class="create-chat-group">
+      <div class="top">
+        <p>Create Group</p>
+        <i class="fas fa-times" onclick="Removegroup()"></i>
+      </div>
+      <form action="{% url 'Create-group-chat' rooms.name %}" method="post">
+        {% csrf_token %}
+        <div class="input-g-name">
+          <label for="Group-name">Group Name</label>
+          {{group_chat_form.group_name}}
+        </div>
+        <button type="submit" name="group_chat_submit">create</button>
+      </form>
+    </div>
     <div class="members">
       <div class="top">
         <div class="top-1">
           <p>Chat</p>
-          <i class="fa-solid fa-plus" id="tooltip"><span class="tooltiptext">Chat with individual</span></i>
+          <i class="fa-solid fa-plus" id="tooltip" onclick="Creategroup()">
+            <span class="tooltiptext">Chat with individual</span>
+          </i>
         </div>
         <div class="top-2">
           <input type="text" placeholder="Search" />
           <i class="fas fa-search"></i>
         </div>
       </div>
+
       <div class="bottom">
-        {% for members in members_joined %}
-        <div class="members-chat">
+        <!-- Group Chat -->
+        {% for group in group_chat %}
+        <div class="members-chat" onclick="loadMessages('{{ rooms.name }}', 'group', '{{ group.id }}')">
           <div class="left">
-            {% if members.profile.profile_pic %}
-            <img src="{{ members.profile.profile_pic.url}}" alt="img" />
+            <img src="{% static 'assets/default.png' %}" alt="img" />
+          </div>
+          <div class="mid"><p>{{ group.group_name }}</p></div>
+          <div class="right">
+            <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- Individual Chat -->
+        {% for member in members_joined %}
+        <div class="members-chat" onclick="loadMessages('{{ rooms.name }}', 'individual', '{{ member.id }}')">
+          <div class="left">
+            {% if member.profile.profile_pic %}
+            <img src="{{ member.profile.profile_pic.url }}" alt="img" />
             {% endif %}
           </div>
-          <div class="mid"><p>{{members.username}}</p></div>
+          <div class="mid"><p>{{ member.username }}</p></div>
           <div class="right">
             <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
           </div>
@@ -81,13 +112,22 @@
           <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
         </div>
       </div>
-      <div class="chat-area-mid">lorem*20</div>
-      <div class="chat-area-bottom">
-        <div class="chat-area-bottom-item">
-          <input type="text" placeholder="Type a message" />
-          <i class="fas fa-paper-plane"></i>
-        </div>
+      <div class="chat-area-mid">
+        {% for chat in group_chat_member %}
+        <p>{{chat.content}}</p>
+        {% endfor %}
       </div>
+      <form action="{% url 'Create-message' rooms.name %}" method="post">
+        {% csrf_token %}
+        <div class="chat-area-bottom">
+          <div class="chat-area-bottom-item">
+            {{group_chat_member_form.content}}
+            <button type="submit" name="group_chat_member_submit">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
   {% block materials %}
@@ -117,13 +157,13 @@
         <i class="fas fa-times" onclick="closeFolder()"></i>
       </div>
       <div class="create-folder-bottom">
-        <form action="{% url 'Create-folder' rooms.name %}" method="POST">
+        <form action="{% url 'Create-folder' rooms.name %}" method="post">
           {% csrf_token %}
           <div class="input-folder-name">
             <label for="folder-name">Name</label>
             {{form.name}}
           </div>
-          <button type="submit">Create</button>
+          <button type="submit" name="folder_submit">Create</button>
         </form>
       </div>
     </div>
@@ -131,17 +171,6 @@
     <div class="materials-bottom">
       <div class="row g-3">
         {% for folder in folders %}
-        <div class="delete">
-          <div class="top">
-            <p>Delete This Folder?</p>
-          </div>
-          <div class="bottom">
-            <button class="cancel-btn" onclick="CancelDelete()">Cancel</button>
-            <a href="{% url 'Delete-folder' rooms.name folder.name %}"
-              ><button class="delete-btn" onclick="DeleteFolder()">Delete</button>
-            </a>
-          </div>
-        </div>
         <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="card">
             <div class="card-top">
@@ -151,10 +180,21 @@
             <div class="card-bottom">
               <p>By: {{ folder.created_by.username|default:'Unknown' }}</p>
               {% if request.user == folder.created_by %}
-              <a onclick="DeleteFolder()"><i class="fa-solid fa-trash"> </i></a>
+              <a onclick="DeleteFolder('{{folder.name}}')"><i class="fa-solid fa-trash"> </i></a>
 
               {% endif %}
             </div>
+          </div>
+        </div>
+        <div id="delete-{{ folder.name }}" class="delete" style="display: none">
+          <div class="top">
+            <p>Delete This Folder?</p>
+          </div>
+          <div class="bottom">
+            <button class="cancel-btn" onclick="CancelDelete('{{ folder.name }}')">Cancel</button>
+            <a href="{% url 'Delete-folder' rooms.name folder.name %}">
+              <button class="delete-btn">Delete</button>
+            </a>
           </div>
         </div>
         {% empty %}
@@ -176,13 +216,20 @@
   function closeFolder() {
     document.querySelector(".create-folder").style.display = "none";
   }
-  function CancelDelete() {
-    document.querySelector(".delete").style.display = "none";
+  function DeleteFolder(folderName) {
+    document.getElementById(`delete-${folderName}`).style.display = "flex";
   }
-  function DeleteFolder() {
-    document.querySelector(".delete").style.display = "flex";
+
+  function CancelDelete(folderName) {
+    document.getElementById(`delete-${folderName}`).style.display = "none";
+  }
+  function Creategroup() {
+    document.querySelector(".create-chat-group").style.display = "flex";
+  }
+  function Removegroup() {
+    document.querySelector(".create-chat-group").style.display = "none";
   }
 </script>
 {% endblock %}
 <!-- <i class="fa-solid fa-file-pdf"></i> -->
-{% url 'Delete-folder' rooms.name folder.name %}
+<!-- {% url 'Delete-folder' rooms.name folder.name %} -->

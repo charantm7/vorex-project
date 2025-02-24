@@ -16,3 +16,20 @@ function openTab(evt, cityName) {
   evt.currentTarget.className += " active";
 }
 document.getElementById("defaultOpen").click();
+
+function loadMessages(roomName, chatType, chatId) {
+  fetch(`/fetch-messages/${roomName}/${chatType}/${chatId}/`)
+    .then((response) => response.json())
+    .then((data) => {
+      const chatArea = document.getElementById("chat-area-mid");
+      chatArea.innerHTML = ""; // Clear existing messages
+
+      data.messages.forEach((msg) => {
+        const msgDiv = document.createElement("div");
+        msgDiv.classList.add("chat-message");
+        msgDiv.innerHTML = `<strong>${msg.user}:</strong> ${msg.content} <span class="time">${msg.created_at}</span>`;
+        chatArea.appendChild(msgDiv);
+      });
+    })
+    .catch((error) => console.error("Error loading messages:", error));
+}
