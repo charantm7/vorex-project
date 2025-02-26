@@ -159,7 +159,7 @@ p {
 .chat-container {
   display: flex;
   width: 100%;
-  height: 87vh;
+  height: 86vh;
   background: var(--navdark);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -237,10 +237,11 @@ p {
   background: var(--navdark);
   border-radius: 10px;
   border: none;
-  padding: 10px;
+  padding: 7px;
   color: var(--text);
   cursor: pointer;
-  margin: 5px;
+  margin: 3px;
+  font-size: 15px;
 }
 
 .chat-list {
