@@ -460,3 +460,8 @@ def delete_folder(request, f_name, room_name):
     folder.delete()
     return redirect('Rooms', room_name=room_name)
 
+def delete_group(request, g_name, room_name):
+    room = get_object_or_404(Room, name=room_name)
+    chat_box = get_object_or_404(ChatBox,group_name=g_name, room=room )
+    chat_box.delete()
+    return redirect('Rooms',room_name=room_name)

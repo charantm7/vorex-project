@@ -10,7 +10,7 @@ function openTab(evt, cityName) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
   if (cityName === "Group") {
-    document.getElementById("Group").style.overflow = "hidden";
+    document.getElementById("Group").style.overflow = "hidden !important";
   }
   document.getElementById(cityName).style.display = "flex";
   evt.currentTarget.className += " active";

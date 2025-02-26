@@ -17,7 +17,7 @@
       <i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span>
     </button>
     <button class="tablinks" onclick="openTab(event, 'Group')" id="defaultOpen">
-      <i class="fa-solid fa-user-group"></i><span class="btn-txt">Group</span>
+      <i class="fa-solid fa-user-group"></i><span class="btn-txt">Message</span>
     </button>
     <button class="tablinks" onclick="openTab(event, 'Materials')">
       <i class="fa-solid fa-book"></i><span class="btn-txt">Study Materials</span>
@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <div id="Group" class="tabcontent">
+  <div id="Group" class="chat-container tabcontent">
     <div class="create-chat-group">
       <div class="top">
         <p>Create Group</p>
@@ -59,77 +59,60 @@
         <button type="submit" name="group_chat_submit">create</button>
       </form>
     </div>
-    <div class="members">
-      <div class="top">
-        <div class="top-1">
-          <p>Chat</p>
-          <i class="fa-solid fa-plus" id="tooltip" onclick="Creategroup()">
-            <span class="tooltiptext">Chat with Individual</span>
-          </i>
-        </div>
-        <div class="top-2">
-          <input type="text" placeholder="Search" />
-          <i class="fas fa-search"></i>
+    <div class="sidebarc">
+      <div class="sidebar-header">
+        <h3>Chat</h3>
+        <div class="toggle-buttons">
+          <button onclick="showIndividualChats()">Individuals</button>
+          <button onclick="showGroupChats()">Groups</button>
+          {% if request.user == rooms.created_by %}
+          <button onclick="Creategroup()" title="Create Group"><i class="fa-solid fa-plus"> </i></button>
+          {% endif %}
         </div>
       </div>
 
-      <div class="bottom">
-        <!-- Group Chat -->
-        {% for group in group_chat %}
-        <div class="members-chat" onclick="loadMessages('{{ rooms.name }}', 'group', '{{ group.id }}')">
-          <div class="left">
-            <img src="{% static 'assets/default.png' %}" alt="img" />
+      <div class="chat-list" id="individual-chats">
+        {% for members in members_joined %}
+        <div class="chat-item" onclick="openChat('{{members.username}}')">
+          <img src="{{ members.profile.profile_pic.url }}" alt="CyberSec" />
+          <div class="name">
+            <p>{{members.username}}</p>
           </div>
-          <div class="mid"><p>{{ group.group_name }}</p></div>
-          <div class="right">
-            <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
-          </div>
+          <i class="fas fa-ellipsis-v" title="More"></i>
         </div>
         {% endfor %}
-
-        <!-- Individual Chat -->
-        {% for member in members_joined %}
-        <div class="members-chat" onclick="loadMessages('{{ rooms.name }}', 'individual', '{{ member.id }}')">
-          <div class="left">
-            {% if member.profile.profile_pic %}
-            <img src="{{ member.profile.profile_pic.url }}" alt="img" />
-            {% endif %}
+      </div>
+      <div class="chat-list" id="group-chats" style="display: none">
+        {% for group in group_chat %}
+        <div class="chat-item" onclick="openChat('{{group.group_name}}')">
+          <img src="{% static 'assets/default.png' %}" alt="CyberSec" />
+          <div class="name">
+            <p>{{group.group_name}}</p>
           </div>
-          <div class="mid"><p>{{ member.username }}</p></div>
-          <div class="right">
-            <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
-          </div>
+          <i class="fas fa-ellipsis-v" title="More"></i>
         </div>
+        {% empty %}
+        <p>No groups created</p>
         {% endfor %}
       </div>
     </div>
     <div class="chat-area">
-      <div class="chat-area-top">
-        <div class="chat-area-top-left">
-          <p id="chat-title">Select a chat</p>
-        </div>
-        <div class="chat-area-top-right">
-          <i class="fas fa-ellipsis-v" id="tooltip"><span class="tooltiptext">more</span></i>
-        </div>
+      <div class="chat-header">
+        <p id="chat-title">Select a chat</p>
+        {% for group in group_chat %} {% if request.user == group.created_by %}
+        <a href="{% url 'Delete-group' rooms.name group.group_name %}"><i class="fa-solid fa-trash"> </i></a>
+        {% endif %} {% endfor %}
       </div>
-
-      <div class="chat-area-mid" id="chat-messages">
-        <!-- Messages will be loaded here -->
+      <div class="chat-messages" id="chat-messages">
+        <!-- Messages will be loaded here dynamically -->
       </div>
-
-      <form id="message-form" method="post" onsubmit="sendMessage(event)">
-        {% csrf_token %}
-        <div class="chat-area-bottom">
-          <div class="chat-area-bottom-item">
-            <input type="text" id="message-content" placeholder="Type a message..." required />
-            <button type="submit">
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
-      </form>
+      <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Type a message..." />
+        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+      </div>
     </div>
   </div>
+
   {% block materials %}
   <div id="Materials" class="tabcontent">
     <div class="materials-top">
@@ -204,32 +187,58 @@
         {% endfor %}
       </div>
     </div>
+
+    {% endblock %}
   </div>
+  <script src="{% static 'js/room.js'%}"></script>
+  <script>
+    function CreateFolder() {
+      document.querySelector(".create-folder").style.display = "block";
+    }
+    function closeFolder() {
+      document.querySelector(".create-folder").style.display = "none";
+    }
+    function DeleteFolder(folderName) {
+      document.getElementById(`delete-${folderName}`).style.display = "flex";
+    }
 
+    function CancelDelete(folderName) {
+      document.getElementById(`delete-${folderName}`).style.display = "none";
+    }
+    function Creategroup() {
+      document.querySelector(".create-chat-group").style.display = "flex";
+    }
+    function Removegroup() {
+      document.querySelector(".create-chat-group").style.display = "none";
+    }
+
+    function showIndividualChats() {
+      document.getElementById("individual-chats").style.display = "block";
+      document.getElementById("group-chats").style.display = "none";
+    }
+    function showGroupChats() {
+      document.getElementById("individual-chats").style.display = "none";
+      document.getElementById("group-chats").style.display = "block";
+    }
+    function openChat(name) {
+      document.getElementById("chat-title").textContent = name;
+      document.getElementById("chat-messages").innerHTML = `<p>Chat with ${name}</p>`;
+    }
+    function sendMessage() {
+      let message = document.getElementById("message-input").value;
+      if (message.trim() !== "") {
+        let messageDiv = document.createElement("div");
+        messageDiv.textContent = message;
+        messageDiv.style.padding = "10px";
+        messageDiv.style.background = "#dff9fb";
+        messageDiv.style.margin = "5px 0";
+        messageDiv.style.borderRadius = "5px";
+        document.getElementById("chat-messages").appendChild(messageDiv);
+        document.getElementById("message-input").value = "";
+      }
+    }
+  </script>
   {% endblock %}
+  <!-- <i class="fa-solid fa-file-pdf"></i> -->
+  <!-- {% url 'Delete-folder' rooms.name folder.name %} -->
 </div>
-<script src="{% static 'js/room.js'%}"></script>
-<script>
-  function CreateFolder() {
-    document.querySelector(".create-folder").style.display = "block";
-  }
-  function closeFolder() {
-    document.querySelector(".create-folder").style.display = "none";
-  }
-  function DeleteFolder(folderName) {
-    document.getElementById(`delete-${folderName}`).style.display = "flex";
-  }
-
-  function CancelDelete(folderName) {
-    document.getElementById(`delete-${folderName}`).style.display = "none";
-  }
-  function Creategroup() {
-    document.querySelector(".create-chat-group").style.display = "flex";
-  }
-  function Removegroup() {
-    document.querySelector(".create-chat-group").style.display = "none";
-  }
-</script>
-{% endblock %}
-<!-- <i class="fa-solid fa-file-pdf"></i> -->
-<!-- {% url 'Delete-folder' rooms.name folder.name %} -->

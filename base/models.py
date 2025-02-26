@@ -10,7 +10,7 @@ class Tag(models.Model):
 class Room(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="rooms",null=True)
     name = models.CharField(max_length=50)
-    tags = models.ManyToManyField(Tag, related_name="rooms")
+    tags = models.ManyToManyField(Tag, related_name="rooms", null=True)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

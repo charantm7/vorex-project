@@ -3,7 +3,7 @@
   --roombg: #0d1117;
   --text: rgba(236, 236, 236, 0.903);
   --border: #4e4e4eb9;
-  --members: #2a2e38;
+  --members: #21252e;
   --lwhite: rgb(189, 188, 188);
   --scroll-hover: rgb(160, 160, 160);
 }
@@ -156,14 +156,14 @@ p {
     display: none;
   }
 }
-#Group {
+.chat-container {
   display: flex;
-  flex-direction: row;
   width: 100%;
-  padding: 0 0;
-  background-color: var(--roombg);
+  height: 87vh;
+  background: var(--navdark);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-#Group .create-chat-group {
+.chat-container .create-chat-group {
   position: absolute;
   z-index: 9999;
   display: none;
@@ -177,28 +177,28 @@ p {
   border-radius: 8px;
   gap: 18px;
 }
-#Group .create-chat-group .top {
+.chat-container .create-chat-group .top {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-#Group .create-chat-group .top i {
+.chat-container .create-chat-group .top i {
   cursor: pointer;
 }
-#Group .create-chat-group .top p {
+.chat-container .create-chat-group .top p {
   font-size: 17px;
 }
-#Group .create-chat-group form {
+.chat-container .create-chat-group form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-#Group .create-chat-group form .input-g-name {
+.chat-container .create-chat-group form .input-g-name {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
-#Group .create-chat-group form .input-g-name input {
+.chat-container .create-chat-group form .input-g-name input {
   height: 35px;
   outline: none;
   border: 1px solid var(--text);
@@ -207,108 +207,57 @@ p {
   color: var(--white);
   padding: 2px 5px;
 }
-#Group .create-chat-group form .input-g-name label {
+.chat-container .create-chat-group form .input-g-name label {
   font-size: 15px;
 }
-#Group .create-chat-group button {
+.chat-container .create-chat-group button {
   height: 35px;
   width: 50%;
   border-radius: 8px;
   border: none;
 }
-#Group .members {
-  padding: 15px 0;
-  width: 20%;
-  background-color: var(--members);
+
+.sidebarc {
+  width: 23%;
+  background: var(--members);
   border-top-left-radius: 15px;
+  color: white;
+  padding: 20px 25px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  overflow: hidden;
-  height: 100%;
 }
-#Group .members .top {
-  display: flex;
-  flex-direction: column;
-  padding: 0 15px;
-}
-#Group .members .top-1 {
-  padding: 10px 5px 10px 5px;
+
+.sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-#Group .members .top-1 i {
-  padding: 5px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-#Group .members .top-2 {
-  background-color: var(--hover);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-radius: 5px;
-  border-bottom: 2px solid var(--lwhite);
-}
-#Group .members .top-2 input {
-  width: 85%;
-  height: 35px;
-  border: none;
-  outline: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: var(--hover);
-  color: var(--text);
-  font-size: 14px;
-}
-#Group .members .top-2 i {
-  cursor: pointer;
-}
-#Group .members .bottom {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 10px 10px;
-  overflow-y: scroll;
-  max-height: 70vh;
-  min-height: 70vh;
-}
-#Group .members .bottom::-webkit-scrollbar {
-  display: flex;
-  width: 7px;
-}
-#Group .members .bottom::-webkit-scrollbar-track {
-  background: transparent;
-}
-#Group .members .bottom::-webkit-scrollbar-thumb {
-  background: var(--lwhite);
+
+.toggle-buttons button {
+  background: var(--navdark);
   border-radius: 10px;
-  border: 2px solid var(--members);
-}
-#Group .members .bottom::-webkit-scrollbar-thumb:hover {
-  background-color: var(--scroll-hover);
-}
-#Group .members .bottom .members-chat {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer;
-  gap: 10px;
+  border: none;
   padding: 10px;
-  overflow: hidden;
-  max-width: 100%;
-  width: 100%;
+  color: var(--text);
+  cursor: pointer;
+  margin: 5px;
 }
-#Group .members .bottom .members-chat .left img {
-  height: 40px;
-  width: 40px;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 50%;
-  flex-shrink: 0;
+
+.chat-list {
+  margin-top: 20px;
+  overflow: auto;
 }
-#Group .members .bottom .members-chat .mid {
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #34495e;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+.chat-item .name {
   display: block;
   max-width: 100%;
   min-width: 0;
@@ -317,73 +266,70 @@ p {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#Group .members .bottom .members-chat:hover {
-  background-color: rgba(199, 194, 194, 0.115);
-  border-radius: 10px;
+.chat-item i {
+  margin-right: 5px;
 }
-#Group .chat-area {
-  max-height: 85.5vh;
-  width: 80%;
-  background-color: var(--hover);
+
+.chat-item:hover {
+  background: rgba(255, 255, 255, 0.0549019608);
+}
+
+.chat-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.chat-area {
+  width: 77%;
   display: flex;
   flex-direction: column;
+  background: var(--hover);
 }
-#Group .chat-area-top {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+
+.chat-header {
+  padding: 15px;
+  background: transparent;
+  color: white;
   border-bottom: 1px solid var(--border);
-  padding: 15px 20px;
 }
-#Group .chat-area-top-left {
-  width: 50%;
-}
-#Group .chat-area-top-right {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  width: 50%;
-  height: 100%;
-}
-#Group .chat-area-top-right i {
-  cursor: pointer;
-  margin-right: 30px;
-}
-#Group .chat-area-mid {
+
+.chat-messages {
   flex: 1;
+  padding: 15px;
   overflow-y: auto;
-  padding: 20px 50px;
 }
-#Group .chat-area-bottom {
+
+.chat-input {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 10px 0;
-  width: 100%;
+  padding: 5px;
+  background: var(--navdark);
+  border-top: 1px solid var(--border);
 }
-#Group .chat-area-bottom-item {
-  width: 93%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: var(--members);
-  border-radius: 10px;
-}
-#Group .chat-area-bottom-item input {
-  width: 100%;
-  height: 55px;
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  height: 50px;
   border: none;
-  outline: none;
-  padding: 0 10px;
-  color: var(--text);
-  font-size: 17px;
+  border-radius: 5px;
   background-color: transparent;
+  outline: none;
+  color: var(--text);
+  font-size: 18px;
 }
-#Group .chat-area-bottom-item i {
+
+.chat-input button {
+  background: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
   cursor: pointer;
-  padding: 15px 20px;
+  margin-right: 15px;
+}
+.chat-input button i {
+  font-size: 20px;
 }
 
 #Materials {
@@ -440,7 +386,8 @@ p {
   padding: 2px 5px;
   border-radius: 10px;
 }
-#Materials .delete {
+
+.delete {
   display: none;
   flex-direction: column;
   position: absolute;
@@ -454,12 +401,12 @@ p {
   transition: transform 0.3s ease-in;
   transform: scale(1.1);
 }
-#Materials .delete .bottom {
+.delete .bottom {
   display: flex;
   flex-direction: row;
   gap: 15px;
 }
-#Materials .delete .bottom .cancel-btn {
+.delete .bottom .cancel-btn {
   padding: 1px 8px;
   border-radius: 5px;
   border: 0.5px solid var(--text);
@@ -467,7 +414,7 @@ p {
   font-size: 15px;
   background-color: transparent;
 }
-#Materials .delete .bottom .delete-btn {
+.delete .bottom .delete-btn {
   padding: 3px 10px;
   border-radius: 5px;
   border: 0.5px solid rgb(22, 22, 22);
@@ -476,7 +423,8 @@ p {
   outline: none;
   color: white;
 }
-#Materials .materials-top {
+
+.materials-top {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -484,19 +432,19 @@ p {
   width: 100%;
   padding: 10px;
 }
-#Materials .materials-top-left {
+.materials-top-left {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 20px;
 }
-#Materials .materials-top-left-folder {
+.materials-top-left-folder {
   padding: 10px;
   background-color: var(--roombg);
   border-radius: 10px;
   cursor: pointer;
 }
-#Materials .materials-top-left-code {
+.materials-top-left-code {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -506,14 +454,14 @@ p {
   background-color: var(--roombg);
   border-radius: 10px;
 }
-#Materials .materials-top-mid {
+.materials-top-mid {
   display: flex;
   flex-direction: row;
   align-items: center;
   background-color: var(--roombg);
   border-radius: 10px;
 }
-#Materials .materials-top-mid input {
+.materials-top-mid input {
   width: 100%;
   height: 40px;
   border: none;
@@ -525,17 +473,18 @@ p {
   font-size: 16px;
   background-color: transparent;
 }
-#Materials .materials-top-mid i {
+.materials-top-mid i {
   padding: 10px 15px;
   cursor: pointer;
 }
-#Materials .materials-bottom {
+
+.materials-bottom {
   border: 1px solid var(--border);
   flex: 1;
   min-height: 100vh;
   padding: 1rem;
 }
-#Materials .materials-bottom .card {
+.materials-bottom .card {
   background-color: var(--roombg);
   color: var(--text);
   padding: 1rem;
@@ -546,16 +495,16 @@ p {
   flex-direction: column;
   gap: 5px;
 }
-#Materials .materials-bottom .card .card-top {
+.materials-bottom .card .card-top {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
-#Materials .materials-bottom .card .card-top i {
+.materials-bottom .card .card-top i {
   font-size: 1.5rem;
   color: var(--primary);
 }
-#Materials .materials-bottom .card .card-top a {
+.materials-bottom .card .card-top a {
   text-decoration: none;
   color: var(--text);
   font-weight: bold;
@@ -567,26 +516,26 @@ p {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-#Materials .materials-bottom .card .card-top a:hover {
+.materials-bottom .card .card-top a:hover {
   text-decoration: underline;
 }
-#Materials .materials-bottom .card .card-bottom {
+.materials-bottom .card .card-bottom {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   justify-content: space-between;
 }
-#Materials .materials-bottom .card .card-bottom p {
+.materials-bottom .card .card-bottom p {
   margin-top: 0.5rem;
   font-size: 0.8rem;
   color: var(--secondary-text);
 }
-#Materials .materials-bottom .card .card-bottom a {
+.materials-bottom .card .card-bottom a {
   margin-top: 0.5rem;
   text-decoration: none;
   color: var(--white);
 }
-#Materials .materials-bottom .card .card-bottom a i {
+.materials-bottom .card .card-bottom a i {
   font-size: 0.9rem;
   cursor: pointer;
 }

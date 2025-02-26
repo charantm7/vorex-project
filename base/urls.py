@@ -37,6 +37,7 @@ urlpatterns = [
     path('create-group-chat/<str:room_name>/',views.rooms, name='Create-group-chat'),
     path('message/<str:room_name>/',views.rooms, name='Create-message'),
     path('fetch-messages/<str:room_name>/<str:chat_type>/<int:chat_id>/', views.fetch_messages, name='fetch-messages'),
+    path('delete-group/<str:room_name>/<str:g_name>/',views.delete_group,name='Delete-group'),
 
 
 
