@@ -5,13 +5,17 @@
 {% endblock %} {% block link %}
 <link rel="stylesheet" href="{% static 'css/auth.css' %}" />
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-{% endblock %} {% block content %}
+{% endblock %} {% block content %} {% load socialaccount %}
 <div class="main-body" id="main-body">
   <div class="wrapper">
     <span class="rotate-bg"></span>
     <span class="rotate-bg2"></span>
     <div class="third-party-auth login" id="third-party-login">
-      <a href="https://www.google.com/" class="animation" style="--i: 3; --j: 24">
+      <a
+        href="{% provider_login_url 'google' process='login' %}?next=/"
+        class="animation"
+        style="--i: 3; --j: 24"
+      >
         <i class="fa-brands fa-google"></i>
       </a>
       <a href="https://github.com/charantm7/" class="animation" style="--i: 3; --j: 24"
@@ -22,7 +26,7 @@
       ></a>
     </div>
     <div class="third-party-auth register" id="third-party-register">
-      <a href="https://www.google.com/" class="animation" style="--i: 17; --j: 0">
+      <a href="{% provider_login_url 'google' %}?next=/" class="animation" style="--i: 17; --j: 0">
         <i class="fa-brands fa-google"></i>
       </a>
       <a href="https://www.google.com/" class="animation" style="--i: 17; --j: 0"

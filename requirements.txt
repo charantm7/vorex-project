@@ -1,0 +1,59 @@
+python3
+# Django and essential dependencies
+Django>=4.2
+djangorestframework>=3.14
+channels>=4.0
+asgiref>=3.7
+channels-redis>=4.1
+
+# Authentication & Security
+django-allauth>=0.61
+djangorestframework-simplejwt>=5.2
+bcrypt>=4.0
+
+# Database and Caching
+psycopg2-binary>=2.9  # PostgreSQL, replace with mysqlclient if using MySQL
+django-redis>=5.3
+
+# Real-time & Chat Features
+django-channels>=4.0
+celery>=5.3
+eventlet>=0.33
+
+# Frontend Support
+django-webpack-loader>=1.8
+whitenoise>=6.5  # For serving static files
+
+# AI & NLP (If needed for study assistant/chat features)
+openai>=1.2
+transformers>=4.36
+torch>=2.2
+nltk>=3.8
+
+# Study Materials (File Uploads, PDFs, and Storage)
+Pillow>=10.2
+pdfplumber>=0.11
+django-storages>=1.14
+boto3>=1.33  # For AWS S3 storage
+
+# Notifications & Background Tasks
+django-notifications-hq>=1.8
+apscheduler>=3.10
+
+# Search and Filtering
+django-filter>=23.5
+drf-yasg>=1.21  # API documentation (Swagger)
+
+# Analytics & Tracking
+django-analytical>=5.0
+matplotlib>=3.8
+numpy>=1.26
+
+# Miscellaneous
+gunicorn>=21.2
+decouple>=0.5  # For environment variable management
+
+# Testing & Debugging
+pytest-django>=4.5
+coverage>=7.4
+django-debug-toolbar>=4.3
