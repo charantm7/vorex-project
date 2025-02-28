@@ -300,6 +300,8 @@ p {
   flex: 1;
   padding: 15px;
   overflow-y: auto;
+  background-color: var(--navdark);
+  color: #0d1117;
 }
 
 .chat-input {
