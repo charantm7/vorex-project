@@ -1,0 +1,93 @@
+{% extends "base.html" %}{% load static %} {% block title %}
+<title>Login</title>
+{% endblock %} {% block nav1 %}
+<a href="{% url 'User_signup'%}">/ signup</a>
+{% endblock %} {% block link %}
+<link rel="stylesheet" href="{% static 'css/login_signup.css' %}" />
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+{% endblock %} {% block content %} {% load socialaccount %}
+<div class="auth-body-signup open-sans">
+  <form action="{% url 'User_signup' %}" method="POST" class="signup-user">
+    {% csrf_token %}
+    <div class="top">
+      <div class="top-1">
+        <p class="vorex">VOREX</p>
+        <i class="fa-solid fa-xmark" onclick="closeSignup()"></i>
+      </div>
+      <div class="top-2">SIGNUP</div>
+    </div>
+    <div class="mid">
+      <div class="input-box">
+        <input type="text" name="username" for="username" , id="username" required />
+        <i class="fa-solid fa-user"></i>
+        <label for="username">Username</label>
+      </div>
+      <div class="input-box">
+        <input type="text" name="email" for="email" , id="email" required />
+        <i class="bx bxs-envelope"></i>
+        <label for="email">Email</label>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" for="passowrd" id="password-1" required />
+        <i
+          class="fa-solid fa-eye-slash"
+          id="hide-password-1"
+          onclick="togglePassword('password-1')"
+          style="cursor: pointer"
+        ></i>
+        <i
+          class="fa-solid fa-eye"
+          id="show-password-1"
+          onclick="togglePassword('password-1')"
+          style="display: none; cursor: pointer"
+        ></i>
+
+        <label for="">Password</label>
+      </div>
+      <div class="input-box">
+        <input type="password" name="confirm_password" for="password" id="confirm_password" required />
+        <i
+          class="fa-solid fa-eye-slash"
+          id="hide-confirm_password"
+          onclick="togglePassword('confirm_password')"
+          style="cursor: pointer"
+        ></i>
+        <i
+          class="fa-solid fa-eye"
+          id="show-confirm_password"
+          onclick="togglePassword('confirm_password')"
+          style="display: none; cursor: pointer"
+        ></i>
+
+        <label for="">Confirm Password</label>
+      </div>
+      <div class="body-btn">
+        <button type="submit">SignUp</button>
+      </div>
+      <div class="mid-1">
+        <p>
+          Already have an account?
+          <a href="{% url 'User_login'%}">Login</a>
+        </p>
+      </div>
+    </div>
+    <div class="or"><p>OR</p></div>
+
+    <div class="bottom">
+      <div class="google-box" onclick="SignupGoogle()">
+        <i class="fa-brands fa-google"></i>
+        <p>Signup with Google</p>
+      </div>
+    </div>
+  </form>
+</div>
+<script src="{% static 'js/login_signup.js' %}"></script>
+<script>
+  function SignupGoogle() {
+    window.location.href = "{% provider_login_url 'google' process='signup' %}?next=/";
+  }
+  function closeSignup() {
+    window.location.href = "/";
+  }
+</script>
+{% endblock %}

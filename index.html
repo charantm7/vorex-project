@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="base/static/css/body.css" />
+    <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   </head>
   <body class="auth-body">
     <div class="login-user">
@@ -17,13 +18,18 @@
             <p class="vorex">VOREX</p>
             <i class="fa-solid fa-xmark"></i>
           </div>
-          <div class="top-2">LOGIN</div>
+          <div class="top-2">SIGNUP</div>
         </div>
         <div class="mid">
           <div class="input-box">
             <input type="text" name="username" for="username" , id="username" required />
             <i class="fa-solid fa-user"></i>
             <label for="username">Username</label>
+          </div>
+          <div class="input-box">
+            <input type="text" name="email" for="email" , id="email" required />
+            <i class="bx bxs-envelope"></i>
+            <label for="email">Email</label>
           </div>
           <div class="input-box">
             <input type="password" name="password" for="passowrd" id="password" required />
@@ -42,24 +48,39 @@
 
             <label for="">Password</label>
           </div>
+          <div class="input-box">
+            <input type="password" name="confirm_password" for="password" id="confirm_password" required />
+            <i
+              class="fa-solid fa-eye-slash"
+              id="hide-confirm_password"
+              onclick="togglePassword('confirm_password')"
+              style="cursor: pointer"
+            ></i>
+            <i
+              class="fa-solid fa-eye"
+              id="show-confirm_password"
+              onclick="togglePassword('confirm_password')"
+              style="display: none; cursor: pointer"
+            ></i>
+
+            <label for="">Confirm Password</label>
+          </div>
           <div class="body-btn">
-            <button type="submit" class="animation" style="--i: 3; --j: 24">Login</button>
+            <button type="submit">Login</button>
           </div>
           <div class="mid-1">
             <p>
-              <a href="">Forget Password?</a>
-            </p>
-            <p>
-              New to vorex?
-              <a href="#" class="register-link">SignUp</a>
+              Already have an account?
+              <a href="#" onclick="Loign()">Login</a>
             </p>
           </div>
         </div>
+        <div class="or"><p>OR</p></div>
+
         <div class="bottom">
-          <p>OR</p>
           <div class="google-box">
             <i class="fa-brands fa-google"></i>
-            <p>Login with Google</p>
+            <p>Signup with Google</p>
           </div>
         </div>
       </form>

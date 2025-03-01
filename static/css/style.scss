@@ -69,30 +69,30 @@ p {
   all: unset;
 }
 
-#tooltip {
-  .tooltiptext {
-    font-family: "Open Sans", serif;
-    visibility: hidden;
-    background-color: var(--room-bottom);
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 10px 10px;
-    font-size: 10px;
-    position: absolute;
-    z-index: 1;
-  }
-}
-#tooltip:hover {
-  .tooltiptext {
-    visibility: visible;
-    margin-top: 30px;
-    margin-left: -40px;
-  }
-}
-.tooltiptext {
-  font-family: "Open Sans", serif;
-}
+// #tooltip {
+//   .tooltiptext {
+//     font-family: "Open Sans", serif;
+//     visibility: hidden;
+//     background-color: var(--room-bottom);
+//     color: #fff;
+//     text-align: center;
+//     border-radius: 6px;
+//     padding: 10px 10px;
+//     font-size: 10px;
+//     position: absolute;
+//     z-index: 1;
+//   }
+// }
+// #tooltip:hover {
+//   .tooltiptext {
+//     visibility: visible;
+//     margin-top: 30px;
+//     margin-left: -40px;
+//   }
+// }
+// .tooltiptext {
+//   font-family: "Open Sans", serif;
+// }
 
 body {
   min-height: 100vh;
@@ -104,7 +104,7 @@ body {
   width: 100%;
   display: grid;
   overflow: auto;
-  grid-template-rows: 58.6px 1fr auto;
+  grid-template-rows: 58.6px 2fr auto;
   grid-template-columns: 58px 1fr;
   grid-template-areas:
     "nav nav"
@@ -488,9 +488,12 @@ footer {
   align-items: center;
   justify-content: center;
   padding: 30px;
+  gap: 0%;
+  // border: 1px solid white;
   border-top: 1px solid var(--border);
   .foot-left {
     width: 40%;
+    // border: 1px solid white;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -526,6 +529,7 @@ footer {
         a {
           text-decoration: none;
           color: var(--lwhite);
+          font-size: 1vw;
         }
         a:hover {
           text-decoration: underline;
@@ -546,6 +550,7 @@ footer {
         a {
           text-decoration: none;
           color: var(--lwhite);
+          font-size: 1vw;
         }
         a:hover {
           text-decoration: underline;
@@ -554,6 +559,7 @@ footer {
     }
   }
   .foot-right {
+    // border: 1px solid white;
     width: 60%;
     display: flex;
     flex-direction: row;
@@ -566,10 +572,12 @@ footer {
       gap: 15px;
       p {
         margin-bottom: 5px;
+        font-size: 1vw;
       }
       a {
         text-decoration: none;
         color: var(--lwhite);
+        font-size: 1vw;
       }
       a:hover {
         text-decoration: underline;
@@ -608,17 +616,49 @@ footer {
     transform: translateX(0);
   }
   footer {
-    .footer-container [class^="footer-column-"] {
-      p {
-        font-size: 2.5vw;
+    flex-direction: column;
+
+    .foot-left {
+      width: 100%;
+      gap: 10px;
+      .logo {
+        margin-left: 8%;
+        p {
+          font-size: 23px;
+        }
       }
-      small,
-      a {
-        font-size: 2vw;
+
+      .copyrights,
+      .devcontact {
+        margin-left: 8%;
+        p {
+          font-size: 3vw;
+
+          a {
+            font-size: 3vw;
+          }
+        }
+        [class^="c-"] {
+          font-size: 3vw;
+          a {
+            font-size: 3vw;
+          }
+        }
       }
     }
-    .footer-bottom {
-      font-size: 2.5vw;
+    .foot-right {
+      width: 100%;
+      justify-content: center;
+      gap: 10%;
+      margin-top: 10%;
+      [class^="r-"] {
+        p {
+          font-size: 3vw;
+        }
+        a {
+          font-size: 3vw;
+        }
+      }
     }
   }
 

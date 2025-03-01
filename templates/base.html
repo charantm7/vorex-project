@@ -51,26 +51,23 @@
         <div class="nav-container-right">
           {% if not request.user.is_authenticated %}
           <div class="nav-container-right-login-btn">
-            <a href="{% url 'auth_page' %}?action=login"><button>Login</button></a>
+            <a href="{% url 'User_login' %}"><button>Login</button></a>
           </div>
           <div class="nav-container-right-signup-btn">
-            <a href="{% url 'auth_page' %}?action=signup"><button>Sign Up</button></a>
+            <a href="{% url 'User_signup' %}"><button>Sign Up</button></a>
           </div>
           {% endif %}
           <div class="search-container" id="tooltip">
             <a href="#"><i class="fas fa-search"></i></a>
-            <span class="tooltiptext" style="margin-top: 40px">Search</span>
           </div>
           <div class="nav-container-right-create-logo" id="tooltip">
             <a href="{% url 'Create-room' %}">
               <i class="fa-solid fa-plus"></i>
             </a>
-            <span class="tooltiptext" style="margin-left: 1px; margin-top: 40px">Create Room</span>
           </div>
 
           <div class="nav-container-right-notification-logo" id="tooltip">
             <a href="#"><i class="fa-solid fa-envelope"></i></a>
-            <span class="tooltiptext" style="margin-left: 1px; margin-top: 40px">Inbox</span>
           </div>
           <div class="nav-container-right-account-logo">
             <a href="/"><img src="{% static 'assets/main.png' %}" alt="account img" /></a>

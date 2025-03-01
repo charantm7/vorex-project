@@ -1,3 +1,7 @@
+footer {
+  display: none;
+}
+
 .main-body {
   display: flex;
   flex-direction: column;
@@ -16,32 +20,37 @@
     border-radius: 10px;
     gap: 20px;
     background-color: var(--navdark);
-    width: 25%;
+    width: 30%;
+    height: 100%;
 
     h3 {
-      font-size: 20px;
       margin-bottom: 20px;
       text-align: center;
+    }
+
+    label {
+      font-size: 1vw;
     }
     input {
       width: 100%;
       background-color: var(--bodydark);
       padding: 10px;
-      border: none;
+      height: 50px;
       border-radius: 5px;
       color: white;
-      border: 1px solid rgb(130, 129, 129);
+      outline: none;
+      border: 1px solid rgba(130, 129, 129, 0.256);
     }
     textarea {
       width: 100%;
-      height: 70px;
+      height: 100px;
+      outline: none;
       max-height: 120px;
       background-color: var(--bodydark);
       padding: 10px;
-      border: none;
       border-radius: 5px;
       color: white;
-      border: 1px solid rgb(130, 129, 129);
+      border: 1px solid rgba(130, 129, 129, 0.275);
     }
 
     .room-title {
@@ -66,10 +75,13 @@
       gap: 10px;
       select {
         background-color: var(--bodydark);
-        border: 1px solid rgb(130, 129, 129);
+        border: 1px solid rgba(130, 129, 129, 0.275);
         border-radius: 5px;
         padding: 10px;
         color: white;
+        width: 30%;
+        font-size: 1vw;
+        outline: none;
         ::webkit-scrollbar {
           background-color: var(--bodydark);
           border: 1px solid rgb(130, 129, 129);
@@ -86,8 +98,45 @@
       gap: 10px;
 
       input {
-        width: 10%;
+        width: 4%;
         margin: 0;
+      }
+    }
+    button {
+      height: 40px;
+      font-size: 1vw;
+      border-radius: 10px;
+      border: none;
+      transition: 0.2s ease-in-out;
+    }
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.794);
+      border: none;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .main-body {
+    form {
+      width: 90%;
+
+      label {
+        font-size: 18px;
+      }
+      input {
+        font-size: 16px;
+      }
+      textarea {
+        font-size: 14px;
+      }
+      .room-tag {
+        select {
+          font-size: 15px;
+        }
+      }
+      button {
+        font-size: 17px;
       }
     }
   }

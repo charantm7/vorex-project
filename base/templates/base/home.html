@@ -5,15 +5,20 @@
 {% endblock %} {% block nav %}
 <a href="/">Home </a>
 {% endblock %} {% block content %}
+
 <div class="main-body">
   <div class="topic">
     {% for tag in tags %}
     <a href="{% url 'Tag' tag.name %}">{{tag.name}}</a>
     {% endfor %}
   </div>
+  {% if request.user.is_authenticated %}
   <div class="create-room-btn">
     <button onclick="openModal()">Create Room</button>
+    <button>Your Rooms</button>
+    <button>Joined Rooms</button>
   </div>
+  {% endif %}
   <div class="content">
     <div class="row g-5">
       {% for room in rooms %}
@@ -39,20 +44,16 @@
             <div class="card-mid-right">
               {% if room.created_by == user %}
               <a href="{% url 'Edit-room' room.name %}"
-                ><i class="fa-solid fa-pen-to-square" id="tooltip"
-                  ><span class="tooltiptext">Edit</span></i
-                ></a
-              >
-              <a href="{% url 'Delete-room' room.name %}"
-                ><i class="fa-solid fa-trash" id="tooltip"><span class="tooltiptext">Delete</span></i></a
-              >
+                ><i class="fa-solid fa-pen-to-square" id="tooltip"></i
+              ></a>
+              <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash" id="tooltip"></i></a>
               {% endif %} {% if room.is_private %}
               <div class="card-mid-right-gobal">
-                <i class="fa-solid fa-lock" id="tooltip"><span class="tooltiptext">Private</span></i>
+                <i class="fa-solid fa-lock" id="tooltip"></i>
               </div>
               {% else %}
               <div class="card-mid-right-gobal">
-                <i class="fa-solid fa-globe" id="tooltip"><span class="tooltiptext">Public</span></i>
+                <i class="fa-solid fa-globe" id="tooltip"></i>
               </div>
               {% endif %}
             </div>
@@ -95,4 +96,5 @@
   <div class="activity"></div>
 </div>
 <script src="{% static 'js/home.js' %}"></script>
+
 {% endblock %}

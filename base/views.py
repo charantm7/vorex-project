@@ -126,65 +126,53 @@ def auth_page(request):
 
 def user_signup(request):
     special_characters = "!@#$%^&*()_+-=[]{}|;:,.<>?~"
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
 
+        # Validation checks
         if User.objects.filter(username=username).exists():
-            messages.error(
-                request, 'Username already exists! Try another username')
-            return redirect('User_signup')
+            messages.error(request, 'Username already exists! Try another username')
         elif len(username) < 3:
-            messages.error(
-                request, 'Username must be at least 3 characters long')
-            return redirect('User_signup')
+            messages.error(request, 'Username must be at least 3 characters long')
         elif len(username) > 15:
             messages.error(request, 'Username must be less than 15 characters')
-            return redirect('User_signup')
         elif len(password) < 8:
-            messages.error(
-                request, 'Password must be at least 8 characters long')
-            return redirect('User_signup')
+            messages.error(request, 'Password must be at least 8 characters long')
         elif len(password) > 20:
-            messages.error(
-                request, 'Password must be less than 20 characters')
-            return redirect('User_signup')
+            messages.error(request, 'Password must be less than 20 characters')
         elif User.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists! Try another email')
-            return redirect('User_signup')
         elif not any(char.isdigit() for char in password):
             messages.error(request, 'Password must contain at least one digit')
-            return redirect('User_signup')
         elif not any(char.isupper() for char in password):
-            messages.error(
-                request, 'Password must contain at least one uppercase letter')
-            return redirect('User_signup')
+            messages.error(request, 'Password must contain at least one uppercase letter')
         elif not any(char.islower() for char in password):
-            messages.error(
-                request, 'Password must contain at least one lowercase letter')
-            return redirect('User_signup')
+            messages.error(request, 'Password must contain at least one lowercase letter')
         elif not any(char in special_characters for char in password):
-            messages.error(
-                request, 'Password must contain at least one special character')
-            return redirect('User_signup')
+            messages.error(request, 'Password must contain at least one special character')
         elif password != confirm_password:
-            messages.error(request, 'Password does not match')
-            return redirect('User_signup')
-        elif (username == 'admin' or username == 'Admin' or username == 'ADMIN' or password == 'admin' or password == 'Admin' or password == 'ADMIN'):
-            messages.error(request, 'Username or password cannot be admin') 
-            return redirect('User_signup')
-        elif (password == username or password == email):
-            messages.error(request, 'Password cannot be username or email')
-            return redirect('User_signup')
+            messages.error(request, 'Passwords do not match')
+        elif username.lower() == "admin" or password.lower() == "admin":
+            messages.error(request, 'Username or password cannot be "admin"')
+        elif password == username or password == email:
+            messages.error(request, 'Password cannot be the same as username or email')
         else:
-            user = User.objects.create_user(
-                username=username, email=email, password=password)
+            user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
-            login(request, user)
-            return redirect('Home')
-    return render(request, 'base/authentication/auth.html')
+
+            user.backend = 'allauth.account.auth_backends.AuthenticationBackend'
+
+            login(request, user, backend=user.backend)
+
+            return redirect('Home') 
+
+        return redirect('User_signup')  
+
+    return render(request, 'base/authentication/signup.html')
 
 
 def user_login(request):
@@ -205,7 +193,8 @@ def user_login(request):
             return redirect('Home')
         else:
             messages.error(request, 'Invalid password')
-    return render(request, 'base/authentication/auth.html')
+            return redirect('User_login')
+    return render(request, 'base/authentication/login.html')
 
 
 @login_required(login_url='User_login')

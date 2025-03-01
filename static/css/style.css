@@ -77,29 +77,6 @@ p {
   all: unset;
 }
 
-#tooltip .tooltiptext {
-  font-family: "Open Sans", serif;
-  visibility: hidden;
-  background-color: var(--room-bottom);
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 10px 10px;
-  font-size: 10px;
-  position: absolute;
-  z-index: 1;
-}
-
-#tooltip:hover .tooltiptext {
-  visibility: visible;
-  margin-top: 30px;
-  margin-left: -40px;
-}
-
-.tooltiptext {
-  font-family: "Open Sans", serif;
-}
-
 body {
   min-height: 100vh;
   font-family: "VT323", monospace;
@@ -110,7 +87,7 @@ body {
   width: 100%;
   display: grid;
   overflow: auto;
-  grid-template-rows: 58.6px 1fr auto;
+  grid-template-rows: 58.6px 2fr auto;
   grid-template-columns: 58px 1fr;
   grid-template-areas: "nav nav" "sidebar main " "sidebar footer ";
 }
@@ -452,6 +429,7 @@ footer {
   align-items: center;
   justify-content: center;
   padding: 30px;
+  gap: 0%;
   border-top: 1px solid var(--border);
 }
 footer .foot-left {
@@ -491,6 +469,7 @@ footer .foot-left .copyrights p .vorex {
 footer .foot-left .copyrights p a {
   text-decoration: none;
   color: var(--lwhite);
+  font-size: 1vw;
 }
 footer .foot-left .copyrights p a:hover {
   text-decoration: underline;
@@ -511,6 +490,7 @@ footer .foot-left .devcontact [class^=c-] {
 footer .foot-left .devcontact [class^=c-] a {
   text-decoration: none;
   color: var(--lwhite);
+  font-size: 1vw;
 }
 footer .foot-left .devcontact [class^=c-] a:hover {
   text-decoration: underline;
@@ -529,10 +509,12 @@ footer .foot-right [class^=r-] {
 }
 footer .foot-right [class^=r-] p {
   margin-bottom: 5px;
+  font-size: 1vw;
 }
 footer .foot-right [class^=r-] a {
   text-decoration: none;
   color: var(--lwhite);
+  font-size: 1vw;
 }
 footer .foot-right [class^=r-] a:hover {
   text-decoration: underline;
@@ -564,15 +546,50 @@ footer .foot-right [class^=r-] a:hover {
     display: block;
     transform: translateX(0);
   }
-  footer .footer-container [class^=footer-column-] p {
-    font-size: 2.5vw;
+  footer {
+    flex-direction: column;
   }
-  footer .footer-container [class^=footer-column-] small,
-  footer .footer-container [class^=footer-column-] a {
-    font-size: 2vw;
+  footer .foot-left {
+    width: 100%;
+    gap: 10px;
   }
-  footer .footer-bottom {
-    font-size: 2.5vw;
+  footer .foot-left .logo {
+    margin-left: 8%;
+  }
+  footer .foot-left .logo p {
+    font-size: 23px;
+  }
+  footer .foot-left .copyrights,
+  footer .foot-left .devcontact {
+    margin-left: 8%;
+  }
+  footer .foot-left .copyrights p,
+  footer .foot-left .devcontact p {
+    font-size: 3vw;
+  }
+  footer .foot-left .copyrights p a,
+  footer .foot-left .devcontact p a {
+    font-size: 3vw;
+  }
+  footer .foot-left .copyrights [class^=c-],
+  footer .foot-left .devcontact [class^=c-] {
+    font-size: 3vw;
+  }
+  footer .foot-left .copyrights [class^=c-] a,
+  footer .foot-left .devcontact [class^=c-] a {
+    font-size: 3vw;
+  }
+  footer .foot-right {
+    width: 100%;
+    justify-content: center;
+    gap: 10%;
+    margin-top: 10%;
+  }
+  footer .foot-right [class^=r-] p {
+    font-size: 3vw;
+  }
+  footer .foot-right [class^=r-] a {
+    font-size: 3vw;
   }
   .nav1 {
     display: none;
