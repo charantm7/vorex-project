@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 :root {
   --roomborder: #ececec;
   --roomtext: #d1d1d1;
@@ -6,6 +7,12 @@
   --borderbottom: #4e4e4eb9;
   --white: white;
   --room-bottom: #2a2e38;
+  --white: #fff;
+  --black: #000;
+  --bodydark: #151b23;
+  --navdark: #0d1117;
+  --lightBulue: rgb(34, 237, 255);
+  --links: rgb(34, 237, 255);
 }
 
 p {
@@ -209,5 +216,165 @@ p {
   }
   .content .card-mid-right {
     margin-right: 30px;
+  }
+}
+.auth-body {
+  height: 90vh;
+  width: 100%;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auth-body .login-user {
+  border: 1px solid black;
+  border-radius: 1rem;
+  height: 75%;
+  width: 24%;
+  padding: 2rem;
+}
+.auth-body .login-user .top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.auth-body .login-user .top .top-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.auth-body .login-user .top .top-1 p {
+  font-size: 1.1vw;
+}
+.auth-body .login-user .top .top-1 i {
+  color: black;
+  font-size: 1.3vw;
+  cursor: pointer;
+}
+.auth-body .login-user .top .top-2 {
+  display: flex;
+  justify-content: center;
+  font-size: 2vw;
+}
+.auth-body .login-user .mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0 0.5rem 0;
+}
+.auth-body .login-user .mid .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 5% 0;
+}
+.auth-body .login-user .mid .input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  color: black;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid black;
+  transition: 0.5s;
+}
+.auth-body .login-user .mid .input-box input:focus,
+.auth-body .login-user .mid .input-box input:valid {
+  border-bottom-color: var(--lightBulue);
+}
+.auth-body .login-user .mid .input-box label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: black;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.auth-body .login-user .mid .input-box input:focus ~ label,
+.auth-body .login-user .mid .input-box input:valid ~ label {
+  top: -5px;
+  color: var(--lightBulue);
+}
+.auth-body .login-user .mid .input-box i {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 18px;
+  transition: 0.5s;
+}
+.auth-body .login-user .mid .input-box input:focus ~ i,
+.auth-body .login-user .mid .input-box input:valid ~ i {
+  color: var(--lightBulue);
+}
+.auth-body .login-user .mid .body-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 4%;
+}
+.auth-body .login-user .mid .body-btn button {
+  width: 100%;
+  height: 45px;
+  background-color: var(--black);
+  color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s;
+  margin-top: 5px;
+}
+.auth-body .login-user .mid .body-btn button:hover {
+  background-color: rgba(0, 0, 0, 0.847);
+}
+.auth-body .login-user .mid .mid-1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 2rem;
+  font-size: 14px;
+  color: var(--white);
+  text-align: start;
+}
+.auth-body .login-user .mid .mid-1 p,
+.auth-body .login-user .mid .mid-1 a {
+  font-size: 0.9vw;
+  padding: 0 0.4rem;
+  color: var(--black);
+  text-decoration: none;
+  font-weight: 600;
+}
+.auth-body .login-user .mid .mid-1 a:hover {
+  text-decoration: underline;
+}
+.auth-body .login-user .bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+.auth-body .login-user .bottom .google-box {
+  border: 1px solid black;
+  border-radius: 40px;
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+@media (max-width: 576px) {
+  .auth-body .login-user {
+    width: 70%;
   }
 }/*# sourceMappingURL=body.css.map */
