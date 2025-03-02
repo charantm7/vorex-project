@@ -521,6 +521,9 @@ footer .foot-right [class^=r-] a:hover {
 }
 
 @media (max-width: 576px) {
+  nav {
+    position: relative;
+  }
   .nav-container-right-login-btn a button,
   .nav-container-right-signup-btn a button {
     display: none;
@@ -551,13 +554,16 @@ footer .foot-right [class^=r-] a:hover {
   }
   footer .foot-left {
     width: 100%;
-    gap: 10px;
+    gap: 15px;
   }
   footer .foot-left .logo {
     margin-left: 8%;
   }
   footer .foot-left .logo p {
     font-size: 23px;
+  }
+  footer .foot-left .devcontact {
+    gap: 20px;
   }
   footer .foot-left .copyrights,
   footer .foot-left .devcontact {

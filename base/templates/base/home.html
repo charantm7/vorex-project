@@ -33,7 +33,7 @@
               {% endif %}
               <a href="{% url 'Profile' room.created_by.username %}">@{{room.created_by.username}}</a>
             </div>
-            <p>created: {{room.created_at|date:"Y F j"}}</p>
+            <p>{{room.created_at|date:"Y F j"}}</p>
           </div>
           <div class="card-mid">
             <div class="card-mid-left">

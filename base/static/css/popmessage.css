@@ -6,7 +6,7 @@
   justify-content: center;
   list-style: none;
   padding: 10px;
-  z-index: 1;
+  z-index: 9999;
   position: absolute;
   top: 110px;
   left: 40%;
@@ -28,4 +28,11 @@
 }
 .messages li span:hover {
   color: red;
+}
+
+@media (max-width: 576px) {
+  .messages {
+    z-index: 9999;
+    background-color: black;
+  }
 }/*# sourceMappingURL=popmessage.css.map */

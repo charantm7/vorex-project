@@ -83,7 +83,7 @@ p {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      padding: 25px 20px 25px 20px;
+      padding: 2rem 1rem 2rem 1rem;
       height: 20%;
       border-bottom: 0.1px solid var(--borderbottom);
       img {
@@ -97,6 +97,16 @@ p {
         text-decoration: none;
         color: var(--roomtext);
         transition: 0.4s ease;
+        // display: block;
+        max-width: 100%;
+        min-width: 0;
+        flex-grow: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: absolute;
+        margin-top: 0.5%;
+        margin-left: 1%;
       }
       a:hover {
         color: var(--white);
@@ -104,6 +114,7 @@ p {
       }
       p {
         font-size: 0.9rem;
+        margin-right: 5px;
       }
     }
     &-mid {
@@ -118,17 +129,36 @@ p {
         flex-direction: column;
         justify-content: center;
         a {
-          margin-left: 20px;
+          margin-left: 2%;
           text-decoration: none;
           color: var(--roomtext);
+          // display: block;
+          max-width: 70%;
+          min-width: 0;
+          flex-grow: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          margin-bottom: 3%;
+          position: absolute;
         }
         a:hover {
           color: var(--white);
           text-decoration: underline;
         }
         small {
-          margin: 15px 0 0 20px;
+          margin: 15px 0 0 2%;
           font-size: 12px;
+          // display: block;
+          max-width: 80%;
+
+          min-width: 0;
+          flex-grow: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          position: absolute;
+          margin-top: 4%;
         }
       }
       &-right {
@@ -219,25 +249,45 @@ p {
       "contents";
   }
   .create-room-btn {
-    padding: 1rem 1rem 0 1.5rem;
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 10px;
     button {
       padding: 10px 10px;
-      font-size: 12px;
+      font-size: 13px;
     }
   }
   .content {
     padding: 20px;
 
     .card-top {
-      padding: 15px 10px 15px 10px;
+      padding: 25px 10px 25px 10px;
       p {
         font-size: 0.7rem;
+      }
+      a {
+        margin-top: 1.5%;
+        margin-left: 2%;
       }
     }
     .card-mid {
       &-right {
-        margin-right: 30px;
+        margin-right: 10%;
       }
+      &-left {
+        small {
+          position: absolute;
+          margin-top: 9%;
+          max-width: 70%;
+        }
+        a {
+          margin-bottom: 10%;
+          position: absolute;
+          max-width: 50%;
+        }
+      }
+    }
+    .card-bottom {
+      padding: 25px;
     }
   }
 }

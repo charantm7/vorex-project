@@ -114,6 +114,7 @@ footer {
 @media (max-width: 576px) {
   .main-body form {
     width: 90%;
+    height: 85%;
   }
   .main-body form label {
     font-size: 18px;
