@@ -132,6 +132,7 @@ p {
           margin-left: 2%;
           text-decoration: none;
           color: var(--roomtext);
+          font-size: 1.2vw;
           // display: block;
           max-width: 70%;
           min-width: 0;
@@ -158,7 +159,7 @@ p {
           text-overflow: ellipsis;
           white-space: nowrap;
           position: absolute;
-          margin-top: 4%;
+          margin-top: 3.5%;
         }
       }
       &-right {
@@ -260,6 +261,7 @@ p {
     padding: 20px;
 
     .card-top {
+      height: 25%;
       padding: 25px 10px 25px 10px;
       p {
         font-size: 0.7rem;
@@ -270,6 +272,67 @@ p {
       }
     }
     .card-mid {
+      height: 50%;
+      &-right {
+        margin-right: 10%;
+      }
+      &-left {
+        small {
+          position: absolute;
+          margin-top: 11%;
+          max-width: 70%;
+          margin-left: 4%;
+        }
+        a {
+          margin-bottom: 10%;
+          position: absolute;
+          max-width: 50%;
+          font-size: 19px;
+          margin-left: 4%;
+        }
+      }
+    }
+    .card-bottom {
+      padding: 25px;
+      height: 25%;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .main-body {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "topic"
+      "create-room-btn"
+      "contents";
+  }
+  .create-room-btn {
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 10px;
+    button {
+      padding: 10px 10px;
+      font-size: 13px;
+    }
+  }
+  .content {
+    padding: 20px;
+
+    .card-top {
+      height: 25%;
+      padding: 25px 10px 25px 10px;
+      p {
+        font-size: 0.7rem;
+      }
+      a {
+        margin-top: 1.5%;
+        margin-left: 2%;
+      }
+    }
+    .card-mid {
+      height: 50%;
       &-right {
         margin-right: 10%;
       }
@@ -278,16 +341,20 @@ p {
           position: absolute;
           margin-top: 9%;
           max-width: 70%;
+          margin-left: 4%;
         }
         a {
-          margin-bottom: 10%;
+          margin-bottom: 7%;
           position: absolute;
           max-width: 50%;
+          font-size: 19px;
+          margin-left: 4%;
         }
       }
     }
     .card-bottom {
       padding: 25px;
+      height: 25%;
     }
   }
 }

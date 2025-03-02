@@ -95,12 +95,14 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 0;
 }
 .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  font-size: 1vw;
 }
 .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 img {
   height: 35px;
@@ -112,48 +114,115 @@ p {
 .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 a {
   text-decoration: none;
   color: var(--text);
+  font-size: 1vw;
 }
 .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 a:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 576px) {
-  .rooms .tabcontent {
-    padding: 15px 10px;
+@media (max-width: 700px) {
+  .rooms #Info .tabcontent-top {
+    gap: 10px;
+    padding: 10px 0 20px 10px;
   }
-  .rooms .tabcontent-top {
-    padding: 20px 15px;
+  .rooms #Info .tabcontent-top .tabcontent-top-left {
+    gap: 10%;
+    width: 70%;
   }
-  .rooms .tabcontent-top-left {
-    gap: 20px;
+  .rooms #Info .tabcontent-top .tabcontent-top-left i {
+    font-size: 23vw;
   }
-  .rooms .tabcontent-top-left-1 {
+  .rooms #Info .tabcontent-top .tabcontent-top-left .tabcontent-top-left-1 {
     gap: 5px;
   }
-  .rooms .tabcontent-top-left-1 p {
-    font-size: 1.6em;
+  .rooms #Info .tabcontent-top .tabcontent-top-left .tabcontent-top-left-1 p {
+    font-size: 3em;
   }
-  .rooms .tabcontent-top-left-1 small {
-    font-size: 0.6em;
-  }
-  .rooms .tabcontent-top-right {
-    margin-right: 20px;
+  .rooms #Info .tabcontent-top .tabcontent-top-left .tabcontent-top-left-1 small {
     font-size: 0.8em;
   }
-  .rooms .tabcontent-top-right-1 {
+  .rooms #Info .tabcontent-top .tabcontent-top-right {
+    font-size: 0.8em;
+    width: 30%;
+    margin-top: 9%;
+    gap: 5px;
+    font-size: 0.7em;
+    margin-right: 0;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 {
     margin-top: 5px;
-    font-size: 0.8em;
     gap: 5px;
   }
-  .rooms .tabcontent-top-right-1 img {
+  .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 img {
     height: 25px;
     width: 25px;
   }
+  .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 a {
+    font-size: 13px;
+  }
   .rooms .tab button {
-    font-size: 0.8em;
+    font-size: 16px;
   }
   .rooms .tab button .btn-txt {
     display: none;
+  }
+  .rooms .tablinks i {
+    padding-right: 0;
+    padding: 0.5rem;
+  }
+}
+@media (max-width: 576px) {
+  .rooms #Info {
+    padding: 5px 10px;
+  }
+  .rooms #Info .tabcontent-top {
+    gap: 10px;
+    padding: 10px 0 10px 10px;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-left {
+    gap: 10%;
+    width: 70%;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-left i {
+    font-size: 23vw;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-left .tabcontent-top-left-1 {
+    gap: 0;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-left .tabcontent-top-left-1 p {
+    font-size: 3em;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-left .tabcontent-top-left-1 small {
+    font-size: 0.6em;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-right {
+    font-size: 0.8em;
+    width: 30%;
+    margin-top: 9%;
+    gap: 5px;
+    font-size: 0.6em;
+    margin-right: 0;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 {
+    margin-top: 5px;
+    gap: 5px;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 img {
+    height: 25px;
+    width: 25px;
+  }
+  .rooms #Info .tabcontent-top .tabcontent-top-right .tabcontent-top-right-1 a {
+    font-size: 10px;
+  }
+  .rooms .tab button {
+    font-size: 16px;
+  }
+  .rooms .tab button .btn-txt {
+    display: none;
+  }
+  .rooms .tablinks i {
+    padding-right: 0;
+    padding: 0.5rem;
   }
 }
 .chat-container {
@@ -335,6 +404,44 @@ p {
   font-size: 20px;
 }
 
+@media screen and (max-width: 768px) {
+  .chat-container {
+    flex-direction: column;
+    height: 85.5vh;
+  }
+  /* Make Sidebar Full Width on Mobile */
+  .sidebarc {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+  /* Hide Chat Area Initially */
+  .chat-area {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 90vh;
+    background: var(--hover);
+    z-index: 1000;
+  }
+  /* Chat Header - Add Back Button */
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chat-messages {
+    flex: 1;
+  }
+  .back-btn {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+  }
+}
 #Materials {
   display: flex;
   flex-direction: column;

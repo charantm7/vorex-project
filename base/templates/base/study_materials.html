@@ -1,0 +1,73 @@
+<div id="Materials" class="tabcontent">
+  <div class="materials-top">
+    <div class="materials-top-left">
+      <div class="materials-top-left-folder" id="tooltip" onclick="CreateFolder()">
+        <i class="fa-solid fa-plus"></i>
+        <p>New Folder</p>
+      </div>
+      <div class="materials-top-left-code" title="Upload Your Code">
+        <i class="fa-solid fa-plus"></i>
+        <p>Code</p>
+      </div>
+    </div>
+
+    <div class="materials-top-mid">
+      <input type="text" placeholder="Search Notes" />
+      <i class="fas fa-search"></i>
+    </div>
+  </div>
+
+  <div class="create-folder">
+    <div class="create-folder-top">
+      <p>Create Folder</p>
+      <i class="fas fa-times" onclick="closeFolder()"></i>
+    </div>
+    <div class="create-folder-bottom">
+      <form action="{% url 'Create-folder' rooms.name %}" method="post">
+        {% csrf_token %}
+        <div class="input-folder-name">
+          <label for="folder-name">Name</label>
+          {{form.name}}
+        </div>
+        <button type="submit" name="folder_submit">Create</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="materials-bottom">
+    <div class="row g-3">
+      {% for folder in folders %}
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+        <div class="card">
+          <div class="card-top">
+            <i class="fa-solid fa-folder-open"></i>
+            <a href="{% url 'Folder' folder.name %}" title="{{folder.name}}">{{ folder.name }}</a>
+          </div>
+          <div class="card-bottom">
+            <p>By: {{ folder.created_by.username|default:'Unknown' }}</p>
+            {% if request.user == folder.created_by %}
+            <a onclick="DeleteFolder('{{folder.name}}')"><i class="fa-solid fa-trash"> </i></a>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div id="delete-{{ folder.name }}" class="delete" style="display: none">
+        <div class="top">
+          <p>Delete This Folder?</p>
+        </div>
+        <div class="bottom">
+          <button class="cancel-btn" onclick="CancelDelete('{{ folder.name }}')">Cancel</button>
+          <a href="{% url 'Delete-folder' rooms.name folder.name %}">
+            <button class="delete-btn">Delete</button>
+          </a>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p>No folders available.</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>

@@ -37,23 +37,23 @@
           </div>
           <div class="card-mid">
             <div class="card-mid-left">
-              <a href="{% url 'Rooms' room.name %}">{{room.name}}</a>
+              <a href="{% url 'Rooms' room.name %}" title="{{room.name}}">{{room.name}}</a>
               <small>{{room.description}}</small>
             </div>
 
             <div class="card-mid-right">
               {% if room.created_by == user %}
               <a href="{% url 'Edit-room' room.name %}"
-                ><i class="fa-solid fa-pen-to-square" id="tooltip"></i
+                ><i class="fa-solid fa-pen-to-square" title="Edit"></i
               ></a>
-              <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash" id="tooltip"></i></a>
+              <a href="{% url 'Delete-room' room.name %}"><i class="fa-solid fa-trash" title="Delete"></i></a>
               {% endif %} {% if room.is_private %}
               <div class="card-mid-right-gobal">
-                <i class="fa-solid fa-lock" id="tooltip"></i>
+                <i class="fa-solid fa-lock" title="Private"></i>
               </div>
               {% else %}
               <div class="card-mid-right-gobal">
-                <i class="fa-solid fa-globe" id="tooltip"></i>
+                <i class="fa-solid fa-globe" title="Public"></i>
               </div>
               {% endif %}
             </div>

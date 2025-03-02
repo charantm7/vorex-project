@@ -7,6 +7,7 @@ from .forms import RoomForm, ProfileForm, UserForm, ChatBoxForm, FolderForm, Stu
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
+from django.urls import reverse
 
 
 
@@ -93,6 +94,8 @@ def rooms(request, room_name):
     }
 
     return render(request, 'base/room.html', context)
+
+
 
 def fetch_messages(request, room_name, chat_type, chat_id):
     room = get_object_or_404(Room, name=room_name)

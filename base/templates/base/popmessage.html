@@ -1,15 +1,9 @@
 {% if messages %} {% load static %}
 
 <link rel="stylesheet" href="{% static 'css/popmessage.css' %}" />
-<ul class="messages">
-  {% for message in messages %}
-  <li>{{ message }}<span onclick="closeMessage(this)">&times;</span></li>
-  {% endfor %}
-</ul>
-
-<script>
-  function closeMessage(element) {
-    element.parentElement.remove();
-  }
-</script>
-{% endif %}
+{% for message in messages %}
+<div class="message {% if message.tags == 'error' %}error{% else %}success{% endif %} quicksand">
+  <p>{{ message }}</p>
+  <button class="close-btn" onclick="this.parentElement.style.display='none'">x</button>
+</div>
+{% endfor %} {% endif %}

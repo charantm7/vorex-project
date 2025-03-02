@@ -13,16 +13,17 @@
 {% endblock %} {% block content %}
 <div class="rooms">
   <div class="tab">
-    <button class="tablinks" onclick="openTab(event, 'Info')">
+    <button class="tablinks" id="tab-Info" onclick="openTab(event, 'Info')" id="defaultOpen">
       <i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span>
     </button>
-    <button class="tablinks" onclick="openTab(event, 'Group')" id="defaultOpen">
+    <button class="tablinks" id="tab-Group" onclick="openTab(event, 'Group')">
       <i class="fa-solid fa-user-group"></i><span class="btn-txt">Message</span>
     </button>
-    <button class="tablinks" onclick="openTab(event, 'Materials')">
+    <button class="tablinks" id="tab-Materials" onclick="openTab(event, 'Materials')">
       <i class="fa-solid fa-book"></i><span class="btn-txt">Study Materials</span>
     </button>
   </div>
+
   <div id="Info" class="tabcontent">
     <div class="tabcontent-top">
       <div class="tabcontent-top-left">
@@ -30,7 +31,7 @@
         <div class="tabcontent-top-left-1">
           <p>{{rooms.name}}</p>
           <small>{{rooms.description}}</small>
-          <small>Created on: {{rooms.created_at|date:"Y F j"}}</small>
+          <small>{{rooms.created_at|date:"Y F j"}}</small>
         </div>
       </div>
       <div class="tabcontent-top-right">
@@ -39,7 +40,7 @@
           <img src="{{profile.profile_pic.url}}" alt="img" />
           <a href="{% url 'Profile' rooms.created_by.username %}">@{{rooms.created_by.username}}</a>
         </div>
-        <p>Squad stats: {{members}} Joined</p>
+        <p>Stats: {{members}} Joined</p>
       </div>
     </div>
   </div>
@@ -98,10 +99,8 @@
     </div>
     <div class="chat-area">
       <div class="chat-header">
+        <button class="back-btn" onclick="backToSidebar()"><i class="fas fa-arrow-left"></i></button>
         <p id="chat-title">Select a chat</p>
-        {% for group in group_chat %} {% if request.user == group.created_by %}
-        <a href="{% url 'Delete-group' rooms.name group.group_name %}"><i class="fa-solid fa-trash"> </i></a>
-        {% endif %} {% endfor %}
       </div>
       <div class="chat-messages" id="chat-messages">
         <!-- Messages will be loaded here dynamically -->
@@ -113,83 +112,7 @@
     </div>
   </div>
 
-  {% block materials %}
-  <div id="Materials" class="tabcontent">
-    <div class="materials-top">
-      <div class="materials-top-left">
-        <div class="materials-top-left-folder" id="tooltip" onclick="CreateFolder()">
-          <i class="fa-solid fa-plus"></i>
-          <p>New Folder</p>
-          <span class="tooltiptext">Add Folder</span>
-        </div>
-        <div class="materials-top-left-code" title="Upload Your Code">
-          <i class="fa-solid fa-plus"></i>
-          <p>Code</p>
-        </div>
-      </div>
-
-      <div class="materials-top-mid">
-        <input type="text" placeholder="Search Notes" />
-        <i class="fas fa-search"></i>
-      </div>
-    </div>
-
-    <div class="create-folder">
-      <div class="create-folder-top">
-        <p>Create Folder</p>
-        <i class="fas fa-times" onclick="closeFolder()"></i>
-      </div>
-      <div class="create-folder-bottom">
-        <form action="{% url 'Create-folder' rooms.name %}" method="post">
-          {% csrf_token %}
-          <div class="input-folder-name">
-            <label for="folder-name">Name</label>
-            {{form.name}}
-          </div>
-          <button type="submit" name="folder_submit">Create</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="materials-bottom">
-      <div class="row g-3">
-        {% for folder in folders %}
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-          <div class="card">
-            <div class="card-top">
-              <i class="fa-solid fa-folder-open"></i>
-              <a href="{% url 'Folder' folder.name %}" title="{{folder.name}}">{{ folder.name }}</a>
-            </div>
-            <div class="card-bottom">
-              <p>By: {{ folder.created_by.username|default:'Unknown' }}</p>
-              {% if request.user == folder.created_by %}
-              <a onclick="DeleteFolder('{{folder.name}}')"><i class="fa-solid fa-trash"> </i></a>
-
-              {% endif %}
-            </div>
-          </div>
-        </div>
-        <div id="delete-{{ folder.name }}" class="delete" style="display: none">
-          <div class="top">
-            <p>Delete This Folder?</p>
-          </div>
-          <div class="bottom">
-            <button class="cancel-btn" onclick="CancelDelete('{{ folder.name }}')">Cancel</button>
-            <a href="{% url 'Delete-folder' rooms.name folder.name %}">
-              <button class="delete-btn">Delete</button>
-            </a>
-          </div>
-        </div>
-        {% empty %}
-        <div class="col-12 text-center">
-          <p>No folders available.</p>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-
-    {% endblock %}
-  </div>
+  {% block materials %} {% include 'base/study_materials.html' %} {% endblock %}
   <script src="{% static 'js/room.js'%}"></script>
   <script>
     function CreateFolder() {
@@ -210,32 +133,6 @@
     }
     function Removegroup() {
       document.querySelector(".create-chat-group").style.display = "none";
-    }
-
-    function showIndividualChats() {
-      document.getElementById("individual-chats").style.display = "block";
-      document.getElementById("group-chats").style.display = "none";
-    }
-    function showGroupChats() {
-      document.getElementById("individual-chats").style.display = "none";
-      document.getElementById("group-chats").style.display = "block";
-    }
-    function openChat(name) {
-      document.getElementById("chat-title").textContent = name;
-      document.getElementById("chat-messages").innerHTML = `<p>Chat with ${name}</p>`;
-    }
-    function sendMessage() {
-      let message = document.getElementById("message-input").value;
-      if (message.trim() !== "") {
-        let messageDiv = document.createElement("div");
-        messageDiv.textContent = message;
-        messageDiv.style.padding = "10px";
-        messageDiv.style.background = "#dff9fb";
-        messageDiv.style.margin = "5px 0";
-        messageDiv.style.borderRadius = "5px";
-        document.getElementById("chat-messages").appendChild(messageDiv);
-        document.getElementById("message-input").value = "";
-      }
     }
   </script>
   {% endblock %}

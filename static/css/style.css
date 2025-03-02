@@ -49,6 +49,8 @@
   --mobile: 576px;
   --border: #4e4e4eb9;
   --room-bottom: #2a2e38;
+  --footer-lwhite: #d5d5d5c4;
+  --footer-white: rgba(238, 238, 238, 0.918);
 }
 
 * {
@@ -457,7 +459,7 @@ footer .foot-left .logo p {
 footer .foot-left .copyrights {
   display: flex;
   flex-direction: row;
-  color: var(--lwhite);
+  color: var(--footer-white);
   margin-left: 100px;
 }
 footer .foot-left .copyrights p .vorex {
@@ -468,7 +470,7 @@ footer .foot-left .copyrights p .vorex {
 }
 footer .foot-left .copyrights p a {
   text-decoration: none;
-  color: var(--lwhite);
+  color: var(--footer-white);
   font-size: 1vw;
 }
 footer .foot-left .copyrights p a:hover {
@@ -478,7 +480,7 @@ footer .foot-left .devcontact {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: var(--lwhite);
+  color: var(--footer-white);
   margin-left: 100px;
 }
 footer .foot-left .devcontact [class^=c-] {
@@ -489,7 +491,7 @@ footer .foot-left .devcontact [class^=c-] {
 }
 footer .foot-left .devcontact [class^=c-] a {
   text-decoration: none;
-  color: var(--lwhite);
+  color: var(--footer-white);
   font-size: 1vw;
 }
 footer .foot-left .devcontact [class^=c-] a:hover {
@@ -510,10 +512,11 @@ footer .foot-right [class^=r-] {
 footer .foot-right [class^=r-] p {
   margin-bottom: 5px;
   font-size: 1vw;
+  color: var(--footer-white);
 }
 footer .foot-right [class^=r-] a {
   text-decoration: none;
-  color: var(--lwhite);
+  color: var(--footer-lwhite);
   font-size: 1vw;
 }
 footer .foot-right [class^=r-] a:hover {
