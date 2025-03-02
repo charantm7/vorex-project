@@ -6,6 +6,7 @@
   --roomlight: #151b23;
   --borderbottom: #4e4e4eb9;
   --white: white;
+  --llwhite: #d3d3d3e8;
   --room-bottom: #2a2e38;
   --white: #fff;
   --black: #000;
@@ -57,7 +58,7 @@ p {
   padding: 10px 20px;
   background-color: var(--roomdark);
   border: 1px solid var(--roomdark);
-  color: var(--white);
+  color: var(--llwhite);
   z-index: 1;
   border-radius: 5px;
   font-size: 1vw;
@@ -92,7 +93,7 @@ p {
 .content .card-top a {
   margin-left: 5px;
   text-decoration: none;
-  color: var(--roomtext);
+  color: var(--llwhite);
   transition: 0.4s ease;
   max-width: 100%;
   min-width: 0;
@@ -103,6 +104,7 @@ p {
   position: absolute;
   margin-top: 0.5%;
   margin-left: 1%;
+  font-size: 1vw;
 }
 .content .card-top a:hover {
   color: var(--white);
@@ -128,7 +130,7 @@ p {
 .content .card-mid-left a {
   margin-left: 2%;
   text-decoration: none;
-  color: var(--roomtext);
+  color: var(--llwhite);
   font-size: 1.2vw;
   max-width: 70%;
   min-width: 0;
@@ -138,6 +140,7 @@ p {
   white-space: nowrap;
   margin-bottom: 3%;
   position: absolute;
+  transition: 0.3s ease;
 }
 .content .card-mid-left a:hover {
   color: var(--white);
@@ -154,6 +157,7 @@ p {
   white-space: nowrap;
   position: absolute;
   margin-top: 3.5%;
+  color: var(--llwhite);
 }
 .content .card-mid-right {
   display: flex;
@@ -167,12 +171,12 @@ p {
   margin-left: 5px;
   margin-top: 25px;
   text-decoration: none;
-  color: var(--roomtext);
+  color: var(--llwhite);
   transition: 0.4s ease;
 }
 .content .card-mid-right-gobal {
   margin-top: 25px;
-  color: var(--roomtext);
+  color: var(--llwhite);
 }
 .content .card-mid-right-gobal i {
   margin-left: 5px;
@@ -183,17 +187,22 @@ p {
   align-items: center;
   justify-content: space-between;
   text-align: center;
-  padding: 30px;
+  padding: 1.7rem 1.5rem;
   height: 20%;
   background-color: var(--room-bottom);
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-.content .card-bottom a {
-  text-decoration: none;
-  color: var(--roomtext);
+.content .card-bottom p {
+  font-size: 1vw;
+  color: var(--llwhite);
 }
-.content .card-bottom a:hover {
+.content .card-bottom p a {
+  text-decoration: none;
+  color: var(--llwhite);
+  font-size: 1vw;
+}
+.content .card-bottom p a:hover {
   text-decoration: underline;
   color: #3758fd;
 }
@@ -207,13 +216,17 @@ p {
   padding: 5px 20px;
   background-color: var(--roomdark);
   border: 1px solid var(--roomdark);
-  color: var(--white);
+  color: var(--llwhite);
   border-radius: 20px;
-  transition: 0.6s ease;
+  transition: 0.3s ease;
+}
+.content .card-bottom .card-bottom-right button a {
+  color: var(--llwhite);
+  text-decoration: none;
 }
 .content .card-bottom .card-bottom-right button:hover {
-  background-color: var(--white);
-  border: 1px solid var(--white);
+  background-color: var(--llwhite);
+  border: 1px solid var(--llwhite);
   color: var(--roomdark);
 }
 .content .card-bottom .card-bottom-right button:hover a {
@@ -228,59 +241,6 @@ p {
   background-color: var(--roomdark);
 }
 
-@media (max-width: 576px) {
-  .main-body {
-    display: grid;
-    grid-template-rows: auto auto 1fr;
-    grid-template-columns: 1fr;
-    grid-template-areas: "topic" "create-room-btn" "contents";
-  }
-  .create-room-btn {
-    padding: 1rem 1rem 0 1rem;
-    border-radius: 10px;
-  }
-  .create-room-btn button {
-    padding: 10px 10px;
-    font-size: 13px;
-  }
-  .content {
-    padding: 20px;
-  }
-  .content .card-top {
-    height: 25%;
-    padding: 25px 10px 25px 10px;
-  }
-  .content .card-top p {
-    font-size: 0.7rem;
-  }
-  .content .card-top a {
-    margin-top: 1.5%;
-    margin-left: 2%;
-  }
-  .content .card-mid {
-    height: 50%;
-  }
-  .content .card-mid-right {
-    margin-right: 10%;
-  }
-  .content .card-mid-left small {
-    position: absolute;
-    margin-top: 11%;
-    max-width: 70%;
-    margin-left: 4%;
-  }
-  .content .card-mid-left a {
-    margin-bottom: 10%;
-    position: absolute;
-    max-width: 50%;
-    font-size: 19px;
-    margin-left: 4%;
-  }
-  .content .card-bottom {
-    padding: 25px;
-    height: 25%;
-  }
-}
 @media (max-width: 700px) {
   .main-body {
     display: grid;
@@ -332,5 +292,66 @@ p {
   .content .card-bottom {
     padding: 25px;
     height: 25%;
+  }
+}
+@media (max-width: 576px) {
+  .main-body {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas: "topic" "create-room-btn" "contents";
+  }
+  .create-room-btn {
+    padding: 1rem 1rem 0 1rem;
+    border-radius: 10px;
+  }
+  .create-room-btn button {
+    padding: 10px 10px;
+    font-size: 13px;
+  }
+  .content {
+    padding: 20px;
+  }
+  .content .card-top {
+    height: 25%;
+    padding: 25px 10px 25px 10px;
+  }
+  .content .card-top p {
+    font-size: 0.7rem;
+  }
+  .content .card-top a {
+    margin-top: 1.55%;
+    margin-left: 2%;
+    font-size: 14px;
+  }
+  .content .card-mid {
+    height: 50%;
+  }
+  .content .card-mid-right {
+    margin-right: 10%;
+  }
+  .content .card-mid-left small {
+    position: absolute;
+    margin-top: 11%;
+    max-width: 70%;
+    margin-left: 4%;
+    font-size: 11px;
+  }
+  .content .card-mid-left a {
+    margin-bottom: 10%;
+    position: absolute;
+    max-width: 50%;
+    font-size: 17.5px;
+    margin-left: 4%;
+  }
+  .content .card-bottom {
+    padding: 1.3rem 1rem;
+    height: 25%;
+  }
+  .content .card-bottom p {
+    font-size: 15px;
+  }
+  .content .card-bottom p a {
+    font-size: 15px;
   }
 }/*# sourceMappingURL=body.css.map */

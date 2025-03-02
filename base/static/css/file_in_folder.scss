@@ -1,16 +1,20 @@
+:root {
+  --llwhite: rgba(230, 230, 230, 0.895);
+}
+
 .upload-file {
   display: none;
   position: absolute;
   z-index: 9999;
   top: 38%;
   left: 38%;
-  height: 35%;
+  height: 37%;
   width: 20%;
   border-radius: 10px;
   background-color: rgba(47, 47, 47, 0.789);
 
   .top {
-    padding: 10px 20px;
+    padding: 1.5rem 2rem 1rem 2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,7 +55,7 @@
     button {
       width: 50%;
       border-radius: 8px;
-      margin-top: 5px;
+      margin-top: 5%;
     }
   }
 }
@@ -59,7 +63,7 @@
 .main {
   display: flex;
   flex-direction: column;
-  padding: 10px 30px 30px 30px;
+  padding: 1rem 2rem 2rem 2rem;
   gap: 20px;
 
   .top {
@@ -80,7 +84,7 @@
         padding: 5px 15px;
         border-radius: 4px;
         cursor: pointer;
-        color: var(--white);
+        color: var(--llwhite);
       }
 
       .upload-file-icon {
@@ -92,9 +96,11 @@
         padding: 5px 10px;
         cursor: pointer;
         background-color: var(--navdark);
-        border-radius: 8px;
+        border-radius: 5px;
+        color: var(--llwhite);
         p {
           font-size: 20px;
+          color: var(--llwhite);
         }
       }
     }
@@ -106,10 +112,11 @@
       //   border: 1px solid white;
       padding: 5px 10px 5px 10px;
       background-color: var(--navdark);
-      border-radius: 8px;
+      border-radius: 5px;
+      width: 20%;
 
       input {
-        width: 200px;
+        width: 100%;
         height: 33px;
         border: none;
         outline: none;
@@ -119,6 +126,7 @@
       }
       i {
         padding: 5px;
+        color: var(--lwhite);
       }
     }
   }
@@ -144,11 +152,11 @@
         gap: 15px;
         i {
           font-size: 3vw;
-          color: var(--text);
+          color: var(--llwhite);
         }
         a {
           text-decoration: none;
-          color: var(--white);
+          color: var(--llwhite);
           font-size: 1.15vw;
           display: block;
           max-width: 100%;
@@ -170,7 +178,9 @@
         padding: 5px;
 
         a {
-          color: var(--white);
+          i {
+            color: var(--llwhite);
+          }
         }
         p {
           font-size: 0.8rem;
@@ -181,6 +191,66 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .upload-file {
+    width: 80%;
+    left: 10%;
+    top: 25%;
+    .top {
+      i {
+        font-size: 17px;
+      }
+    }
+  }
+  .main {
+    padding: 0.8rem 0.8rem 0.8rem 0.8rem;
+    .top {
+      .top-1 {
+        gap: 8px;
+        #back-icon {
+          font-size: 15px;
+        }
+        .upload-file-icon {
+          p {
+            font-size: 16px;
+          }
+        }
+      }
+      .top-2 {
+        width: 50%;
+        input {
+          height: 25px;
+          font-size: 15px;
+        }
+      }
+    }
+    .file {
+      .custom-column {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+      }
+      .file-materials {
+        .file-icon-name {
+          i {
+            font-size: 2.5em;
+          }
+          a {
+            font-size: 15px;
+          }
+        }
+        .file-data {
+          a {
+            font-size: 15px;
+          }
+          p {
+            font-size: 12px;
+          }
         }
       }
     }

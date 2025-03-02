@@ -1,7 +1,7 @@
 <div id="Materials" class="tabcontent">
   <div class="materials-top">
     <div class="materials-top-left">
-      <div class="materials-top-left-folder" id="tooltip" onclick="CreateFolder()">
+      <div class="materials-top-left-folder" title="Create Folder" onclick="CreateFolder()">
         <i class="fa-solid fa-plus"></i>
         <p>New Folder</p>
       </div>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="materials-top-mid">
-      <input type="text" placeholder="Search Notes" />
+      <input type="text" placeholder="Search folder" />
       <i class="fas fa-search"></i>
     </div>
   </div>
@@ -37,7 +37,7 @@
   <div class="materials-bottom">
     <div class="row g-3">
       {% for folder in folders %}
-      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+      <div class="col-6 col-sm-4 col-md-3 col-lg-2 custom-col">
         <div class="card">
           <div class="card-top">
             <i class="fa-solid fa-folder-open"></i>

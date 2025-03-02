@@ -4,7 +4,7 @@
   --text: rgba(236, 236, 236, 0.903);
   --border: #4e4e4eb9;
   --members: #21252e;
-  --lwhite: rgb(189, 188, 188);
+  --lwhite: #d3d3d3e8;
   --scroll-hover: rgb(160, 160, 160);
 }
 p {
@@ -35,7 +35,7 @@ p {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    color: var(--text);
+    color: var(--lwhite);
     font-size: 0.9vw;
   }
 
@@ -75,6 +75,7 @@ p {
         gap: 50px;
         i {
           font-size: 15vw;
+          color: var(--lwhite);
         }
         .tabcontent-top-left-1 {
           display: flex;
@@ -85,9 +86,11 @@ p {
           p {
             font-family: "VT323", monospace;
             font-size: 4vw;
+            color: var(--lwhite);
           }
           small {
             font-size: 1vw;
+            color: var(--lwhite);
           }
         }
       }
@@ -100,12 +103,17 @@ p {
         // border: 1px solid #fff;
         gap: 10px;
         margin-top: 0;
+
+        p {
+          color: var(--lwhite);
+        }
         .tabcontent-top-right-1 {
           display: flex;
           flex-direction: row;
           align-items: center;
           gap: 10px;
           font-size: 1vw;
+
           img {
             height: 35px;
             width: 35px;
@@ -114,7 +122,7 @@ p {
           }
           a {
             text-decoration: none;
-            color: var(--text);
+            color: var(--lwhite);
             font-size: 1vw;
           }
           a:hover {
@@ -251,7 +259,7 @@ p {
 .chat-container {
   display: flex;
   width: 100%;
-  height: 86vh;
+  height: 86.5vh;
   background: var(--navdark);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   .create-chat-group {
@@ -327,9 +335,9 @@ p {
 }
 .toggle-buttons button {
   background: var(--navdark);
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
-  padding: 7px;
+  padding: 7px 10px;
   color: var(--text);
   cursor: pointer;
   margin: 3px;
@@ -347,6 +355,7 @@ p {
   border-bottom: 1px solid #34495e;
   border-radius: 10px;
   margin-top: 10px;
+  background: #ffffff0e;
 
   .name {
     display: block;
@@ -362,7 +371,7 @@ p {
   }
 }
 .chat-item:hover {
-  background: #ffffff0e;
+  background: #ffffff1a;
 }
 .chat-item img {
   width: 40px;
@@ -417,6 +426,9 @@ p {
     font-size: 20px;
   }
 }
+.back-btn {
+  display: none;
+}
 @media screen and (max-width: 768px) {
   .chat-container {
     flex-direction: column;
@@ -430,7 +442,6 @@ p {
     border-radius: 0;
   }
 
-  /* Hide Chat Area Initially */
   .chat-area {
     display: none;
     flex-direction: column;
@@ -442,7 +453,6 @@ p {
     z-index: 1000;
   }
 
-  /* Chat Header - Add Back Button */
   .chat-header {
     display: flex;
     justify-content: space-between;
@@ -474,7 +484,7 @@ p {
     position: absolute;
     z-index: 9999;
     width: 20%;
-    height: 28%;
+    height: 30%;
     top: 35%;
     left: 35%;
     background-color: rgba(57, 57, 57, 0.878);
@@ -579,31 +589,35 @@ p {
     &-folder {
       padding: 10px;
       background-color: var(--roombg);
-      border-radius: 10px;
+      border-radius: 5px;
       cursor: pointer;
+      color: var(--lwhite);
+      font-size: 1vw;
     }
     &-code {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 10px;
+      color: var(--lwhite);
       // border: 1px solid var(--border);
       padding: 10px;
       cursor: pointer;
       background-color: var(--roombg);
-      border-radius: 10px;
+      border-radius: 5px;
     }
   }
   &-mid {
     display: flex;
     flex-direction: row;
     align-items: center;
-    // border: 1px solid var(--border);
+    border: 1px solid var(--border);
     background-color: var(--roombg);
-    border-radius: 10px;
+    border-radius: 5px;
+    width: 20%;
     input {
       width: 100%;
-      height: 40px;
+      height: 45px;
       border: none;
       outline: none;
       padding: 5px 10px;
@@ -612,10 +626,12 @@ p {
       color: var(--text);
       font-size: 16px;
       background-color: transparent;
+      // border: 1px solid white;
     }
     i {
       padding: 10px 15px;
       cursor: pointer;
+      color: var(--lwhite);
     }
   }
 }
@@ -627,11 +643,11 @@ p {
 
   .card {
     background-color: var(--roombg);
-    color: var(--text);
+    color: var(--lwhite);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: 210px;
+    width: 95%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -643,12 +659,12 @@ p {
 
       i {
         font-size: 1.5rem;
-        color: var(--primary);
+        color: var(--lwhite);
       }
 
       a {
         text-decoration: none;
-        color: var(--text);
+        color: var(--lwhite);
         font-weight: bold;
         display: block;
         max-width: 100%;
@@ -671,15 +687,16 @@ p {
       p {
         margin-top: 0.5rem;
         font-size: 0.8rem;
-        color: var(--secondary-text);
+        color: var(--lwhite);
       }
       a {
         margin-top: 0.5rem;
         text-decoration: none;
-        color: var(--white);
+
         i {
           font-size: 0.9rem;
           cursor: pointer;
+          color: var(--lwhite);
         }
       }
     }
@@ -691,4 +708,56 @@ footer {
 }
 
 @media (max-width: 700px) {
+  #Materials {
+    .create-folder {
+      width: 55%;
+      top: 35%;
+      left: 22%;
+    }
+  }
+  .materials-top {
+    .materials-top-mid {
+      width: 45%;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #Materials {
+    .create-folder {
+      width: 75%;
+      top: 35%;
+      left: 12%;
+    }
+  }
+  .materials-top {
+    .materials-top-left {
+      gap: 10px;
+      .materials-top-left-folder {
+        font-size: 12px;
+        padding: 10px;
+      }
+      .materials-top-left-code {
+        font-size: 12px;
+        padding: 10px;
+      }
+    }
+    .materials-top-mid {
+      width: auto;
+      color: var(--lwhite);
+      border: none;
+      input {
+        display: none;
+      }
+    }
+  }
+  .materials-bottom {
+    .custom-col {
+      flex: 0 0 100% !important;
+      max-width: 100% !important;
+    }
+    .card {
+      width: 100%;
+    }
+  }
 }

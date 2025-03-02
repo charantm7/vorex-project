@@ -64,8 +64,8 @@
       <div class="sidebar-header">
         <h3>Chat</h3>
         <div class="toggle-buttons">
-          <button onclick="showIndividualChats()">Individuals</button>
-          <button onclick="showGroupChats()">Group</button>
+          <button onclick="showIndividualChats()" title="Chat with Individuals">Individuals</button>
+          <button onclick="showGroupChats()" title="Group chat">Group</button>
           {% if request.user == rooms.created_by %}
           <button onclick="Creategroup()" title="Create Group"><i class="fa-solid fa-plus"> </i></button>
           {% endif %}

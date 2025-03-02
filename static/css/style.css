@@ -40,6 +40,7 @@
   --bodydark: #151b23;
   --navdark: #0d1117;
   --white: #fff;
+  --llwhite: #d3d3d3e8;
   --black: black;
   --bodylight: #ececec;
   --text: #cecece;
@@ -126,7 +127,7 @@ nav .nav-container-left .bar2,
 nav .nav-container-left .bar3 {
   width: 25px;
   height: 3px;
-  background-color: var(--text);
+  background-color: var(--llwhite);
   margin: 5.5px 0;
   transition: 0.4s;
 }
@@ -145,7 +146,7 @@ nav .nav-container-left .nav-links {
 }
 nav .nav-container-left .nav-links a {
   text-decoration: none;
-  color: var(--text);
+  color: var(--llwhite);
   font-size: 1.5rem;
 }
 nav .nav-container-left .nav-links .nav1 {
@@ -163,16 +164,20 @@ nav .nav-container-right {
   gap: 20px;
 }
 nav .nav-container-right .search-container {
-  border: 1px solid var(--text);
-  padding: 5px 8px 5px 8px;
+  border: 1px solid var(--llwhite);
+  padding: 0.45rem 0.55rem;
   border-radius: 4px;
-  transition: 0.5s ease;
+  transition: 0.4s ease;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 nav .nav-container-right .search-container i {
-  color: var(--text);
+  color: var(--llwhite);
+  font-size: 0.9vw;
 }
 nav .nav-container-right .search-container:hover {
-  background-color: white;
+  background-color: var(--llwhite);
 }
 nav .nav-container-right .search-container:hover i {
   color: black;
@@ -182,41 +187,41 @@ nav .nav-container-right [class^=nav-container-right-] {
   flex-direction: row;
 }
 nav .nav-container-right-login-btn a button {
-  color: var(--white);
+  color: var(--llwhite);
   background-color: transparent;
-  border: 1px solid var(--text);
-  border-radius: 4px;
-  transition: 0.7s ease;
-  padding: 5px 8px;
+  border: 1px solid var(--llwhite);
+  border-radius: 3px;
+  transition: 0.4s ease;
+  padding: 0.2rem 0.5rem;
 }
 nav .nav-container-right-login-btn a button:hover {
-  background-color: var(--text);
+  background-color: var(--llwhite);
   color: var(--black);
 }
 nav .nav-container-right-signup-btn a button {
-  color: var(--white);
+  color: var(--llwhite);
   background-color: transparent;
-  border: 1px solid var(--text);
-  border-radius: 4px;
-  transition: 0.7s ease;
-  padding: 5px 8px;
+  border: 1px solid var(--llwhite);
+  border-radius: 3px;
+  transition: 0.4s ease;
+  padding: 0.2rem 0.5rem;
 }
 nav .nav-container-right-signup-btn a button:hover {
-  background-color: var(--text);
+  background-color: var(--llwhite);
   color: var(--black);
 }
 nav .nav-container-right-create-logo {
-  border: 1px solid var(--text);
+  border: 1px solid var(--llwhite);
   border-radius: 4px;
 }
 nav .nav-container-right-create-logo a i {
-  color: var(--text);
-  font-size: 20px;
-  padding: 5px 8px;
-  transition: 0.7s ease;
+  color: var(--llwhite);
+  font-size: 1.1vw;
+  padding: 0.4rem 0.5rem;
+  transition: 0.4s ease;
 }
 nav .nav-container-right-create-logo a i:hover {
-  background-color: var(--text);
+  background-color: var(--llwhite);
   color: var(--black);
 }
 nav .nav-container-right-create-logo .create-room-text {
@@ -250,22 +255,23 @@ nav .nav-container-right-create-logo:hover .create-room-text {
   opacity: 1;
 }
 nav .nav-container-right-notification-logo {
-  border: 1px solid var(--text);
+  border: 1px solid var(--llwhite);
   border-radius: 4px;
 }
 nav .nav-container-right-notification-logo a i {
-  color: var(--text);
-  font-size: 20px;
+  color: var(--llwhite);
+  font-size: 1.1vw;
   padding: 5px 8px;
-  transition: 0.7s ease;
+  transition: 0.4s ease;
 }
 nav .nav-container-right-notification-logo a i:hover {
-  background-color: var(--text);
+  background-color: var(--llwhite);
   color: var(--black);
 }
 nav .nav-container-right-account-logo a img {
   height: 35px;
   width: 35px;
+  color: var(--llwhite);
 }
 
 aside .sidebar {
@@ -283,6 +289,8 @@ aside .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
 aside .sidebar.active {
   width: 170px;
@@ -295,12 +303,12 @@ aside .logo_content {
 }
 aside .logo i {
   font-size: 1.3rem;
-  color: var(--bodylight);
+  color: var(--llwhite);
   cursor: pointer;
 }
 aside .logo_name {
   font-size: 22px;
-  color: var(--bodylight);
+  color: var(--llwhite);
   font-weight: 400;
   margin-left: 25px;
   gap: 2px;
@@ -322,7 +330,7 @@ aside .nav_list-top a {
   all: unset;
   display: flex;
   align-items: center;
-  color: var(--bodylight);
+  color: var(--llwhite);
   font-size: 18px;
   text-decoration: none;
   padding: 10px 10px;
@@ -331,7 +339,7 @@ aside .nav_list-top a {
   cursor: pointer;
 }
 aside .nav_list-top a:hover {
-  background: var(--white);
+  background: var(--llwhite);
   color: var(--black);
 }
 aside .nav_list-top i {
@@ -352,7 +360,7 @@ aside .nav-list-bottom a {
   all: unset;
   display: flex;
   align-items: center;
-  color: var(--bodylight);
+  color: var(--llwhite);
   font-size: 18px;
   text-decoration: none;
   padding: 10px 10px;
@@ -361,7 +369,7 @@ aside .nav-list-bottom a {
   cursor: pointer;
 }
 aside .nav-list-bottom a:hover {
-  background: var(--white);
+  background: var(--llwhite);
   color: var(--black);
 }
 aside .nav-list-bottom i {
@@ -527,6 +535,20 @@ footer .foot-right [class^=r-] a:hover {
   nav {
     position: relative;
   }
+  nav .nav-container .nav-container-right .search-container {
+    padding: 0.5rem 0.5rem;
+  }
+  nav .nav-container .nav-container-right .search-container i {
+    font-size: 12px;
+  }
+  nav .nav-container .nav-container-right .nav-container-right-notification-logo a,
+  nav .nav-container .nav-container-right .nav-container-right-notification-logo i {
+    font-size: 15px;
+  }
+  nav .nav-container .nav-container-right .nav-container-right-create-logo a,
+  nav .nav-container .nav-container-right .nav-container-right-create-logo i {
+    font-size: 15px;
+  }
   .nav-container-right-login-btn a button,
   .nav-container-right-signup-btn a button {
     display: none;
@@ -536,13 +558,13 @@ footer .foot-right [class^=r-] a:hover {
     grid-template-columns: 1fr;
     grid-template-areas: "nav" "main " "footer ";
   }
-  .sidebar {
+  aside .sidebar {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 56.8px;
     left: 0;
     height: calc(100% - 56.8px);
-    height: 100%;
+    height: 100vh;
     width: 200px;
     z-index: 1000;
     transform: translateX(-100%);

@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tabButton.click();
     }
   } else {
-    document.getElementById("defaultOpen").click(); // Open default tab
+    document.getElementById("defaultOpen").click();
   }
 });
 
