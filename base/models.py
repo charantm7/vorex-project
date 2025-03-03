@@ -5,12 +5,12 @@ class Tag(models.Model):
     name = models.CharField(max_length=500, unique=True)
 
     def __str__(self):
-        return self.name
+        return self.name 
 
 class Room(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE,related_name="rooms",null=True)
     name = models.CharField(max_length=50)
-    tags = models.ManyToManyField(Tag, related_name="rooms", null=True)
+    tags = models.ManyToManyField(Tag, related_name="rooms", blank=True)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -78,11 +78,11 @@ class RoomChatIndividual(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name="individual_messages", null=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender", null=True)
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver", null=True)
-    content = models.CharField(max_length=255, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    content = models.TextField(null=True)
+    timestamp  = models.DateTimeField(auto_now_add=True, null=False)
 
     def __str__ (self):
-        return f'{self.sender.username} : {self.content}'
+        return f'{self.sender.username} -> {self.receiver.username} : {self.content[:20]}'
 
 
 

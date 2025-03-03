@@ -5,7 +5,7 @@ from . import views
 urlpatterns = [
     path('',views.home, name='Home'),
     
-    path('rooms/<str:room_name>',views.rooms, name='Rooms'),
+    path('rooms/<str:room_name>/',views.rooms, name='Rooms'),
     path('authentication/',views.auth_page, name='auth_page'),
     path('user_login/',views.user_login, name='User_login'),
     path('profile/<str:user_tag>/',views.profile, name='Profile'),
@@ -36,8 +36,12 @@ urlpatterns = [
 
     path('create-group-chat/<str:room_name>/',views.rooms, name='Create-group-chat'),
     path('message/<str:room_name>/',views.rooms, name='Create-message'),
-    path('fetch-messages/<str:room_name>/<str:chat_type>/<int:chat_id>/', views.fetch_messages, name='fetch-messages'),
+    # path('fetch-messages/<str:room_name>/<str:chat_type>/<int:chat_id>/', views.fetch_messages, name='fetch-messages'),
     path('delete-group/<str:room_name>/<str:g_name>/',views.delete_group,name='Delete-group'),
+
+    path('chat/<str:room_name>/<str:chat_name>/',views.chat, name='chat'),
+
+    path('group-chat/<str:room_name>/<str:group_name>/', views.rooms, name='group-chat'),
 
 
 

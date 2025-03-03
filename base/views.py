@@ -30,6 +30,9 @@ def home(request):
 
 @login_required(login_url='User_login')
 def rooms(request, room_name):
+    """
+    View for handling rooms without chat_name.
+    """
     room = get_object_or_404(Room, name=room_name)
     folder = Folder.objects.filter(room=room)
     members_joined = room.members_count.all()
@@ -37,7 +40,7 @@ def rooms(request, room_name):
     group_chat = ChatBox.objects.filter(room=room)
     group_chat_member = ChatBoxMembership.objects.filter(chat_box__in=group_chat)
 
-    # Initialize forms
+    # Initialize forms  
     folder_form = FolderForm()
     group_chat_form = ChatBoxForm()
     group_chat_member_form = ChatBoxMemberForm()
@@ -50,9 +53,8 @@ def rooms(request, room_name):
                 folder_instance.created_by = request.user
                 folder_instance.room = room
                 folder_instance.save()
-                return redirect('Rooms', room_name=room_name)
-            else:
-                messages.error(request, 'Invalid Folder Form')
+                return redirect('rooms', room_name=room_name)
+            messages.error(request, 'Invalid Folder Form')
 
         elif 'group_chat_submit' in request.POST:
             group_chat_form = ChatBoxForm(request.POST)
@@ -61,59 +63,189 @@ def rooms(request, room_name):
                 chat.created_by = request.user
                 chat.room = room
                 chat.save()
-                return redirect('Rooms', room_name=room_name)
-            else:
-                messages.error(request, 'Invalid Group Chat Form')
+                return redirect('rooms', room_name=room_name)
+            messages.error(request, 'Invalid Group Chat Form')
 
         elif 'group_chat_member_submit' in request.POST:
             group_chat_member_form = ChatBoxMemberForm(request.POST)
             if group_chat_member_form.is_valid():
                 group_member = group_chat_member_form.save(commit=False)
                 group_member.message_by = request.user
-                group_member.chatbox__in = group_chat
+                group_member.chat_box = chat  # Fixed assignment
                 group_member.save()
-                return redirect('Rooms', room_name=room_name)
-            else:
-                messages.error(request, "Invalid Member Form")
+                return redirect('rooms', room_name=room_name)
+            messages.error(request, "Invalid Member Form")
 
-    if request.user not in room.members_count.all():
+    if request.user not in members_joined:
         messages.error(request, "You are not a member of this room! Join to continue.")
         return redirect("Home")
 
+    # Chat section
+    search_query = request.GET.get('search', '') 
+    users = User.objects.exclude(id=request.user.id)
+    chats = RoomChatIndividual.objects.none()  # No chats loaded for this view
+
+    # Optimized last messages retrieval
+    last_messages = RoomChatIndividual.objects.filter(
+        Q(sender=request.user) | Q(receiver=request.user)
+    ).exclude(timestamp=None).order_by('-timestamp').values('sender', 'receiver', 'timestamp')
+
+    user_last_messages = {user: 0 for user in users}
+    for msg in last_messages:
+        if msg['sender'] == request.user.id:
+            user_last_messages[msg['receiver']] = msg['timestamp'].timestamp()
+        else:
+            user_last_messages[msg['sender']] = msg['timestamp'].timestamp()
+
+    user_last_messages = sorted(
+        [{'user': user, 'last_message': ts} for user, ts in user_last_messages.items()],
+        key=lambda x: x['last_message'],
+        reverse=True
+    )
+
     context = {
         'rooms': room,
-        'members': room.member_count,
+        'members': members_joined,
         'profile': profile,
-        'members_joined': members_joined,
         'folders': folder,
         'form': folder_form,
         'group_chat': group_chat,
         'group_chat_member': group_chat_member,
         'group_chat_form': group_chat_form,
-        'group_chat_member_form': group_chat_member_form
+        'group_chat_member_form': group_chat_member_form,
+        'room_name': room_name,  
+        'chats': chats,
+        'users': users,
+        'user_last_messages': user_last_messages,
+        'search_query': search_query 
+    }
+
+    return render(request, 'base/room.html', context)
+
+@login_required(login_url='User_login')
+def chat(request, room_name, chat_name):
+    """
+    View for handling rooms with chat_name.
+    """
+    room = get_object_or_404(Room, name=room_name)
+    folder = Folder.objects.filter(room=room)
+    members_joined = room.members_count.all()
+    profile = get_object_or_404(UserProfile, user=room.created_by)
+    group_chat = ChatBox.objects.filter(room=room)
+    group_chat_member = ChatBoxMembership.objects.filter(chat_box__in=group_chat)
+
+    # Initialize forms  
+    folder_form = FolderForm()
+    group_chat_form = ChatBoxForm()
+    group_chat_member_form = ChatBoxMemberForm()
+
+    if request.method == 'POST':
+        if 'folder_submit' in request.POST:
+            folder_form = FolderForm(request.POST)
+            if folder_form.is_valid():
+                folder_instance = folder_form.save(commit=False)
+                folder_instance.created_by = request.user
+                folder_instance.room = room
+                folder_instance.save()
+                return redirect('chat', room_name=room_name, chat_name=chat_name)
+            messages.error(request, 'Invalid Folder Form')
+
+        elif 'group_chat_submit' in request.POST:
+            group_chat_form = ChatBoxForm(request.POST)
+            if group_chat_form.is_valid():
+                chat = group_chat_form.save(commit=False)
+                chat.created_by = request.user
+                chat.room = room
+                chat.save()
+                return redirect('chat', room_name=room_name, chat_name=chat_name)
+            messages.error(request, 'Invalid Group Chat Form')
+
+        elif 'group_chat_member_submit' in request.POST:
+            group_chat_member_form = ChatBoxMemberForm(request.POST)
+            if group_chat_member_form.is_valid():
+                group_member = group_chat_member_form.save(commit=False)
+                group_member.message_by = request.user
+                group_member.chat_box = chat  # Fixed assignment
+                group_member.save()
+                return redirect('chat', room_name=room_name, chat_name=chat_name)
+            messages.error(request, "Invalid Member Form")
+
+    if request.user not in members_joined:
+        messages.error(request, "You are not a member of this room! Join to continue.")
+        return redirect("Home")
+
+    # Chat section
+    search_query = request.GET.get('search', '') 
+    users = User.objects.exclude(id=request.user.id)
+
+    # Load chats for the specific chat_name
+    chats = RoomChatIndividual.objects.filter(
+        Q(room=room) & 
+        (Q(sender=request.user, receiver__username=chat_name) | 
+         Q(receiver=request.user, sender__username=chat_name))
+    ).order_by('timestamp')
+
+    if search_query:
+        chats = chats.filter(Q(content__icontains=search_query))
+
+    # Optimized last messages retrieval
+    last_messages = RoomChatIndividual.objects.filter(
+        Q(sender=request.user) | Q(receiver=request.user)
+    ).exclude(timestamp=None).order_by('-timestamp').values('sender', 'receiver', 'timestamp')
+
+    user_last_messages = {user: 0 for user in users}
+    for msg in last_messages:
+        if msg['sender'] == request.user.id:
+            user_last_messages[msg['receiver']] = msg['timestamp'].timestamp()
+        else:
+            user_last_messages[msg['sender']] = msg['timestamp'].timestamp()
+
+    user_last_messages = sorted(
+        [{'user': user, 'last_message': ts} for user, ts in user_last_messages.items()],
+        key=lambda x: x['last_message'],
+        reverse=True
+    )
+
+    context = {
+        'rooms': room,
+        'members': members_joined,
+        'profile': profile,
+        'folders': folder,
+        'form': folder_form,
+        'group_chat': group_chat,
+        'group_chat_member': group_chat_member,
+        'group_chat_form': group_chat_form,
+        'group_chat_member_form': group_chat_member_form,
+        'room_name': room_name,  
+        'chat_name': chat_name,
+        'chats': chats,
+        'users': users,
+        'user_last_messages': user_last_messages,
+        'search_query': search_query 
     }
 
     return render(request, 'base/room.html', context)
 
 
 
-def fetch_messages(request, room_name, chat_type, chat_id):
-    room = get_object_or_404(Room, name=room_name)
-    messages = []
 
-    if chat_type == 'group':
-        chat = get_object_or_404(ChatBox, id=chat_id, room=room)
-        messages = ChatBoxMembership.objects.filter(chatbox=chat).order_by('created_at')
-    elif chat_type == 'individual':
-        user = get_object_or_404(User, id=chat_id)
-        messages = RoomChatIndividual.objects.filter(
-            room=room, sender=request.user, receiver=user
-        ).order_by('created_at')
+# def fetch_messages(request, room_name, chat_type, chat_id):
+#     room = get_object_or_404(Room, name=room_name)
+#     messages = []
 
-    message_data = [{"user": msg.user.username if hasattr(msg, 'user') else msg.sender.username,
-                     "content": msg.content, "created_at": msg.created_at.strftime('%H:%M')} for msg in messages]
+#     if chat_type == 'group':
+#         chat = get_object_or_404(ChatBox, id=chat_id, room=room)
+#         messages = ChatBoxMembership.objects.filter(chatbox=chat).order_by('created_at')
+#     elif chat_type == 'individual':
+#         user = get_object_or_404(User, id=chat_id)
+#         messages = RoomChatIndividual.objects.filter(
+#             room=room, sender=request.user, receiver=user
+#         ).order_by('created_at')
 
-    return JsonResponse({"messages": message_data})
+#     message_data = [{"user": msg.user.username if hasattr(msg, 'user') else msg.sender.username,
+#                      "content": msg.content, "created_at": msg.created_at.strftime('%H:%M')} for msg in messages]
+
+#     return JsonResponse({"messages": message_data})
 
 
 def tag(request, tag_name):

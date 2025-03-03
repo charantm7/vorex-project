@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 SITE_ID = 2
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig',
-    
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -98,9 +99,15 @@ TEMPLATES = [
         },
     },
 ]
-
+ASGI_APPLICATION = 'studyroom.asgi.application'
 WSGI_APPLICATION = 'studyroom.wsgi.application'
-ASGI_APPLICATION = 'studyroom.asgi.application' 
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database

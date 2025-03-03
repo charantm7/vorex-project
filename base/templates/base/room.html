@@ -44,74 +44,7 @@
       </div>
     </div>
   </div>
-
-  <div id="Group" class="chat-container tabcontent">
-    <div class="create-chat-group">
-      <div class="top">
-        <p>Create Group</p>
-        <i class="fas fa-times" onclick="Removegroup()"></i>
-      </div>
-      <form action="{% url 'Create-group-chat' rooms.name %}" method="post">
-        {% csrf_token %}
-        <div class="input-g-name">
-          <label for="Group-name">Group Name</label>
-          {{group_chat_form.group_name}}
-        </div>
-        <button type="submit" name="group_chat_submit">create</button>
-      </form>
-    </div>
-    <div class="sidebarc">
-      <div class="sidebar-header">
-        <h3>Chat</h3>
-        <div class="toggle-buttons">
-          <button onclick="showIndividualChats()" title="Chat with Individuals">Individuals</button>
-          <button onclick="showGroupChats()" title="Group chat">Group</button>
-          {% if request.user == rooms.created_by %}
-          <button onclick="Creategroup()" title="Create Group"><i class="fa-solid fa-plus"> </i></button>
-          {% endif %}
-        </div>
-      </div>
-
-      <div class="chat-list" id="individual-chats">
-        {% for members in members_joined %}
-        <div class="chat-item" onclick="openChat('{{members.username}}')">
-          <img src="{{ members.profile.profile_pic.url }}" alt="CyberSec" />
-          <div class="name">
-            <p>{{members.username}}</p>
-          </div>
-          <i class="fas fa-ellipsis-v" title="More"></i>
-        </div>
-        {% endfor %}
-      </div>
-      <div class="chat-list" id="group-chats" style="display: none">
-        {% for group in group_chat %}
-        <div class="chat-item" onclick="openChat('{{group.group_name}}')">
-          <img src="{% static 'assets/default.png' %}" alt="CyberSec" />
-          <div class="name">
-            <p>{{group.group_name}}</p>
-          </div>
-          <i class="fas fa-ellipsis-v" title="More"></i>
-        </div>
-        {% empty %}
-        <p>No groups created</p>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="chat-area">
-      <div class="chat-header">
-        <button class="back-btn" onclick="backToSidebar()"><i class="fas fa-arrow-left"></i></button>
-        <p id="chat-title">Select a chat</p>
-      </div>
-      <div class="chat-messages" id="chat-messages">
-        <!-- Messages will be loaded here dynamically -->
-      </div>
-      <div class="chat-input">
-        <input type="text" id="message-input" placeholder="Type a message..." />
-        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
-      </div>
-    </div>
-  </div>
-
+  <div>{% block chat %} {% include 'base/chat.html' %} {% endblock %}</div>
   {% block materials %} {% include 'base/study_materials.html' %} {% endblock %}
   <script src="{% static 'js/room.js'%}"></script>
   <script>
