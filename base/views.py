@@ -30,9 +30,7 @@ def home(request):
 
 @login_required(login_url='User_login')
 def rooms(request, room_name):
-    """
-    View for handling rooms without chat_name.
-    """
+    
     room = get_object_or_404(Room, name=room_name)
     folder = Folder.objects.filter(room=room)
     members_joined = room.members_count.all()
@@ -80,28 +78,7 @@ def rooms(request, room_name):
         messages.error(request, "You are not a member of this room! Join to continue.")
         return redirect("Home")
 
-    # Chat section
-    search_query = request.GET.get('search', '') 
-    users = User.objects.exclude(id=request.user.id)
-    chats = RoomChatIndividual.objects.none()  # No chats loaded for this view
 
-    # Optimized last messages retrieval
-    last_messages = RoomChatIndividual.objects.filter(
-        Q(sender=request.user) | Q(receiver=request.user)
-    ).exclude(timestamp=None).order_by('-timestamp').values('sender', 'receiver', 'timestamp')
-
-    user_last_messages = {user: 0 for user in users}
-    for msg in last_messages:
-        if msg['sender'] == request.user.id:
-            user_last_messages[msg['receiver']] = msg['timestamp'].timestamp()
-        else:
-            user_last_messages[msg['sender']] = msg['timestamp'].timestamp()
-
-    user_last_messages = sorted(
-        [{'user': user, 'last_message': ts} for user, ts in user_last_messages.items()],
-        key=lambda x: x['last_message'],
-        reverse=True
-    )
 
     context = {
         'rooms': room,
@@ -113,118 +90,61 @@ def rooms(request, room_name):
         'group_chat_member': group_chat_member,
         'group_chat_form': group_chat_form,
         'group_chat_member_form': group_chat_member_form,
-        'room_name': room_name,  
-        'chats': chats,
-        'users': users,
-        'user_last_messages': user_last_messages,
-        'search_query': search_query 
+        
     }
 
     return render(request, 'base/room.html', context)
 
 @login_required(login_url='User_login')
 def chat(request, room_name, chat_name):
-    """
-    View for handling rooms with chat_name.
-    """
+    
     room = get_object_or_404(Room, name=room_name)
-    folder = Folder.objects.filter(room=room)
-    members_joined = room.members_count.all()
     profile = get_object_or_404(UserProfile, user=room.created_by)
     group_chat = ChatBox.objects.filter(room=room)
     group_chat_member = ChatBoxMembership.objects.filter(chat_box__in=group_chat)
 
-    # Initialize forms  
-    folder_form = FolderForm()
+   
     group_chat_form = ChatBoxForm()
     group_chat_member_form = ChatBoxMemberForm()
 
-    if request.method == 'POST':
-        if 'folder_submit' in request.POST:
-            folder_form = FolderForm(request.POST)
-            if folder_form.is_valid():
-                folder_instance = folder_form.save(commit=False)
-                folder_instance.created_by = request.user
-                folder_instance.room = room
-                folder_instance.save()
-                return redirect('chat', room_name=room_name, chat_name=chat_name)
-            messages.error(request, 'Invalid Folder Form')
-
-        elif 'group_chat_submit' in request.POST:
-            group_chat_form = ChatBoxForm(request.POST)
-            if group_chat_form.is_valid():
-                chat = group_chat_form.save(commit=False)
-                chat.created_by = request.user
-                chat.room = room
-                chat.save()
-                return redirect('chat', room_name=room_name, chat_name=chat_name)
-            messages.error(request, 'Invalid Group Chat Form')
-
-        elif 'group_chat_member_submit' in request.POST:
-            group_chat_member_form = ChatBoxMemberForm(request.POST)
-            if group_chat_member_form.is_valid():
-                group_member = group_chat_member_form.save(commit=False)
-                group_member.message_by = request.user
-                group_member.chat_box = chat  # Fixed assignment
-                group_member.save()
-                return redirect('chat', room_name=room_name, chat_name=chat_name)
-            messages.error(request, "Invalid Member Form")
-
-    if request.user not in members_joined:
-        messages.error(request, "You are not a member of this room! Join to continue.")
-        return redirect("Home")
-
-    # Chat section
     search_query = request.GET.get('search', '') 
-    users = User.objects.exclude(id=request.user.id)
-
-    # Load chats for the specific chat_name
+    users = User.objects.exclude(id=request.user.id) 
     chats = RoomChatIndividual.objects.filter(
-        Q(room=room) & 
-        (Q(sender=request.user, receiver__username=chat_name) | 
-         Q(receiver=request.user, sender__username=chat_name))
-    ).order_by('timestamp')
+        (Q(sender=request.user) & Q(receiver__username=chat_name)) |
+        (Q(receiver=request.user) & Q(sender__username=chat_name))
+    )
 
     if search_query:
-        chats = chats.filter(Q(content__icontains=search_query))
+        chats = chats.filter(Q(content__icontains=search_query))  
 
-    # Optimized last messages retrieval
-    last_messages = RoomChatIndividual.objects.filter(
-        Q(sender=request.user) | Q(receiver=request.user)
-    ).exclude(timestamp=None).order_by('-timestamp').values('sender', 'receiver', 'timestamp')
+    chats = chats.order_by('timestamp') 
+    user_last_messages = []
 
-    user_last_messages = {user: 0 for user in users}
-    for msg in last_messages:
-        if msg['sender'] == request.user.id:
-            user_last_messages[msg['receiver']] = msg['timestamp'].timestamp()
-        else:
-            user_last_messages[msg['sender']] = msg['timestamp'].timestamp()
+    for user in users:
+        last_message = RoomChatIndividual.objects.filter(
+            (Q(sender=request.user) & Q(receiver=user)) |
+            (Q(receiver=request.user) & Q(sender=user))
+        ).order_by('-timestamp').first()
 
-    user_last_messages = sorted(
-        [{'user': user, 'last_message': ts} for user, ts in user_last_messages.items()],
-        key=lambda x: x['last_message'],
+        user_last_messages.append({
+            'user': user,
+            'last_message': last_message
+        })
+
+    # Sort user_last_messages by the timestamp of the last_message in descending order
+    user_last_messages.sort(
+        key=lambda x: x['last_message'].timestamp if x['last_message'] else None,
         reverse=True
     )
 
-    context = {
-        'rooms': room,
-        'members': members_joined,
-        'profile': profile,
-        'folders': folder,
-        'form': folder_form,
-        'group_chat': group_chat,
-        'group_chat_member': group_chat_member,
-        'group_chat_form': group_chat_form,
-        'group_chat_member_form': group_chat_member_form,
-        'room_name': room_name,  
-        'chat_name': chat_name,
+    return render(request, 'base/chat.html', {
+        'rooms':room,
+        'room_name': chat_name,
         'chats': chats,
         'users': users,
         'user_last_messages': user_last_messages,
         'search_query': search_query 
-    }
-
-    return render(request, 'base/room.html', context)
+    })
 
 
 

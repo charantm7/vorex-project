@@ -16,7 +16,7 @@
     <button class="tablinks" id="tab-Info" onclick="openTab(event, 'Info')" id="defaultOpen">
       <i class="fas fa-tachometer-alt"></i><span class="btn-txt">Dashboard</span>
     </button>
-    <button class="tablinks" id="tab-Group" onclick="openTab(event, 'Group')">
+    <button class="tablinks" id="tab-Group" onclick="openChat()">
       <i class="fa-solid fa-user-group"></i><span class="btn-txt">Message</span>
     </button>
     <button class="tablinks" id="tab-Materials" onclick="openTab(event, 'Materials')">
@@ -44,10 +44,13 @@
       </div>
     </div>
   </div>
-  <div>{% block chat %} {% include 'base/chat.html' %} {% endblock %}</div>
+
   {% block materials %} {% include 'base/study_materials.html' %} {% endblock %}
   <script src="{% static 'js/room.js'%}"></script>
   <script>
+    function openChat() {
+      window.location.href = "{% url 'chat' rooms.name request.user.username %}";
+    }
     function CreateFolder() {
       document.querySelector(".create-folder").style.display = "block";
     }
