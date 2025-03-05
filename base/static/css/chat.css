@@ -29,7 +29,7 @@
 .chat-container {
   display: flex;
   width: 100%;
-  height: 91vh;
+  height: 93vh;
   background: var(--navdark);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   /* change border bottom color of the item in the list  */
@@ -120,6 +120,7 @@
   border-radius: 10px;
   background-color: var(--bodydark);
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
 }
 .chat-container .chat-message {
@@ -183,6 +184,9 @@
 .chat-container .sidebar {
   background-color: var(--member-side);
   overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid white;
+  padding: 0 10px 0 0;
 }
 .chat-container .sidebar a {
   background: transparent;
@@ -191,15 +195,19 @@
 .chat-container .sidebar i {
   color: white;
 }
+.chat-container .chats {
+  padding: 30px 50px 20px 30px;
+}
 .chat-container .chats .list-group-item {
   border: none;
   border-bottom: 1px solid #e9ecef;
-  padding: 25px 25px 15px 30px;
+  padding: 25px 30px 15px 10px;
   font-size: 18px;
 }
 .chat-container .chats .list-group-item:hover {
   background-color: #435f7a;
   color: white;
+  border-radius: 10px;
 }
 .chat-container .chats .list-group-item {
   border-bottom: 1px solid #435f7a;
