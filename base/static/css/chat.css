@@ -205,6 +205,20 @@
   border-bottom: 1px solid #435f7a;
   width: 105%;
 }
+.chat-container .chats .contacts {
+  padding: 0;
+}
+.chat-container .chats .contacts .members-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.chat-container .chats .contacts .message-by {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
 .chat-container .active {
   background-color: #435f7a !important;
   color: white;

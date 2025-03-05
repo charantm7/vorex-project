@@ -213,6 +213,22 @@
     width: 105%;
   }
 
+  .chats .contacts {
+    padding: 0;
+
+    .members-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+    }
+    .message-by {
+      display: flex;
+      flex-direction: row;
+      gap: 5px;
+    }
+  }
+
   .active {
     background-color: #435f7a !important;
     color: white;

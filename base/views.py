@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.db.models import Q
 from django.urls import reverse
-
+from datetime import datetime
 
 
 def home(request):
@@ -82,7 +82,7 @@ def rooms(request, room_name):
 
     context = {
         'rooms': room,
-        'members': members_joined,
+        'members': members_joined.count(),
         'profile': profile,
         'folders': folder,
         'form': folder_form,
@@ -131,11 +131,10 @@ def chat(request, room_name, chat_name):
             'last_message': last_message
         })
 
-    # Sort user_last_messages by the timestamp of the last_message in descending order
     user_last_messages.sort(
-        key=lambda x: x['last_message'].timestamp if x['last_message'] else None,
-        reverse=True
-    )
+    key=lambda x: (x['last_message'] is not None, x['last_message'].timestamp if x['last_message'] else 0),
+    reverse=True
+)
 
     return render(request, 'base/chat.html', {
         'rooms':room,

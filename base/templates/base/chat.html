@@ -32,13 +32,13 @@
             class="list-group-item list-group-item-action {% if item.user.username == room_name %} active {% endif %}"
             data-id="{{ room_name }}"
           >
-            <div class="d-flex align-items-center">
+            <div class="members-container">
               <!-- Profile Icon -->
               <img
                 src="https://ui-avatars.com/api/?name={{ item.user.username|urlencode }}&size=64&background=random"
                 alt="{{ item.user.username }}'s Profile Image"
                 class="profile-icon rounded-circle mr-3"
-                style="width: 1.8rem; height: 1.8rem; object-fit: cover"
+                style="width: 2.5rem; height: 2.5rem; object-fit: cover"
               />
 
               <!-- Message Content and Username -->
@@ -51,9 +51,13 @@
                 </div>
 
                 <!-- Last message preview -->
-                <div>
+                <div class="d-flex flex-direction-row">
                   {% if item.last_message %}
-                  <small class="d-block text-truncate last-msg" style="max-width: 90%" id="last-message">
+                  <small
+                    class="d-flex text-truncate last-msg flex-directiion-row message-by"
+                    style="max-width: 90%; font-size: 14px"
+                    id="last-message"
+                  >
                     {% if item.last_message.sender == request.user %} You: {% endif %}
                     <div>{{ item.last_message.content|truncatewords:5 }}</div>
                   </small>
