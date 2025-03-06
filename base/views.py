@@ -51,7 +51,7 @@ def rooms(request, room_name):
                 folder_instance.created_by = request.user
                 folder_instance.room = room
                 folder_instance.save()
-                return redirect('rooms', room_name=room_name)
+                return redirect('Rooms', room_name=room_name)
             messages.error(request, 'Invalid Folder Form')
 
         elif 'group_chat_submit' in request.POST:
@@ -61,7 +61,7 @@ def rooms(request, room_name):
                 chat.created_by = request.user
                 chat.room = room
                 chat.save()
-                return redirect('rooms', room_name=room_name)
+                return redirect('Rooms', room_name=room_name)
             messages.error(request, 'Invalid Group Chat Form')
 
         elif 'group_chat_member_submit' in request.POST:
@@ -71,7 +71,7 @@ def rooms(request, room_name):
                 group_member.message_by = request.user
                 group_member.chat_box = chat  # Fixed assignment
                 group_member.save()
-                return redirect('rooms', room_name=room_name)
+                return redirect('Rooms', room_name=room_name)
             messages.error(request, "Invalid Member Form")
 
     if request.user not in members_joined:
@@ -104,8 +104,6 @@ def chat(request, room_name, chat_name):
     group_chat_member = ChatBoxMembership.objects.filter(chat_box__in=group_chat)
 
    
-    group_chat_form = ChatBoxForm()
-    group_chat_member_form = ChatBoxMemberForm()
 
     search_query = request.GET.get('search', '') 
     users = User.objects.exclude(id=request.user.id) 
@@ -511,14 +509,31 @@ def delete_group(request, g_name, room_name):
 
 
 
+# your rooms and joined rooms views
+def your_room(request, user_name):
+    user = User.objects.get(username=user_name)
+    room = Room.objects.filter(created_by=user)
+
+    context = {
+        'user': user,
+        'rooms': room,
+    }
+
+    return render(request, 'base/your_room.html', context)
+
+def joined_room(request):
+    rooms = Room.objects.all()
+    member = Room.objects.filter(members_count=request.user.id)
+    joined_room = member.exists()
+    context = {
+        'rooms': rooms,
+        'joined_room': joined_room,
+        'member':member,
+        
+    }
+    return render(request, 'base/joined_room.html', context)
 
 
-
-
-
-
-
-
-
+# Oauth 
 def google_login_redirect(request):
     return redirect("/accounts/google/login/")

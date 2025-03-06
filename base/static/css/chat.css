@@ -124,7 +124,7 @@
   padding: 10px;
 }
 .chat-container .chat-message {
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 10px;
   display: flex;
   width: -moz-fit-content;
@@ -133,16 +133,18 @@
   clear: both;
 }
 .chat-container .chat-message.sender {
-  background-color: #ffffff;
-  color: #435f7a;
+  background-color: var(--llwhite);
+  color: black;
   margin-left: auto;
   text-align: right;
+  border-radius: 10px;
 }
 .chat-container .chat-message.receiver {
   background-color: var(--members);
   color: white;
   margin-right: auto;
   text-align: left;
+  padding: 15px;
 }
 .chat-container .chat-input {
   background-color: var(--member-side);
@@ -185,7 +187,6 @@
   background-color: var(--member-side);
   overflow-y: auto;
   overflow-x: hidden;
-  border: 1px solid white;
   padding: 0 10px 0 0;
 }
 .chat-container .sidebar a {
@@ -198,29 +199,41 @@
 .chat-container .chats {
   padding: 30px 50px 20px 30px;
 }
-.chat-container .chats .list-group-item {
-  border: none;
-  border-bottom: 1px solid #e9ecef;
-  padding: 25px 30px 15px 10px;
+.chat-container .chats .chat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-container .chats .chat-top a,
+.chat-container .chats .chat-top i {
   font-size: 18px;
 }
-.chat-container .chats .list-group-item:hover {
-  background-color: #435f7a;
-  color: white;
+.chat-container .chats .list-group-item {
+  border: none;
+  padding: 15px 30px 15px 10px;
+  font-size: 18px;
+  background-color: rgba(67, 95, 122, 0.4666666667);
   border-radius: 10px;
 }
+.chat-container .chats .list-group-item:hover {
+  color: white;
+  border-radius: 10px;
+  background-color: #435f7a;
+}
 .chat-container .chats .list-group-item {
-  border-bottom: 1px solid #435f7a;
   width: 105%;
 }
 .chat-container .chats .contacts {
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
 }
 .chat-container .chats .contacts .members-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 .chat-container .chats .contacts .message-by {
   display: flex;

@@ -24,7 +24,13 @@
     <div class="row h-100">
       <!-- User List Sidebar (4 Columns) -->
       <div class="col-3 sidebar chats">
-        <h5 class="mb-3 text-white">Chats</h5>
+        <div class="chat-top">
+          <a href="{% url 'Rooms' rooms.name %}" id="back-icon"
+            ><i class="fa-solid fa-arrow-left" title="Back"></i
+          ></a>
+          <h5 class="mb-3 text-white">Chats</h5>
+        </div>
+
         <div class="contacts">
           {% for item in user_last_messages %}
           <a

@@ -14,9 +14,16 @@
   </div>
   {% if request.user.is_authenticated %}
   <div class="create-room-btn">
-    <button onclick="openModal()">Create Room</button>
-    <button>Your Rooms</button>
-    <button>Joined Rooms</button>
+    <button onclick="openModal()" title="Create Room">Create Room</button>
+    <button
+      title="Your Rooms"
+      id="OpenYourRooms"
+      data-url="{% url 'Your-Room' request.user.username %}"
+      onclick="openYourRoom()"
+    >
+      Your Rooms
+    </button>
+    <button title="Joied Rooms" onclick="openJoinedRoom()">Joined Rooms</button>
   </div>
   {% endif %}
   <div class="content">

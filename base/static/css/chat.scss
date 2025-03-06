@@ -123,7 +123,7 @@
   }
 
   .chat-message {
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 10px;
     display: flex;
     width: fit-content;
@@ -132,10 +132,11 @@
   }
 
   .chat-message.sender {
-    background-color: #ffffff;
-    color: #435f7a;
+    background-color: var(--llwhite);
+    color: black;
     margin-left: auto;
     text-align: right;
+    border-radius: 10px;
   }
 
   .chat-message.receiver {
@@ -143,6 +144,7 @@
     color: white;
     margin-right: auto;
     text-align: left;
+    padding: 15px;
   }
 
   .chat-input {
@@ -187,7 +189,7 @@
     background-color: var(--member-side);
     overflow-y: auto;
     overflow-x: hidden;
-    border: 1px solid white;
+
     padding: 0 10px 0 0;
   }
 
@@ -200,35 +202,51 @@
   }
   .chats {
     padding: 30px 50px 20px 30px;
+
+    .chat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      a,
+      i {
+        font-size: 18px;
+      }
+    }
   }
 
   .chats .list-group-item {
     border: none;
-    border-bottom: 1px solid #e9ecef;
-    padding: 25px 30px 15px 10px;
+    // border-bottom: 1px solid #e9ecef;
+    padding: 15px 30px 15px 10px;
     font-size: 18px;
+    background-color: #435f7a77;
+    border-radius: 10px;
   }
 
   .chats .list-group-item:hover {
-    background-color: #435f7a;
     color: white;
     border-radius: 10px;
+    background-color: #435f7a;
   }
 
   /* change border bottom color of the item in the list  */
   .chats .list-group-item {
-    border-bottom: 1px solid #435f7a;
+    // border-bottom: 1px solid #435f7a;
     width: 105%;
   }
 
   .chats .contacts {
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 10px 0;
 
     .members-container {
       display: flex;
       flex-direction: row;
       align-items: center;
-      gap: 10px;
+      gap: 20px;
     }
     .message-by {
       display: flex;
