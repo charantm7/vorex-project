@@ -197,7 +197,7 @@
   color: white;
 }
 .chat-container .chats {
-  padding: 30px 50px 20px 30px;
+  padding: 25px 50px 20px 30px;
 }
 .chat-container .chats .chat-top {
   display: flex;
@@ -207,6 +207,9 @@
 .chat-container .chats .chat-top a,
 .chat-container .chats .chat-top i {
   font-size: 18px;
+}
+.chat-container .chats .chat-top P {
+  font-size: larger;
 }
 .chat-container .chats .list-group-item {
   border: none;
@@ -227,7 +230,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px 0;
+  padding: 30px 0;
 }
 .chat-container .chats .contacts .members-container {
   display: flex;

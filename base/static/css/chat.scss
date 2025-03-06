@@ -201,15 +201,19 @@
     color: white;
   }
   .chats {
-    padding: 30px 50px 20px 30px;
+    padding: 25px 50px 20px 30px;
 
     .chat-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      // border: 1px solid white;
       a,
       i {
         font-size: 18px;
+      }
+      P {
+        font-size: larger;
       }
     }
   }
@@ -240,7 +244,7 @@
     flex-direction: column;
     gap: 10px;
 
-    padding: 10px 0;
+    padding: 30px 0;
 
     .members-container {
       display: flex;

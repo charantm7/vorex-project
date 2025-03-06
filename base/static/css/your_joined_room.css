@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+.quicksand {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 :root {
   --roomborder: #ececec;
   --roomtext: #d1d1d1;
@@ -19,9 +25,29 @@
 .main-room {
   min-height: 100vh;
 }
+.main-room .top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3.5rem 0 3.5rem;
+}
+.main-room .top a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--llwhite);
+  border: 1px solid var(--borderbottom);
+  padding: 0.5rem;
+  background-color: var(--navdark);
+  border-radius: 4px;
+}
+.main-room .top a i {
+  font-size: 18px;
+}
 .main-room .content {
   grid-area: contents;
-  padding: 5rem 3rem;
+  padding: 2rem 3rem;
   font-family: sans-serif;
 }
 .main-room .content .card {
@@ -188,4 +214,91 @@
 .main-room .content .card-bottom .card-bottom-right button:hover a {
   color: var(--black);
   text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .main-room .content {
+    padding: 20px;
+  }
+  .main-room .content .card-top {
+    height: 25%;
+    padding: 25px 10px 25px 10px;
+  }
+  .main-room .content .card-top p {
+    font-size: 0.7rem;
+  }
+  .main-room .content .card-top a {
+    margin-top: 1.5%;
+    margin-left: 2%;
+  }
+  .main-room .content .card-mid {
+    height: 50%;
+  }
+  .main-room .content .card-mid-right {
+    margin-right: 10%;
+  }
+  .main-room .content .card-mid-left small {
+    position: absolute;
+    margin-top: 9%;
+    max-width: 70%;
+    margin-left: 4%;
+  }
+  .main-room .content .card-mid-left a {
+    margin-bottom: 7%;
+    position: absolute;
+    max-width: 50%;
+    font-size: 19px;
+    margin-left: 4%;
+  }
+  .main-room .content .card-bottom {
+    padding: 25px;
+    height: 25%;
+  }
+}
+@media (max-width: 576px) {
+  .main-room .content {
+    padding: 20px;
+  }
+  .main-room .content .card-top {
+    height: 25%;
+    padding: 25px 10px 25px 10px;
+  }
+  .main-room .content .card-top p {
+    font-size: 0.7rem;
+  }
+  .main-room .content .card-top a {
+    margin-top: 1.55%;
+    margin-left: 2%;
+    font-size: 14px;
+  }
+  .main-room .content .card-mid {
+    height: 50%;
+  }
+  .main-room .content .card-mid-right {
+    margin-right: 10%;
+  }
+  .main-room .content .card-mid-left small {
+    position: absolute;
+    margin-top: 11%;
+    max-width: 70%;
+    margin-left: 4%;
+    font-size: 11px;
+  }
+  .main-room .content .card-mid-left a {
+    margin-bottom: 10%;
+    position: absolute;
+    max-width: 50%;
+    font-size: 17.5px;
+    margin-left: 4%;
+  }
+  .main-room .content .card-bottom {
+    padding: 1.3rem 1rem;
+    height: 25%;
+  }
+  .main-room .content .card-bottom p {
+    font-size: 15px;
+  }
+  .main-room .content .card-bottom p a {
+    font-size: 15px;
+  }
 }/*# sourceMappingURL=your_joined_room.css.map */

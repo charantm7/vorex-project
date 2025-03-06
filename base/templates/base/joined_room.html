@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{% static 'css/your_joined_room.css' %}" />
 {% endblock %} {% block content %} {% if joined_room %}
 <div class="main-room">
+  <div class="top">
+    <a href="{% url 'Home' %}" id="back-icon"><i class="fa-solid fa-arrow-left" title="Back"></i></a>
+    <h5 class="mb-3 text-white quicksand">Joined Rooms</h5>
+  </div>
   <div class="content">
     <div class="row g-5">
       {% for room in member %}
